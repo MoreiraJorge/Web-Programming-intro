@@ -37,5 +37,5 @@ app.use(express.json())
 app.use('/api', cors(), apiRouter)
 
 app.listen(PORT, () => {
-	console.log(`Server started on http://localhost:${PORT}`)
+	console.log(`Server started on http://localhost:${PORT}/api`)
 })
