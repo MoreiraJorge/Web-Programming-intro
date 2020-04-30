@@ -5,7 +5,7 @@ const fetch = require('node-fetch')
 
 const cors = require('cors')
 
-const apiRouter = require('./api/routes/index')
+const apiRouter = require('./api/routes')
 
 const app = express()
 mongoose.Promise = global.Promise
