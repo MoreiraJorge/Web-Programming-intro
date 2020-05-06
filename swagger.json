@@ -1,0 +1,29 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "API de gestão de utilizadores e testes de COVID-19",
+        "description": "API que faz a gestão de utilizadores (técnicos, clientes e admins) e de testes de covid-19 de um centro de analises"
+    },
+    "host": "localhost:3000",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "",
+            "description": ""
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths":{
+    },
+    "definitions":{     
+    }
+}

@@ -2,6 +2,8 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const fetch = require('node-fetch')
+var swaggerUi = require('swagger-ui-express')
+var swaggerDocument = require('./swagger.json')
 
 const cors = require('cors')
 
@@ -18,6 +20,7 @@ const {
 	MONGO_DB_NAME = 'demo2'
 } = process.env
 
+//mongo connection
 mongoose
 	.connect(
 		`mongodb://${ MONGO_DB_HOST }:${ MONGO_BD_PORT }/${ MONGO_DB_NAME }`,
@@ -32,10 +35,15 @@ mongoose
 	})
 	.catch(console.error)
 
+//view engine setup
 app.set('view engine', 'ejs')
 app.use(express.json())
+
+//swagger doc setup
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use('/api', cors(), apiRouter)
 
 app.listen(PORT, () => {
-	console.log(`Server started on http://localhost:${PORT}/api`)
+	console.log(`API started on http://localhost:${PORT}/api`)
+	console.log(`API started on http://localhost:${PORT}/api-docs`)
 })
