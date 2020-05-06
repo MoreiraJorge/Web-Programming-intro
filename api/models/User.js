@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
     phoneNumber: Number,
     idCard: String,
     role: String,
+    schedule: Date, 
     updated_at: { type: Date, default: Date.now },
 
 })
