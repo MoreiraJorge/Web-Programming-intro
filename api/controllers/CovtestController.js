@@ -5,7 +5,8 @@ var uniqid = require('uniqid');
 var CovtestController = {};
 
 CovtestController.listTests = async (req, res) => {
-    const testList = await Covtest.find();
+    const testList = await Covtest.find().
+    populate('user', 'name')
     res.send(testList);
 }
 
