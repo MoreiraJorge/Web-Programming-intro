@@ -1,7 +1,11 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
 
-const CovtestSchema = new mongoose.Schema({
+var User = require('../models/User')
 
+const CovtestSchema = Schema({
+
+    //_id: Schema.Types.ObjectId,
     code: String,
     description: String,
     userHistory: String,
@@ -11,6 +15,9 @@ const CovtestSchema = new mongoose.Schema({
     testStatus: String,
     testResult: String,
     resultFile: String,
+    isTestDone: Boolean,
+    schedule: Date,
+    User: { type: Schema.Types.ObjectId, ref: User },
     updated_at: { type: Date, default: Date.now },
 
 })

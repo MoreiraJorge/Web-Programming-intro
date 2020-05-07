@@ -20,17 +20,17 @@ router.put('/update/:id', function(req,res){
 */
 
 //update test status
-router.put('/update/TestStatus/:id', function(req,res){
+router.put('/update/testStatus/:id', function(req,res){
     Covtest.updateTestStatus(req, res)
 })
 
 //update user test status
-router.put('/update/TestUserStatus/:id', function(req,res){
+router.put('/update/testUserStatus/:id', function(req,res){
     Covtest.updateTestUserStatus(req,res)
 })
 
 //update test result
-router.put('/update/TestResult/:id', function(req,res){
+router.put('/update/testResult/:id', function(req,res){
     Covtest.updateTestResult(req,res)
 })
 

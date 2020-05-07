@@ -1,3 +1,4 @@
+//get dependencies
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
@@ -7,7 +8,8 @@ var swaggerDocument = require('./swagger.json')
 
 const cors = require('cors')
 
-const apiRouter = require('./api/routes')
+//get the api base route
+const apiRouter = require('./api/index')
 
 const app = express()
 mongoose.Promise = global.Promise
@@ -35,15 +37,19 @@ mongoose
 	})
 	.catch(console.error)
 
-//view engine setup
-app.set('view engine', 'ejs')
-app.use(express.json())
+//api setup
+app
 
-//swagger doc setup
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-app.use('/api', cors(), apiRouter)
+	//view engine setup
+	.set('view engine', 'ejs')
 
-app.listen(PORT, () => {
+	.use(express.json())
+
+	//swagger doc setup
+	.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+	.use('/api', cors(), apiRouter)
+
+	.listen(PORT, () => {
 	console.log(`API started on http://localhost:${PORT}/api`)
 	console.log(`API started on http://localhost:${PORT}/api-docs`)
 })
