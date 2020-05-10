@@ -17,7 +17,7 @@ router.post('/create', function(req,res){
     User.createUser(req,res)
 })
 
-//create user
+//delete user
 router.delete('/:id', function(req, res) {
     User.deleteUser(req, res)
 })
