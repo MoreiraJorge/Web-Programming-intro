@@ -12,13 +12,6 @@ router.post('/create', function(req,res){
     Covtest.createTest(req, res)
 })
 
-/*
-//route to display test
-router.put('/update/:id', function(req,res){
-    Covtest.updateTest(req, res)
-})
-*/
-
 //update test status
 router.put('/update/testStatus/:id', function(req,res){
     Covtest.updateTestStatus(req, res)

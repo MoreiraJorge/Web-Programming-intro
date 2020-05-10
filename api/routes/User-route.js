@@ -17,4 +17,14 @@ router.post('/create', function(req,res){
     User.createUser(req,res)
 })
 
+//create user
+router.delete('/:id', function(req, res) {
+    User.deleteUser(req, res)
+})
+
+//update user
+router.put('/:id', function(req, res) {
+    User.updateUser(req, res)
+})
+
 module.exports = router;
