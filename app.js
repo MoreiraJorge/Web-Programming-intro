@@ -39,7 +39,6 @@ mongoose
 
 //api setup
 app
-
 	//view engine setup
 	.set('view engine', 'ejs')
 

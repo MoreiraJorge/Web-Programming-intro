@@ -4,12 +4,14 @@ var uniqid = require('uniqid');
 
 var CovtestController = {};
 
+//list tests
 CovtestController.listTests = async (req, res) => {
     const testList = await Covtest.find().
-    populate('user', 'name')
-    res.send(testList);
+        populate('user', 'name')
+    res.json(testList);
 }
 
+//create test
 CovtestController.createTest = async (req, res) => {
     const randomCode = uniqid.process('', '-Covtest')
     const newData =
@@ -18,9 +20,10 @@ CovtestController.createTest = async (req, res) => {
         code: randomCode
     }
     const result = await Covtest.create(newData);
-    res.send(result);
+    res.json(result);
 }
 
+//update user status on test
 CovtestController.updateTestUserStatus = async (req, res) => {
 
     const newData =
@@ -30,9 +33,10 @@ CovtestController.updateTestUserStatus = async (req, res) => {
 
     await Covtest.findOneAndUpdate({ code: req.params.id }, newData);
     const result = await Covtest.find({ code: req.params.id })
-    res.send(result)
+    res.json(result)
 }
 
+//update test status
 CovtestController.updateTestStatus = async (req, res) => {
 
     const newData =
@@ -42,9 +46,10 @@ CovtestController.updateTestStatus = async (req, res) => {
 
     await Covtest.findOneAndUpdate({ code: req.params.id }, newData);
     const result = await Covtest.find({ code: req.params.id })
-    res.send(result)
+    res.json(result)
 }
 
+//update test result
 CovtestController.updateTestResult = async (req, res) => {
 
     const newData =
@@ -54,7 +59,7 @@ CovtestController.updateTestResult = async (req, res) => {
 
     await Covtest.findOneAndUpdate({ code: req.params.id }, newData);
     const result = await Covtest.find({ code: req.params.id })
-    res.send(result)
+    res.json(result)
 }
 
 module.exports = CovtestController
