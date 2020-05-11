@@ -15,4 +15,14 @@ const UserSchema = new mongoose.Schema({
 
 })
 
+/*
+UserSchema.pre('save', function(next) {
+	if (this.role === "EXT") {
+		next()
+	} else {
+		throw new Error('Not valid')
+	}
+})
+*/
+
 module.exports = mongoose.model('User', UserSchema)

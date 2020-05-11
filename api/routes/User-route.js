@@ -24,7 +24,12 @@ router.delete('/:id', function(req, res) {
 
 //update user
 router.put('/:id', function(req, res) {
-    User.updateUser(req, res)
+    User.UserController.updateUser(req, res)
 })
+
+// this will set the product on req.product - for any route that contains
+router.param('id',User.setRole)
+
+
 
 module.exports = router;

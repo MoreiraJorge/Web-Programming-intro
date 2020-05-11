@@ -7,7 +7,6 @@ var TechController = {};
 //create tech user
 TechController.createUserTech = async (req, res) => {
     const encryptedPass = bcrypt.hashSync(req.body.password, 10);
-
     const newData =
     {
         ...req.body,
@@ -16,7 +15,6 @@ TechController.createUserTech = async (req, res) => {
     }
     const result = await User.create(newData);
     res.json(result);
-
 }
 
 //delete tech user
@@ -34,7 +32,6 @@ TechController.deleteUserTech = async (req, res) => {
 //update tech user
 TechController.updateUserTech = async (req, res) => {
     const user = await User.findOne({ idCard: req.params.id })
-
     if (user.role === "TECH") {
         await User.updateOne({_id: user._id}, req.body)
         const result = await User.findOne({ idCard: req.params.id }).
@@ -54,7 +51,6 @@ TechController.listUserTech = async (req, res) => {
 
 //findOne tech user
 TechController.findOneUserTech = async (req, res) => {
-    
     const user = await User.findOne({ idCard: req.params.id, role: "TECH"})
     if(user!=null){
         res.json(user)
