@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var Covtest = require("../controllers/CovtestController");
+var fileController = require('../controllers/fileController')
+const fileUpload = require('express-fileupload')
 
+router.use(fileUpload());
 //List tests
 router.get('/testList',function(req, res){
     Covtest.listTests(req, res)
@@ -26,5 +29,16 @@ router.put('/update/testUserStatus/:id', function(req,res){
 router.put('/update/testResult/:id', function(req,res){
     Covtest.updateTestResult(req,res)
 })
+
+//Upload PDF file of Covid Test
+router.post('/upload/:id', function (req, res) {
+    fileController.upload(req, res)
+})
+
+//Download PDF file of result Covid Test
+router.get('/download/:id', function (req, res) {
+    fileController.download(req, res)
+})
+
 
 module.exports = router;

@@ -34,7 +34,7 @@ UserController.createUser = async (req, res) => {
 
 //delete user
 UserController.deleteUser = async (req, res) => {
-    const result = await User.findOneAndDelete({ code: req.params.id });
+    const result = await User.findOneAndDelete({ idCard: req.params.id });
     res.json(result)
 }
 
