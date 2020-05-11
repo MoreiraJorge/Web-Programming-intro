@@ -53,6 +53,11 @@ TechController.updateUserTech = async (req, res) => {
         req.body.covtest = []
     }
 
+    //if new password is sent, encrypt
+    if (req.body.password) {
+        req.body.password = bcrypt.hashSync(req.body.password, 10);
+    }
+
     await User.findOneAndUpdate({ idCard: req.params.id, role: "TECH" }, userData)
     const result = await User.findOne({ idCard: req.params.id })
     res.json(result)

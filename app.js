@@ -2,9 +2,11 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
-const fetch = require('node-fetch')
+//const fetch = require('node-fetch')
+const cookieParser = require('cookie-parser')
 var swaggerUi = require('swagger-ui-express')
 var swaggerDocument = require('./swagger.json')
+const sessionMiddleware = require('./api/middleware/session')
 
 const cors = require('cors')
 
@@ -43,6 +45,13 @@ app
 	.set('view engine', 'ejs')
 
 	.use(express.json())
+	.use(express.urlencoded({ extended: true }))
+
+	// Setup cookie parser
+	.use(cookieParser())
+
+	// Setup session middleware
+	.use(sessionMiddleware)
 
 	//swagger doc setup
 	.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
