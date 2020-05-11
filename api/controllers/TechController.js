@@ -1,13 +1,17 @@
 var mongoose = require("mongoose");
 const User = require('../models/User')
+const bcrypt = require('bcrypt');
 
 var TechController = {};
 
 //create tech user
 TechController.createUserTech = async (req, res) => {
+    const encryptedPass = bcrypt.hashSync(req.body.password, 10);
+
     const newData =
     {
         ...req.body,
+        password: encryptedPass,
         role: "TECH"
     }
     const result = await User.create(newData);
