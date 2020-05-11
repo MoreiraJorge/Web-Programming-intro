@@ -24,12 +24,18 @@ router.delete('/:id', function(req, res) {
 
 //update user
 router.put('/:id', function(req, res) {
-    User.UserController.updateUser(req, res)
+    User.updateUser(req, res)
 })
 
-// this will set the product on req.product - for any route that contains
-router.param('id',User.setRole)
+//add tests to user test list
+router.put('/tests/:id', function(req, res) {
+    User.addCovTests(req,res)
+})
 
+//add tests to user test list
+router.delete('/tests/:id', function(req, res) {
+    User.remCovTests(req, res)
+})
 
 
 module.exports = router;

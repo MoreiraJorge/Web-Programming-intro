@@ -1,5 +1,7 @@
 var mongoose = require("mongoose");
 const Covtest = require('../models/Covtest')
+const User = require('../models/User')
+
 var uniqid = require('uniqid');
 
 var CovtestController = {};
@@ -13,13 +15,24 @@ CovtestController.listTests = async (req, res) => {
 
 //create test
 CovtestController.createTest = async (req, res) => {
+    const targetUser = req.params.id;
+
     const randomCode = uniqid.process('', '-Covtest')
     const newData =
     {
         ...req.body,
-        code: randomCode
+        code: randomCode,
+        //associate the user that created the test
+        user: targetUser
+
     }
+
+
     const result = await Covtest.create(newData);
+
+    //update the user info of the tests
+    await User.findOneAndUpdate({ _id: req.params.id, role: "EXT" }, { $push: { covtest: result._id } })
+
     res.json(result);
 }
 

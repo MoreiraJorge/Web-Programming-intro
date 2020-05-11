@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const CovtestSchema = new mongoose.Schema({
 
-    code: String,
+    code: {type: String, required: true},
     description: String,
     userHistory: String,
     userStatus: String,

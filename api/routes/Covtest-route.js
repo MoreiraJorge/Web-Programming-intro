@@ -8,7 +8,7 @@ router.get('/testList',function(req, res){
 })
 
 //Create covid test
-router.post('/create', function(req,res){
+router.post('/create/:id', function(req,res){
     Covtest.createTest(req, res)
 })
 
