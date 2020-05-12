@@ -17,33 +17,39 @@
     "consumes":["application/json"],
     "produces":["application/json"],
     "paths": {
-        "/covtests/testList":{
+
+        "/admin/":{
             "get": {
-                "tags": ["Covtests"],
-                "summary": "Get all covid tests",
+                "tags": ["Admin"],
+                "summary": "Get Admin Info ",
                 "responses": {
                     "200":{
                         "description": "Ok",
                         "schema":{
-                            "$ref": "#/definitions/Covtests"
+                            "$ref": "#/definitions/User"
                         }
                     }
                 }
             }
         } ,
-        "/covtests/create":{
-            "post": {
-                "tags": [
-                    "Covtest"
-                ],
-                "summary": "Create a new covtest",
+        "/admin/changePass/{id}":{
+            "put": {
+                "tags": ["Admin"],
+                "summary": "Change Admin Password",
                 "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Admin Id",
+                        "type": "string"
+                    }, 
                    {
                      "in": "body",
                      "name": "body",
-                     "description": "Covid que se quer criar",
+                     "description": "Password nova ",
                      "schema": {
-                         "$ref": "#/definition/Covtest"
+                         "$ref": "#/definitions/User/properties/password"
                      }
                    }
                 ],
@@ -54,11 +60,732 @@
                     "200": {
                         "description": "Ok",
                         "schema":{
-                            "$ref": "#/definition/Covtest"
+                            "$ref": "#/definitions/id"
                         }
                     },
                     "400":{
                         "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/techs/{id}/":{
+            "get": {
+                "tags": ["Techs"],
+                "summary": "Search Specific Tech User",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Tech ID",
+                        "type": "string"
+                         }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed"
+                    }
+                }
+            }
+        },
+        "/techs/:{id}":{
+            "get": {
+                "tags": ["Techs"],
+                "summary": "Update specific Tech User",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Tech ID",
+                        "type": "string"
+                         },
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "Definir parametros do utilizador a actualizar",
+                     "schema": {
+                         "$ref": "#/definitions/User"
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed"
+                    }
+                }
+            }
+        },
+        "/techs/{id}":{
+            "delete": {
+                "tags": ["Techs"],
+                "summary": "Delete Tech User",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Tech ID",
+                        "type": "string"
+                         }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed"
+                    }
+                }
+            }
+        },
+        "/techs/techList":{
+            "get": {
+                "tags": ["Techs"],
+                "summary": "Get all Techs ",
+                "responses": {
+                    "200":{
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        } ,
+        "/techs/create":{
+            "get": {
+                "tags": ["Techs"],
+                "summary": "Create Tech User",
+                "parameters": [
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "Definir parametros do utilizador a criar",
+                     "schema": {
+                         "$ref": "#/definitions/User"
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed"
+                    }
+                }
+            }
+        },
+        "/listTest/{id}":{
+            "get": {
+                "tags": ["User"],
+                "summary": "List user tests",
+                "parameters": [
+                   {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the User",
+                    "type": "string"
+                     }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/users/tests/{id}/":{
+            "delete": {
+                "tags": ["User"],
+                "summary": "Delete test from user form",
+                "parameters": [
+                   {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the User",
+                    "type": "string"
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/users/tests/{id}":{
+            "put": {
+                "tags": ["User"],
+                "summary": "add tests to user test list",
+                "parameters": [
+                   {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the User",
+                    "type": "string"
+                   }, 
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "idCard User que se pretende eliminar  ",
+                     "schema": {
+                         "$ref": "#/definitions/Covtest"
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/users/:{id}":{
+            "put": {
+                "tags": ["User"],
+                "summary": "Update user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the User",
+                        "type": "string"
+                    }, 
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "idCard User que se pretende eliminar  ",
+                     "schema": {
+                         "$ref": "#/definitions/User"
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/users/{id}/":{
+            "delete": {
+                "tags": ["User"],
+                "summary": "Delete user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the User",
+                        "type": "string"
+                       }, 
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "idCard User que se pretende eliminar  ",
+                     "schema": {
+                         "$ref": "#/definitions/User/properties/idCard"
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/users/create":{
+            "post": {
+                "tags": ["User"],
+                "summary": "Create a new user",
+                "parameters": [
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "User que se pretende criar  ",
+                     "schema": {
+                         "$ref": "#/definitions/User"
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/users/{id}":{
+            "get": {
+                "tags": ["User"],
+                "summary": "Search one User",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the User",
+                        "type": "string"
+                       }, 
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "Id do user a pesquisar",
+                     "schema": {
+                         "$ref": "#/definitions/User/properties/idCard"
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/users/userList":{
+            "get": {
+                "tags": ["User"],
+                "summary": "Get all users ",
+                "responses": {
+                    "200":{
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        } ,
+        "/session/me":{
+            "get": {
+                "tags": ["Session"],
+                "summary": "Logout",
+                "parameters": [
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "User page information",
+                     "schema": {
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/session/logout":{
+            "post": {
+                "tags": ["Session"],
+                "summary": "Logout",
+                "parameters": [
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "User logout",
+                     "schema": {
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/session/login":{
+            "post": {
+                "tags": ["Session"],
+                "summary": "Login",
+                "parameters": [
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "User email ",
+                     "schema": {
+                         "$ref": "#/definitions/User/properties/email"
+                     }
+                   },
+                   {
+                    "in": "body",
+                    "name": "body",
+                    "description": "User password ",
+                    "schema": {
+                        "$ref": "#/definitions/User/properties/password"
+                    }
+                  }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/covtests/testList":{
+            "get": {
+                "tags": ["Covtest"],
+                "summary": "Get all covid tests",
+                "responses": {
+                    "200":{
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/Covtest"
+                        }
+                    }
+                }
+            }
+        } ,
+        "/covtests/create":{
+            "post": {
+                "tags": ["Covtest"],
+                "summary": "Create a new covtest",
+                "parameters": [
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "Covid que se quer criar, para testar, eliminar campos (code) e (schedule)  ",
+                     "schema": {
+                         "$ref": "#/definitions/Covtest"
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/covtests/update/testUserStatus/{id}":{
+            "put": {
+                "tags": ["Covtest"],
+                "summary": "Update User Covtest status",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the User",
+                        "type": "string"
+                       }, 
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "Covtes que se quer criar, para testar, eliminar campos (code) e (schedule)  ",
+                     "schema": {
+                         "$ref": "#/definitions/Covtest/properties/testStatus"
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/covtests/update/testResult/{id}":{
+            "put": {
+                "tags": ["Covtest"],
+                "summary": "Update User Covtest result",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the User",
+                        "type": "string"
+                       }, 
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "Covtes que se quer dar updat ao testResult, para testar, eliminar campos (code) e (schedule)  ",
+                     "schema": {
+                         "$ref": "#/definitions/Covtest/properties/testResult"
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/covtests/update/testStatus/{id}":{
+            "put": {
+                "tags": ["Covtest"],
+                "summary": "Update Covtest Status",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the User",
+                        "type": "string"
+                       }, 
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "Alterar CovTestStatus, para testar, eliminar campos (code) e (schedule)  ",
+                     "schema": {
+                         "$ref": "#/definitions/Covtest/properties/testStatus"
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        },
+        "/covtests/upload/{id}":{
+                "post": {
+                  "tags": ["Covtest"],
+                  "summary": "Uploads an Covtest pdf file.",
+                  "consumes": [
+                    "multipart/form-data"
+                  ],
+                  "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the User",
+                        "type": "string"
+                       }, 
+                    {
+                      "in": "formData",
+                      "name": "upfile",
+                      "type": "file",
+                      "description": "The Covtest file to upload."
+                    }
+                  ],
+                  "responses": {
+                      "200":{
+                          "description": "Ok",
+                          "schema":{
+                              "$ref": "#/definitions/id"
+                          }
+                    }
+                }
+            }
+        },
+        "/covtests/download/{id}":{
+            "post": {
+              "tags": ["Covtest"],
+              "summary": "Download an Covtest pdf file.",
+              "consumes": [
+                "multipart/form-data"
+              ],
+              "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the User",
+                    "type": "string"
+                }
+            ],
+              "responses": {
+                  "200":{
+                      "description": "Ok",
+                      "schema":{
+                          "$ref": "#/definitions/id"
+                      }
+                }
+            }
+        }
+    },
+        "/covtests/{id}":{
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the CovidTest",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Covtest"
+                ],
+                "summary": "Get CovidTest with given ID",
+                "responses": {
+                    "200":{
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/Covtest"
+                        }
                     }
                 }
             }
@@ -101,7 +828,7 @@
                 "role": {"type": "string"}
             }
         },
-        "CovidTests": {
+        "Covtests": {
             "type": "object",
             "properties": {
                 "covidTests": {
