@@ -9,14 +9,8 @@ const SESSION_EXP = 600000
 const {
 	JWT_SECRET = 'this is for development'
 } = process.env
-const userJSON = {
-	username: 'edgar',
-	password: 'pass123',
-	role: 'ADMIN' // 'REGULAR', 'EXTERNAL'
-}
-sessionRouter.post('/login', async (req, res, next) => {
 
-	
+sessionRouter.post('/login', async (req, res, next) => {
 	const user = await User.findOne({ email: req.body.email });
 	bcrypt.compare(req.body.password, user.password, (err, result) => {
 		if (err) {
@@ -36,14 +30,15 @@ sessionRouter.post('/login', async (req, res, next) => {
 			)
 		}
 		res.json(user)
-
 	})
 })
+
+//ver sessao
 sessionRouter.get('/me', (req, res, next) => {
 	res.json(req.user)
 })
 
-
+//fazerlogout
 sessionRouter.post('/logout', (req, res, next) => {
 	res.clearCookie('session')
 	res.json({ success: 'true' })

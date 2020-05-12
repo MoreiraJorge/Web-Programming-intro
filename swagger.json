@@ -9,21 +9,118 @@
     "basePath": "/api",
     "tags": [
         {
-            "name": "",
-            "description": ""
+            "name": "Covtest",
+            "description": "API CRUD para gestao de diagnostico do novo Corona Virus"
         }
     ],
-    "schemes": [
-        "http"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths":{
+    "schemes": ["http"],
+    "consumes":["application/json"],
+    "produces":["application/json"],
+    "paths": {
+        "/covtests/testList":{
+            "get": {
+                "tags": ["Covtests"],
+                "summary": "Get all covid tests",
+                "responses": {
+                    "200":{
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/Covtests"
+                        }
+                    }
+                }
+            }
+        } ,
+        "/covtests/create":{
+            "post": {
+                "tags": [
+                    "Covtest"
+                ],
+                "summary": "Create a new covtest",
+                "parameters": [
+                   {
+                     "in": "body",
+                     "name": "body",
+                     "description": "Covid que se quer criar",
+                     "schema": {
+                         "$ref": "#/definition/Covtest"
+                     }
+                   }
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definition/Covtest"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, Bad Post Data"
+                    }
+                }
+            }
+        }   
     },
-    "definitions":{     
+    "definitions": {
+        "id": {
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "Covtest": {
+            "type": "object",
+            "properties": {
+                "code": {"type": "string"},
+                "description": {"type": "string"},
+                "userHistory": {"type": "string"},
+                "userStatus": {"type": "string"},
+                "riskGroup": {"type": "string"},
+                "riskJob": {"type": "string"},
+                "testStatus": {"type": "string"},
+                "testResult": {"type": "string"},
+                "resultFile": {"type": "string"},
+                "isTestDone": {"type": "boolean"},
+                "schedule": {"type": "string"}
+            }
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "address": {"type": "string"},
+                "age": {"type": "number"},
+                "email": {"type": "string"},
+                "password": {"type": "string"},
+                "phoneNumber": {"type": "number"},
+                "idCard": {"type": "string"},
+                "role": {"type": "string"}
+            }
+        },
+        "CovidTests": {
+            "type": "object",
+            "properties": {
+                "covidTests": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Covtest"
+                    }
+                }
+            }
+        }, "Users": {
+            "type": "object",
+            "properties": {
+                "covidTests": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/User"
+                    }
+                }
+            }
+        }
     }
 }

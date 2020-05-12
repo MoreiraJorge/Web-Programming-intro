@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const fetch = require('node-fetch')
 var swaggerUi = require('swagger-ui-express')
 var swaggerDocument = require('./swagger.json')
+const cookieParser = require('cookie-parser')
 
 const cors = require('cors')
 
@@ -39,11 +40,16 @@ mongoose
 
 //api setup
 app
+
 	//view engine setup
 	.set('view engine', 'ejs')
 
 	.use(express.json())
 
+	// Setup cookie parser
+	.use(cookieParser())
+
+	.use(express.static('public'))
 	//swagger doc setup
 	.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 	.use('/api', cors(), apiRouter)
