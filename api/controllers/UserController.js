@@ -83,4 +83,18 @@ UserController.remCovTests = async (req, res) => {
 
 }
 
+//get test list from a specific user
+UserController.listUserTests = async (req, res) => {
+
+    const result = await User.aggregate([{ $match: { idCard: req.params.id, role: "EXT" } }]).project({
+        name: 1,
+        covtest: 1,
+        _id:0
+    })
+
+    console.log(result.covtest)
+    res.json(result)
+
+}
+
 module.exports = UserController

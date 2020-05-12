@@ -37,5 +37,10 @@ router.delete('/tests/:id', function(req, res) {
     User.remCovTests(req, res)
 })
 
+//list tests of user
+router.get('/listTest/:id', function(req, res) {
+    User.listUserTests(req, res)
+})
+
 
 module.exports = router;
