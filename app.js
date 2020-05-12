@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 var swaggerUi = require('swagger-ui-express')
 var swaggerDocument = require('./swagger.json')
+const fileUpload = require('express-fileupload')
 const sessionMiddleware = require('./api/middleware/session')
 
 const cors = require('cors')
@@ -52,6 +53,9 @@ app
 
 	// Setup session middleware
 	.use(sessionMiddleware)
+
+	//dispose public folder
+	.use(express.static('public'))
 
 	//swagger doc setup
 	.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
