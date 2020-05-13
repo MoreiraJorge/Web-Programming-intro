@@ -22,8 +22,116 @@
     "produces": [
         "application/json"
     ],
-    "paths":{
+    "paths": {
+        
     },
-    "definitions":{     
+    "definitions": {
+        "Covtest": {
+            "required": [
+                "code"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "code": {
+                    "type": "String"
+                },
+                "description": {
+                    "type": "String"
+                },
+                "userHistory": {
+                    "type": "String"
+                },
+                "userStatus": {
+                    "type": "String"
+                },
+                "riskGroup": {
+                    "type": "String"
+                },
+                "riskJob": {
+                    "type": "String"
+                },
+                "testStatus": {
+                    "type": "String"
+                },
+                "testResult": {
+                    "type": "String"
+                },
+                "resultFile": {
+                    "type": "String"
+                },
+                "isTestDone": {
+                    "type": "Boolean"
+                },
+                "schedule": {
+                    "type": "Date"
+                },
+                "user": {
+                    "type": "object",
+                    "$ref": "#/definitions/User"
+                },
+                "updated_at": {
+                    "type": "Date",
+                    "default": "Date.now"
+                }
+            }
+        },
+        "Covtests": {
+            "type": "array",
+            "$ref": "#/definitions/Covtest"
+        },
+        "User": {
+            "required": [
+                "email",
+                "password",
+                "idCard"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "String"
+                },
+                "address": {
+                    "type": "String"
+                },
+                "age": {
+                    "type": "Number"
+                },
+                "email": {
+                    "type": "String"
+                },
+                "password": {
+                    "type": "String"
+                },
+                "phoneNumber": {
+                    "type": "Number"
+                },
+                "idCard": {
+                    "type": "String"
+                },
+                "role": {
+                    "type": "String"
+                },
+                "covtest": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Covtest"
+                    }
+                },
+                "updated_at": {
+                    "type": "Date",
+                    "default": "Date.now"
+                }
+            }
+        },
+        "Users": {
+            "type": "array",
+            "$ref": "#/definitions/User"
+        }
     }
 }
