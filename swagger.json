@@ -9,8 +9,11 @@
     "basePath": "/api",
     "tags": [
         {
-            "name": "",
-            "description": ""
+            "name": "Autenticação",
+            "description": "Rotas de autenticação"
+        },{
+            "name": "Techs",
+            "description": "Rotas de manipulação de técnicos"
         }
     ],
     "schemes": [
@@ -23,7 +26,64 @@
         "application/json"
     ],
     "paths": {
-        
+        "/login": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "description": "Rota usada para fazer login",
+                "parameters": [
+                    {
+                        "name": "login",
+                        "in": "body",
+                        "required": true,
+                        "description": "Dados de login",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "String"
+                                },
+                                "password": {
+                                    "type": "String"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Login Efetuado",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Login Failed"
+                    }
+                }
+            }
+        },
+        "/techs/techList":{
+            "get": {
+                "tags": ["Techs"],
+                "summary": "Obter todos os técnicos",
+                "responses": {
+                    "200":{
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Não autorizado"
+                    }
+                }
+            }
+        }
     },
     "definitions": {
         "Covtest": {

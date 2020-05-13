@@ -110,5 +110,14 @@ CovtestController.listNeg = async (req, res) => {
 
 }
 
+//Count tests (ADM)
+CovtestController.countTest = async (req, res) => {
+
+    const result = await Covtest.estimatedDocumentCount()
+    res.json(result)
+
+}
+
+
 
 module.exports = CovtestController

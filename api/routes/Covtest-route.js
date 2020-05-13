@@ -62,4 +62,9 @@ router.get('/negative', authorize(['TECH']), function (req, res) {
     Covtest.listNeg(req, res)
 })
 
+//count tests
+router.get('/count', authorize(['ADM']), function (req, res) {
+    Covtest.countTest(req, res)
+})
+
 module.exports = router;
