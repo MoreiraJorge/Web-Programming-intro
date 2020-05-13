@@ -3,7 +3,7 @@ const Covtest = require('../models/Covtest')
 
 var FileController = {};
 
-//Upload File
+//Upload File (tech)
 FileController.upload = async (req, res) => {
     if (!req.files || Object.keys(req.files).length === 0) {
         return res.status(404).send(`<h1>NO FILES UPLOADED</h1>`);
@@ -29,7 +29,7 @@ FileController.upload = async (req, res) => {
     }
 }
 
-//Download file
+//Download file (tech)
 FileController.download = async (req, res) =>{
 
     try{

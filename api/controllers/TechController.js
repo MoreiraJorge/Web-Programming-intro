@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 var TechController = {};
 
-//create tech user
+//create tech user (admin)
 TechController.createUserTech = async (req, res) => {
     if (req.body.role == null) {
 
@@ -28,7 +28,7 @@ TechController.createUserTech = async (req, res) => {
     }
 }
 
-//delete tech user
+//delete tech user (admin)
 TechController.deleteUserTech = async (req, res) => {
     const user = await User.findOne({ idCard: req.params.id })
     if (user.role === "TECH") {
@@ -40,7 +40,7 @@ TechController.deleteUserTech = async (req, res) => {
     }
 }
 
-//update tech user
+//update tech user (admin)
 TechController.updateUserTech = async (req, res) => {
 
     const userData = req.body
@@ -63,13 +63,13 @@ TechController.updateUserTech = async (req, res) => {
     res.json(result)
 }
 
-//list tech user
+//list tech user (admin)
 TechController.listUserTech = async (req, res) => {
     const list = await User.find({ role: "TECH" })
     res.json(list);
 }
 
-//findOne tech user
+//findOne tech user (admin)
 TechController.findOneUserTech = async (req, res) => {
     const user = await User.findOne({ idCard: req.params.id, role: "TECH" })
     if (user != null) {

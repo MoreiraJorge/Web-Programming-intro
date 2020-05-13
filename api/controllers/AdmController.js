@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 var AdmController = {};
 
-//Update Admin password
+//Update Admin password (admin)
 AdmController.updatePassword = async (req, res) => {
     const encryptedPass = bcrypt.hashSync(req.body.password, 10);
 
@@ -18,7 +18,7 @@ AdmController.updatePassword = async (req, res) => {
     res.json(result)
 }
 
-//find the admin
+//find the admin (admin)
 AdmController.getAdmin = async (req, res) => {
     const result = await User.findOne({role: "ADM"})
     res.json(result)

@@ -4,21 +4,28 @@ const bcrypt = require('bcrypt');
 
 var UserController = {};
 
-//list all users
-UserController.listUsers = async (req, res) => {
+//list all users (admin)
+UserController.listAllUsers = async (req, res) => {
+    const list = await User.find().
+        populate('covtest')
+    res.json(list);
+}
+
+//list all External users (tech)
+UserController.listExtUsers = async (req, res) => {
     const list = await User.find({ role: "EXT" }).
         populate('covtest')
     res.json(list);
 }
 
-//find one user
+//find one user (tech)
 UserController.findOneUser = async (req, res) => {
     const result = await User.findOne({ idCard: req.params.id, role: "EXT" }).
         populate('covtest')
     res.json(result);
 }
 
-//create user
+//create user (tech)
 UserController.createUser = async (req, res) => {
     try {
 
@@ -42,13 +49,13 @@ UserController.createUser = async (req, res) => {
     }
 }
 
-//delete user
+//delete user (tech)
 UserController.deleteUser = async (req, res) => {
     const result = await User.findOneAndDelete({ idCard: req.params.id, role: "EXT" });
     res.json(result)
 }
 
-//update user
+//update user (tech)
 UserController.updateUser = async (req, res) => {
 
     const userData = req.body
@@ -63,7 +70,7 @@ UserController.updateUser = async (req, res) => {
 
 }
 
-//add covid tests to user test list
+//add covid tests to user test list (tech)
 UserController.addCovTests = async (req, res) => {
 
     await User.findOneAndUpdate({ idCard: req.params.id, role: "EXT" }, { $push: { covtest: req.body.covtest } })
@@ -73,26 +80,12 @@ UserController.addCovTests = async (req, res) => {
 
 }
 
-//remove covid test from user test list
+//remove covid test from user test list (tech)
 UserController.remCovTests = async (req, res) => {
 
     await User.findOneAndUpdate({ idCard: req.params.id, role: "EXT" }, { $pull: { covtest: req.body.covtest } })
     const result = await User.findOne({ idCard: req.params.id }).
         populate('covtest')
-    res.json(result)
-
-}
-
-//get test list from a specific user
-UserController.listUserTests = async (req, res) => {
-
-    const result = await User.aggregate([{ $match: { idCard: req.params.id, role: "EXT" } }]).project({
-        name: 1,
-        covtest: 1,
-        _id:0
-    })
-
-    console.log(result.covtest)
     res.json(result)
 
 }
