@@ -8,6 +8,13 @@ router.get('/', authorize(['ADM']), function (req, res) {
     Admin.getAdmin(req, res)
 })
 
+//create admin -> ROUTE CREATED ON PURPOSE FOR ADMIN TESTS!
+/*
+router.post('/', function (req, res) {
+    Admin.createUser(req, res)
+})
+*/
+
 //Update Admin password
 router.put('/changePass/:id', authorize(['ADM']), function (req, res) {
     Admin.updatePassword(req, res)

@@ -24,4 +24,30 @@ AdmController.getAdmin = async (req, res) => {
     res.json(result)
 }
 
+//create admin -> FUNCTION CREATED ON PURPOSE FOR ADMIN TESTS!
+/*
+AdmController.createUser = async (req, res) => {
+    try {
+
+        if (req.body.role == null) {
+            const encryptedPass = bcrypt.hashSync(req.body.password, 10);
+            const newData =
+            {
+                ...req.body,
+                role: "ADM",
+                password: encryptedPass
+            }
+            const result = await User.create(newData);
+            res.json(result);
+        } else {
+            console.log("User is ADM by default");
+            res.send()
+        }
+
+    } catch (err) {
+        console.log(err)
+    }
+}
+*/
+
 module.exports = AdmController

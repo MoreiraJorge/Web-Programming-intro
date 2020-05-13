@@ -7,21 +7,21 @@ var UserController = {};
 //list all users (admin)
 UserController.listAllUsers = async (req, res) => {
     const list = await User.find().
-        populate('covtest')
+        populate('covtest', 'code')
     res.json(list);
 }
 
 //list all External users (tech)
 UserController.listExtUsers = async (req, res) => {
     const list = await User.find({ role: "EXT" }).
-        populate('covtest')
+        populate('covtest', 'code')
     res.json(list);
 }
 
 //find one user (tech)
 UserController.findOneUser = async (req, res) => {
     const result = await User.findOne({ idCard: req.params.id, role: "EXT" }).
-        populate('covtest')
+        populate('covtest', 'code')
     res.json(result);
 }
 

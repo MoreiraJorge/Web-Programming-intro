@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
 
 })
 
+
 UserSchema.pre('save', function(next) {
 	if (this.role !== "ADM") {
 		next()
@@ -22,5 +23,6 @@ UserSchema.pre('save', function(next) {
 		throw new Error('Not valid')
 	}
 })
+
 
 module.exports = mongoose.model('User', UserSchema)

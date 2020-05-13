@@ -4,7 +4,7 @@ var User = require("../controllers/UserController")
 const authorize = require('../middleware/authorize')
 
 //List external users
-router.get('/userListExt', authorize(['TECH']), function (req, res) {
+router.get('/userListExt', authorize(['TECH', 'ADM']), function (req, res) {
     User.listExtUsers(req, res)
 })
 

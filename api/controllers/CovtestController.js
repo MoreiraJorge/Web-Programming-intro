@@ -105,7 +105,7 @@ CovtestController.listPos = async (req, res) => {
 //get test list with negative result (techs)
 CovtestController.listNeg = async (req, res) => {
 
-    const result = await Covtest.find({ testResult: "Positive" })
+    const result = await Covtest.find({ testResult: "Negative" })
     res.json(result)
 
 }

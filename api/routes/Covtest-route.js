@@ -12,7 +12,7 @@ router.get('/testList', authorize(['ADM']), function (req, res) {
     Covtest.listTests(req, res)
 })
 
-//Create covid test
+//Create covid test with a id from  user
 router.post('/create/:id', authorize(['EXT']), function (req, res) {
     Covtest.createTest(req, res)
 })
@@ -38,7 +38,7 @@ router.put('/upload/:id', authorize(['TECH']), function (req, res) {
 })
 
 //Download PDF file of result Covid Test
-router.get('/download/:id', authorize(['TECH']), function (req, res) {
+router.get('/download/:id', authorize(['TECH', 'EXT']), function (req, res) {
     fileController.download(req, res)
 })
 
@@ -58,8 +58,8 @@ router.get('/positive', authorize(['TECH']), function (req, res) {
 })
 
 //list negative tests
-router.get('/positive', authorize(['TECH']), function (req, res) {
-    Covtest.listPos(req, res)
+router.get('/negative', authorize(['TECH']), function (req, res) {
+    Covtest.listNeg(req, res)
 })
 
 module.exports = router;
