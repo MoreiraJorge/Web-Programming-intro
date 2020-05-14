@@ -18,6 +18,10 @@ document.getElementById('form1').addEventListener('submit', (e) => {
     })
         .then(r => r.json())
         .then(user => {
-            
+            console.log(user)
+
+            if(user.role === "ADM"){
+               //redirect a pagina ejs com o user 
+            }
         })
 })
