@@ -27,7 +27,7 @@ sessionRouter.post('/login', async (req, res, next) => {
 				{
 					expires: new Date(Date.now() + SESSION_EXP),
 					httpOnly: true
-				}
+				},
 			)
 		}
 		res.json(user)
