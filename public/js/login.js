@@ -7,7 +7,9 @@ document.getElementById('form1').addEventListener('submit', (e) => {
 
     fetch('/api/login', {
         method: 'POST',
-        headers: {},
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
             email,
             password
@@ -16,6 +18,6 @@ document.getElementById('form1').addEventListener('submit', (e) => {
     })
         .then(r => r.json())
         .then(user => {
-            console.log(user)
+            
         })
 })
