@@ -5,13 +5,12 @@ document.getElementById('form1').addEventListener('submit', (e) => {
     const email = e.target.email.value
     const password = e.target.password.value
 
-    fetch('http://localhost:3000/api/login', {
-
+    fetch('/api/login', {
         method: 'POST',
         headers: {},
         body: JSON.stringify({
-            "email": email,
-            "password": password
+            email,
+            password
         })
 
     })
