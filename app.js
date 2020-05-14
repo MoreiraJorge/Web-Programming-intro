@@ -6,8 +6,9 @@ const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 var swaggerUi = require('swagger-ui-express')
 var swaggerDocument = require('./swagger.json')
-const fileUpload = require('express-fileupload')
+//const fileUpload = require('express-fileupload')
 const sessionMiddleware = require('./api/middleware/session')
+const path = require('path')
 
 const HomeRouter = require('./routes/Index')
 
@@ -46,6 +47,7 @@ mongoose
 app
 	//view engine setup
 	.set('view engine', 'ejs')
+	.set('views', path.join(__dirname, 'views'))
 
 	.use(express.json())
 	.use(express.urlencoded({ extended: true }))
