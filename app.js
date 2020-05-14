@@ -9,6 +9,8 @@ var swaggerDocument = require('./swagger.json')
 const fileUpload = require('express-fileupload')
 const sessionMiddleware = require('./api/middleware/session')
 
+const HomeRouter = require('./routes/Index')
+
 const cors = require('cors')
 
 //get the api base route
@@ -48,6 +50,9 @@ app
 	.use(express.json())
 	.use(express.urlencoded({ extended: true }))
 
+	//views
+	.use(HomeRouter)
+
 	// Setup cookie parser
 	.use(cookieParser())
 
@@ -62,6 +67,7 @@ app
 	.use('/api', cors(), apiRouter)
 
 	.listen(PORT, () => {
+	console.log(`Views on http://localhost:${PORT}/`)
 	console.log(`API started on http://localhost:${PORT}/api`)
 	console.log(`API started on http://localhost:${PORT}/api-docs`)
 })

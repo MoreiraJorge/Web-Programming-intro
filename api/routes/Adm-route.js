@@ -4,7 +4,7 @@ var Admin = require("../controllers/AdmController");
 const authorize = require('../middleware/authorize')
 
 //get Admin
-router.get('/', authorize(['ADM']), function (req, res) {
+router.get('/', function (req, res) {
     Admin.getAdmin(req, res)
 })
 

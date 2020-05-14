@@ -11,7 +11,8 @@
         {
             "name": "Autenticação",
             "description": "Rotas de autenticação"
-        },{
+        },
+        {
             "name": "Techs",
             "description": "Rotas de manipulação de técnicos"
         }
@@ -25,6 +26,20 @@
     "produces": [
         "application/json"
     ],
+    "components": {
+		"securitySchemes": {
+			"cookieAuth": {
+				"type": "apiKey",
+				"in": "header",
+				"name": "session"
+            },
+            "authentication": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+		}
+    },
     "paths": {
         "/login": {
             "post": {
@@ -32,6 +47,7 @@
                     "Autenticação"
                 ],
                 "description": "Rota usada para fazer login",
+                "security": [],
                 "parameters": [
                     {
                         "name": "login",
@@ -42,10 +58,10 @@
                             "type": "object",
                             "properties": {
                                 "email": {
-                                    "type": "String"
+                                    "type": "string"
                                 },
                                 "password": {
-                                    "type": "String"
+                                    "type": "string"
                                 }
                             }
                         }
@@ -59,6 +75,14 @@
                         "description": "Login Efetuado",
                         "schema": {
                             "$ref": "#/definitions/User"
+                        },
+                        "headers": {
+                            "Set-Cookie": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "session=abcde12345; Path=/; HttpOnly"
+                                }
+                            }
                         }
                     },
                     "400": {
@@ -67,14 +91,22 @@
                 }
             }
         },
-        "/techs/techList":{
+        "/techs/techList": {
             "get": {
-                "tags": ["Techs"],
+                "security": [
+                    {
+                        "cookieAuth": [],
+                        "authentication": []
+                    }
+                ],
+                "tags": [
+                    "Techs"
+                ],
                 "summary": "Obter todos os técnicos",
                 "responses": {
-                    "200":{
+                    "200": {
                         "description": "Ok",
-                        "schema":{
+                        "schema": {
                             "$ref": "#/definitions/User"
                         }
                     },
@@ -82,6 +114,9 @@
                         "description": "Não autorizado"
                     }
                 }
+            },
+            "security": {
+                "authentication": []
             }
         }
     },
@@ -96,44 +131,46 @@
                     "uniqueItems": true
                 },
                 "code": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "description": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "userHistory": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "userStatus": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "riskGroup": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "riskJob": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "testStatus": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "testResult": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "resultFile": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "isTestDone": {
-                    "type": "Boolean"
+                    "type": "boolean"
                 },
                 "schedule": {
-                    "type": "Date"
+                    "type": "string",
+                    "format": "date"
                 },
                 "user": {
                     "type": "object",
                     "$ref": "#/definitions/User"
                 },
                 "updated_at": {
-                    "type": "Date",
+                    "type": "string",
+                    "format": "date",
                     "default": "Date.now"
                 }
             }
@@ -154,28 +191,28 @@
                     "uniqueItems": true
                 },
                 "name": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "address": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "age": {
-                    "type": "Number"
+                    "type": "number"
                 },
                 "email": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "password": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "phoneNumber": {
-                    "type": "Number"
+                    "type": "number"
                 },
                 "idCard": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "role": {
-                    "type": "String"
+                    "type": "string"
                 },
                 "covtest": {
                     "type": "array",
@@ -184,7 +221,8 @@
                     }
                 },
                 "updated_at": {
-                    "type": "Date",
+                    "type": "string",
+                    "format": "date",
                     "default": "Date.now"
                 }
             }

@@ -12,7 +12,6 @@ const {
 
 sessionRouter.post('/login', async (req, res, next) => {
 
-	
 	const user = await User.findOne({ email: req.body.email });
 	bcrypt.compare(req.body.password, user.password, (err, result) => {
 		if (err) {
