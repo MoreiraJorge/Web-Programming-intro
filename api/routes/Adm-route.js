@@ -9,6 +9,7 @@ router.get('/', authorize(['ADM']), function (req, res) {
 })
 
 //create admin -> ROUTE CREATED ON PURPOSE FOR ADMIN TESTS!
+//DO NOT PUT ROLE ON BODY, ITS ADM BY DEFAULT
 /*
 router.post('/', function (req, res) {
     Admin.createUser(req, res)
