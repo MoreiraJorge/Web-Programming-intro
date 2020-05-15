@@ -829,7 +829,7 @@
                 "tags": [
                     "Covtest"
                 ],
-                "summary": "Obter testes de um utilizador específico | Acesso -> Externo / Técnico",
+                "summary": "Obter testes de um utilizador específico | Acesso -> Técnico",
                 "produces": [
                     "application/json"
                 ],
@@ -1079,6 +1079,9 @@
                 "schedule": {
                     "type": "string",
                     "format": "date"
+                },
+                "saude24": {
+                    "type": "boolean"
                 },
                 "user": {
                     "type": "object",

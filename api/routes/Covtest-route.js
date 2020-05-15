@@ -43,7 +43,7 @@ router.get('/download/:id', authorize(['TECH', 'EXT']), function (req, res) {
 })
 
 //list tests of user
-router.get('/listTest/:id', authorize(['EXT', 'TECH']), function (req, res) {
+router.get('/listTest/:id', authorize(['TECH']), function (req, res) {
     Covtest.listUserTests(req, res)
 })
 
