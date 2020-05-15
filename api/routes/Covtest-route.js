@@ -7,17 +7,17 @@ const authorize = require('../middleware/authorize')
 
 router.use(fileUpload())
 
-//List tests-
-router.get('/testList', authorize(['ADM']), function (req, res) {
+//List tests
+router.get('/testList', authorize(['ADM', 'TECH']), function (req, res) {
     Covtest.listTests(req, res)
 })
 
-//Create covid test with a id from  user-
+//Create covid test with a id from  user
 router.post('/create/:id', authorize(['EXT']), function (req, res) {
     Covtest.createTest(req, res)
 })
 
-//update test status-
+//update test status
 router.put('/update/testStatus/:id', authorize(['TECH']), function (req, res) {
     Covtest.updateTestStatus(req, res)
 })
@@ -43,11 +43,11 @@ router.get('/download/:id', authorize(['TECH', 'EXT']), function (req, res) {
 })
 
 //list tests of user
-router.get('/listTest/:id', authorize(['EXT']), function (req, res) {
+router.get('/listTest/:id', authorize(['EXT', 'TECH']), function (req, res) {
     Covtest.listUserTests(req, res)
 })
 
-//list pending tests-
+//list pending tests
 router.get('/pending', authorize(['TECH']), function (req, res) {
     Covtest.listPend(req, res)
 })

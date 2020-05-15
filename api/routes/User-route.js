@@ -32,7 +32,7 @@ router.delete('/:id', authorize(['TECH']), function (req, res) {
 router.put('/:id', authorize(['TECH']), function (req, res) {
     User.updateUser(req, res)
 })
-//------------missing swagger---------------//
+
 //add tests to user test list
 router.put('/tests/:id', authorize(['TECH']), function (req, res) {
     User.addCovTests(req, res)

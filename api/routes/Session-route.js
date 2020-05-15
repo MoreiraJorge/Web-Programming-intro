@@ -9,7 +9,7 @@ const SESSION_EXP = 600000
 const {
 	JWT_SECRET = 'this is for development'
 } = process.env
-//-
+
 sessionRouter.post('/login', async (req, res, next) => {
 
 	const user = await User.findOne({ email: req.body.email });
@@ -34,12 +34,12 @@ sessionRouter.post('/login', async (req, res, next) => {
 
 	})
 })
-//-
+
 sessionRouter.get('/me', (req, res, next) => {
 	res.json(req.user)
 })
 
-//-
+
 sessionRouter.post('/logout', (req, res, next) => {
 	res.clearCookie('session')
 	res.json({ success: 'true' })
