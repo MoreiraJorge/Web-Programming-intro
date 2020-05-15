@@ -8,8 +8,11 @@ router.get('/', authorize(['ADM']), function (req, res) {
     Admin.getAdmin(req, res)
 })
 
-//create admin -> ROUTE CREATED ON PURPOSE FOR ADMIN TESTS!
-//DO NOT PUT ROLE ON BODY, ITS ADM BY DEFAULT
+/*create admin -> ROUTE CREATED ON PURPOSE FOR ADMIN TESTS!
+DO NOT PUT ROLE ON BODY, ITS ADM BY DEFAULT
+used to create admin if doesn´t exist. Uncoment here, in Admcontroller
+and coment the restriction in the User schema
+*/
 /*
 router.post('/', function (req, res) {
     Admin.createUser(req, res)
