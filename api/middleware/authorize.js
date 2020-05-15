@@ -7,7 +7,7 @@ const authorize = (opts) => {
 			next('Not authenticated')
 		}
 		const hasAuthorization = opts.includes(req.user.role)
-		
+
 		if (hasAuthorization) {
 			next()
 		} else {

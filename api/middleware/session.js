@@ -13,7 +13,7 @@ const sessionMiddleware = (req, res, next) => {
 		} else {
 			req.user = null
 		}
-	} catch(e) {
+	} catch (e) {
 		// console.error(e)
 		req.user = null
 	}

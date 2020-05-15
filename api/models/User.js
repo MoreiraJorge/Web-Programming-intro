@@ -5,10 +5,10 @@ const UserSchema = new mongoose.Schema({
     name: String,
     address: String,
     age: Number,
-    email: {type: String, unique : true, required: true},
-    password: {type: String, required: true},
+    email: { type: String, unique: true, required: true },
+    password: { type: String, required: true },
     phoneNumber: Number,
-    idCard: {type: String, unique : true, required: true},
+    idCard: { type: String, unique: true, required: true },
     role: String,
     covtest: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Covtest' }],
     updated_at: { type: Date, default: Date.now }
@@ -16,12 +16,12 @@ const UserSchema = new mongoose.Schema({
 })
 
 
-UserSchema.pre('save', function(next) {
-	if (this.role !== "ADM") {
-		next()
-	} else {
-		throw new Error('Not valid')
-	}
+UserSchema.pre('save', function (next) {
+    if (this.role !== "ADM") {
+        next()
+    } else {
+        throw new Error('Not valid')
+    }
 })
 
 

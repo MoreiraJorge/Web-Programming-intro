@@ -2,11 +2,9 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
-//const fetch = require('node-fetch')
 const cookieParser = require('cookie-parser')
 var swaggerUi = require('swagger-ui-express')
 var swaggerDocument = require('./swagger.json')
-//const fileUpload = require('express-fileupload')
 const sessionMiddleware = require('./api/middleware/session')
 const path = require('path')
 
