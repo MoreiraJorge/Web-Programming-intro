@@ -3,7 +3,7 @@
     "info": {
         "version": "1.0.0",
         "title": "API de gestão de utilizadores e testes de COVID-19",
-        "description": "API que faz a gestão de utilizadores (técnicos, clientes e admins) e de testes de covid-19 de um centro de analises"
+        "description": "API que faz a gestão de utilizadores (técnicos, clientes e admins) e de testes de covid-19 de um centro de analises - Efetuar login para usar a API"
     },
     "host": "localhost:3000",
     "basePath": "/api",
@@ -279,7 +279,7 @@
                 "tags": [
                     "Externos"
                 ],
-                "summary": "Listar utilizadores externos | Acesso -> Técnicos / Admins",
+                "summary": "Listar utilizadores externos | Acesso -> Técnicos / Admin",
                 "produces": [
                     "application/json"
                 ],
@@ -310,6 +310,267 @@
                         "description": "success",
                         "schema": {
                             "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "Externos"
+                ],
+                "summary": "Obter utilizador externo especifico | Acesso -> Técnicos",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "idCard do utilizador externo a ser obtido",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Externos"
+                ],
+                "summary": "Apagar utilizador externo | Acesso -> Técnicos",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "idCard do utilizador externo a ser apagado",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Externos"
+                ],
+                "summary": "Atualizar utilizador externo | Acesso -> Técnicos",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "idCard do utilizador externo a ser atualizado",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "Detalhes",
+                        "description": "Campos a serem atualizados",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            }
+        },
+        "/users/create": {
+            "post": {
+                "tags": [
+                    "Externos"
+                ],
+                "summary": "Criar utilizador externo | Acesso -> Técnicos",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Detalhes",
+                        "description": "Detalhes do utilizador a ser criado",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            }
+        },
+        "/covtests/testList": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Obter todos os testes de covid | Acesso -> Admin",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/Covtest"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            }
+        },
+        "/covtests/create/{id}": {
+            "post": {
+                "tags": [
+                    "Covtest"
+                ],
+                "summary": "Criar teste de covid para um utilizador | Acesso -> Externos",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ObjectID (_id) do utilizador a ser associado ao teste",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "Detalhes",
+                        "description": "Detalhes do pedido de teste a ser criado",
+                        "schema": {
+                            "$ref": "#/definitions/Covtest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/Covtest"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            }
+        },
+        "/covtests/update/testStatus/{id}": {
+            "put": {
+                "tags": [
+                    "Covtest"
+                ],
+                "summary": "Atualizar o status de um teste de covid | Acesso -> Técnico",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Código (code) do teste a ser atualizado",
+                        "schema": {
+                            "$ref": "#/definitions/Covtest"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "Detalhes",
+                        "description": "Detalhes a atualizar no teste",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "testStatus": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/Covtest"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            }
+        },
+        "/covtests/pending": {
+            "get": {
+                "tags": [
+                    "Covtest"
+                ],
+                "summary": "Obter os testes com status: pending | Acesso -> Técnico",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/Covtest"
                         }
                     },
                     "400": {

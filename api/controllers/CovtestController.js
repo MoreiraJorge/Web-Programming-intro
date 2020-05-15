@@ -86,7 +86,7 @@ CovtestController.listUserTests = async (req, res) => {
 
 }
 
-//get test list with pending tests (techs)
+//get test list with pending tests (techs)-
 CovtestController.listPend = async (req, res) => {
 
     const result = await Covtest.find({ testStatus: "pending" })
@@ -118,6 +118,18 @@ CovtestController.countTest = async (req, res) => {
 
 }
 
+//change schedule
+CovtestController.schedule = async (req, res) => {
 
+    const newData =
+    {
+        schedule: req.body.schedule
+    }
+
+    await Covtest.findOneAndUpdate({ code: req.params.id }, newData)
+
+    const result = await Covtest.find({ code: req.params.id })
+    res.json(result)
+}
 
 module.exports = CovtestController
