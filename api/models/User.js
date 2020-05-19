@@ -5,10 +5,10 @@ const UserSchema = new mongoose.Schema({
     name: String,
     address: String,
     age: Number,
-    email: { type: String, unique: false, required: false },
-    password: { type: String, required: false },
+    email: { type: String },
+    password: { type: String},
     phoneNumber: Number,
-    idCard: { type: String, unique: true, required: false },
+    idCard: { type: String },
     role: String,
     covtest: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Covtest' }],
     updated_at: { type: Date, default: Date.now }

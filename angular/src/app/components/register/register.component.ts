@@ -34,16 +34,17 @@ export class RegisterComponent implements OnInit {
     //Required Fields 
     if(!this.validateService.validateRegister(user)){
       this.flashMessages.show("Campos nao preenchidos", {cssClass:'alert-danger'});
-      
+      return false;
     }
     //Validate Email
     if(!this.validateService.validateEmail(user.email)){
       this.flashMessages.show("Email Invalido", {cssClass:'alert-danger'});
+      return false;
     }
 
     //Register user on BackEnd
     this.auth.registerUser(user).subscribe(data => {
-      if(data.success){
+      if(data! = []){
         this.flashMessages.show('You are now registered and can log in', {cssClass: 'alert-success', timeout: 3000});
         this.router.navigate(['/login']);
       } else {
