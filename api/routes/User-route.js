@@ -19,7 +19,7 @@ router.get('/:id', authorize(['TECH']), function (req, res) {
 })
 
 //Create user
-router.post('/create', authorize(['TECH']), function (req, res) {
+router.post('/create', function (req, res) {
     User.createUser(req, res)
 })
 
