@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 const Covtest = require('../models/Covtest')
+var fs = require('fs');
 
 var FileController = {};
 
@@ -9,14 +10,18 @@ FileController.upload = async (req, res) => {
         return res.status(404).send(`<h1>NO FILES UPLOADED</h1>`);
     }
     let sampleFile = req.files.file
-    let uploadPath = "./public/uploads/" + sampleFile.name;
+    let path = "./public/uploads/"
+
+    if (!fs.existsSync(path)){
+        fs.mkdirSync(path);
+    }
+    
+    let uploadPath = path + sampleFile.name;
 
     try {
         await Covtest.findOneAndUpdate({ code: req.params.id }, { resultFile: uploadPath })
         const result = await Covtest.find({ code: req.params.id })
 
-        const rr = await Covtest.find({ code: req.params.id }, 'description')
-        console.log(rr)
         sampleFile.mv(uploadPath, function (err) {
             if (err)
                 return res.status(500).send(err);

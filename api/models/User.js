@@ -9,20 +9,17 @@ const UserSchema = new mongoose.Schema({
     password: { type: String, required: true },
     phoneNumber: Number,
     idCard: { type: String, unique: true, required: true },
-    role: String,
+
+    role: {
+        type: String,
+        enum: ['ADM', 'TECH', 'EXT'],
+        default: 'EXTERNAL',
+        index: true
+    },
+    
     covtest: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Covtest' }],
     updated_at: { type: Date, default: Date.now }
 
 })
-
-
-UserSchema.pre('save', function (next) {
-    if (this.role !== "ADM") {
-        next()
-    } else {
-        throw new Error('Not valid')
-    }
-})
-
 
 module.exports = mongoose.model('User', UserSchema)

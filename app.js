@@ -1,57 +1,79 @@
-//get dependencies
-require('dotenv').config()
+require('dotenv').config() // It must be the first line of code
+
 const express = require('express')
-const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
+const cors = require('cors')
+
+const mongoose = require('mongoose')
+
 var swaggerUi = require('swagger-ui-express')
 var swaggerDocument = require('./swagger.json')
 const sessionMiddleware = require('./api/middleware/session')
-const path = require('path')
+const User = require('./api/models/User')
+const bcrypt = require('bcrypt');
+var fs = require('fs');
 
-const HomeRouter = require('./routes/Index')
+let path = 'public'
 
-const cors = require('cors')
+if (!fs.existsSync(path)) {
+	fs.mkdirSync(path);
+}
 
-//get the api base route
-const apiRouter = require('./api/index')
+const apiRouter = require('./api')
 
 const app = express()
-mongoose.Promise = global.Promise
 
-// Object destructuring ES6
-const {
-	PORT = 3000,
-	MONGO_DB_HOST = 'localhost',
-	MONGO_BD_PORT = 27017,
-	MONGO_DB_NAME = 'demo2'
-} = process.env
+// Read values from environment variables
+const PORT = process.env.APP_PORT
+const MONGO_DB_HOST = process.env.MONGO_DB_HOST
+const MONGO_DB_PORT = process.env.MONGO_DB_PORT
+const MONGO_DB_DATABASE_NAME = process.env.MONGO_DB_DATABASE_NAME
+
+mongoose.Promise = global.Promise
 
 //mongo connection
 mongoose
 	.connect(
-		`mongodb://${ MONGO_DB_HOST }:${ MONGO_BD_PORT }/${ MONGO_DB_NAME }`,
+		`mongodb://${MONGO_DB_HOST}:${MONGO_DB_PORT}/${MONGO_DB_DATABASE_NAME}`,
 		{
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
-			useFindAndModify: false
+			useFindAndModify: false,
+			useCreateIndex: true,
 		}
 	)
-	.then((mongoose) => {
+	.then(async (mongoose) => {
 		console.log('connected to mongo')
+		const adminUser = await User.findOne({ role: 'ADM' }).select('+password')
+		if (!adminUser) {
+			console.log('creating admin user')
+			const encryptedPass = bcrypt.hashSync(process.env.ADMIN_PASSWORD, 10);
+			const adminUser = await new User({
+				name: process.env.ADMIN_USERNAME,
+				password: encryptedPass,
+				email: process.env.ADMIN_EMAIL,
+				idCard: process.env.ADMIN_IDCARD,
+				role: 'ADM'
+			})
+				.save()
+				.catch(console.error)
+
+			if (adminUser) {
+				console.log('Admin created')
+				console.table([adminUser.toJSON()])
+			}
+		} else {
+			console.log('Admin:')
+			console.table([adminUser.toJSON()])
+		}
 	})
 	.catch(console.error)
 
+
 //api setup
 app
-	//view engine setup
-	.set('view engine', 'ejs')
-	.set('views', path.join(__dirname, 'views'))
-
 	.use(express.json())
-	.use(express.urlencoded({ extended: true }))
-
-	//views
-	.use(HomeRouter)
+	.use(express.urlencoded({ extended: false }))
 
 	// Setup cookie parser
 	.use(cookieParser())
@@ -67,7 +89,6 @@ app
 	.use('/api', cors(), apiRouter)
 
 	.listen(PORT, () => {
-	console.log(`Views on http://localhost:${PORT}/`)
-	console.log(`API started on http://localhost:${PORT}/api`)
-	console.log(`API started on http://localhost:${PORT}/api-docs`)
-})
+		console.log(`API started on http://localhost:${PORT}/api`)
+		console.log(`API started on http://localhost:${PORT}/api-docs`)
+	})

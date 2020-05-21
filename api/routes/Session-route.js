@@ -5,10 +5,8 @@ const bcrypt = require('bcrypt');
 
 const sessionRouter = express.Router()
 
-const SESSION_EXP = 600000
-const {
-	JWT_SECRET = 'this is for development'
-} = process.env
+const SESSION_EXP = process.env.SESSION_EXP
+const JWT_SECRET = process.env.JWT_SECRET
 
 sessionRouter.post('/login', async (req, res, next) => {
 
