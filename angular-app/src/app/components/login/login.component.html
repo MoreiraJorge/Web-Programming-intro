@@ -1,0 +1,12 @@
+<div class="fullscreen">
+	<div class="form-container">
+		<div *ngIf="errors">
+			{{ errors }}
+		</div>
+		<form (submit)="handleSubmit($event)">
+			<input [(ngModel)]="email" name="email" type="text" placeholder="enter an email" />
+			<input [(ngModel)]="password" name="password" type="password" placeholder="enter a password" />
+			<button type="submit">Login</button>
+		</form>
+	</div>
+</div>
