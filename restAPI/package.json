@@ -1,0 +1,38 @@
+{
+  "name": "paw2020",
+  "version": "0.0.1",
+  "description": "Projeto paw avaliação contínua",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoreiraJorge/paw2020.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MoreiraJorge/paw2020/issues"
+  },
+  "homepage": "https://github.com/MoreiraJorge/paw2020#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.11",
+    "mongoose-immutable-plugin": "^1.0.3",
+    "node-fetch": "^2.6.0",
+    "swagger-ui-express": "^4.1.4",
+    "uniqid": "^5.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
