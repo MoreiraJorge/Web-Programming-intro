@@ -1,46 +1,12 @@
 const express = require('express')
-const jwt = require('jsonwebtoken')
-const User = require('../models/User')
-const bcrypt = require('bcrypt');
+const sessionController = require('../controllers/sessionController')
 
 const sessionRouter = express.Router()
 
-const SESSION_EXP = process.env.SESSION_EXP
-const JWT_SECRET = process.env.JWT_SECRET
+sessionRouter.post('/login', sessionController.login)
 
-sessionRouter.post('/login', async (req, res, next) => {
+sessionRouter.get('/me', sessionController.me)
 
-	const user = await User.findOne({ email: req.body.email });
-	bcrypt.compare(req.body.password, user.password, (err, result) => {
-		if (err) {
-			return res.status(401).json({
-				message: "Auth failed"
-			});
-		}
-		if (result) {
-			const jwtToken = jwt.sign(JSON.stringify(user), JWT_SECRET)
-			res.cookie(
-				'session',
-				jwtToken,
-				{
-					expires: new Date(Date.now() + SESSION_EXP),
-					httpOnly: true
-				},
-			)
-		}
-		res.json(user)
-
-	})
-})
-
-sessionRouter.get('/me', (req, res, next) => {
-	res.json(req.user)
-})
-
-
-sessionRouter.post('/logout', (req, res, next) => {
-	res.clearCookie('session')
-	res.json({ success: 'true' })
-})
+sessionRouter.post('/logout', sessionController.logout)
 
 module.exports = sessionRouter
