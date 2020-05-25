@@ -132,4 +132,24 @@ CovtestController.schedule = async (req, res) => {
     res.json(result)
 }
 
+//number tests in a day
+CovtestController.nTestsDay = async (req, res) => {
+    try {
+        const result = await Covtest.countDocuments({ schedule: req.body.schedule })
+        res.json(result)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+//number tests per person
+CovtestController.nTestsPerson = async (req, res) => {
+    try {
+        const result = await Covtest.countDocuments({ user: req.params.id })
+        res.json(result)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 module.exports = CovtestController

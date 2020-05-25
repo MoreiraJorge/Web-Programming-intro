@@ -72,4 +72,15 @@ router.put('/schedule/:id', authorize(['TECH']), function (req, res) {
     Covtest.schedule(req, res)
 })
 
+//numberTestsOnDay
+router.get('/schedule/count', authorize(['ADM']), function (req, res) {
+    Covtest.nTestsDay(req, res)
+})
+
+//numberTests per person
+router.get('/nTestsPerson/:id', authorize(['ADM']), function (req, res) {
+    Covtest.nTestsPerson(req, res)
+})
+
+
 module.exports = router;

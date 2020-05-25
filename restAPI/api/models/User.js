@@ -8,15 +8,14 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     phoneNumber: Number,
+    infected: Boolean,
     idCard: { type: String, unique: true, required: true },
-
     role: {
         type: String,
         enum: ['ADM', 'TECH', 'EXT'],
-        default: 'EXTERNAL',
+        default: 'EXT',
         index: true
     },
-    
     covtest: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Covtest' }],
     updated_at: { type: Date, default: Date.now }
 

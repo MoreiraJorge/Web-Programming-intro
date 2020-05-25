@@ -43,5 +43,8 @@ router.delete('/tests/:id', authorize(['TECH']), function (req, res) {
     User.remCovTests(req, res)
 })
 
+router.get('/infected', function (req, res) {
+    User.countInfected(req, res)
+})
 
 module.exports = router;
