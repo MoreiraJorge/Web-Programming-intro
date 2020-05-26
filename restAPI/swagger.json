@@ -1034,6 +1034,49 @@
                     }
                 }
             }
+        },
+        "/covtests/schedule/count": {
+            "get": {
+                "tags": [
+                    "Covtest"
+                ],
+                "summary": "Obter número de testes por dia | Acesso -> Admin",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "schedule",
+                        "description": "Data a procurar",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "schedule": {
+                                    "type": "string",
+                                    "format": "date"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "number",
+                            "properties": {
+                                "number": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            }
         }
     },
     "definitions": {
