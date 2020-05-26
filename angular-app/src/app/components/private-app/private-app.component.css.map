@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,IAAI,EAAE,IAAI,CAAC;EACP,MAAM,EAAE,GAAG;EACX,OAAO,EAAE,KAAK;CAAG",
-    "sources": [
-        "private-app.component.sass"
-    ],
-    "names": [],
-    "file": "private-app.component.css"
-}
