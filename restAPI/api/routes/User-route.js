@@ -13,6 +13,12 @@ router.get('/userList', authorize(['ADM']), function (req, res) {
     User.listAllUsers(req, res)
 })
 
+//count infected
+router.get('/infected', authorize(['ADM']), function (req, res) {
+    console.log("aqui")
+    User.countInfected(req, res)
+})
+
 //get specific user by ID
 router.get('/:id', authorize(['TECH']), function (req, res) {
     User.findOneUser(req, res)
@@ -41,11 +47,6 @@ router.put('/tests/:id', authorize(['TECH']), function (req, res) {
 //remove tests to user test list
 router.delete('/tests/:id', authorize(['TECH']), function (req, res) {
     User.remCovTests(req, res)
-})
-
-router.get('/infected', authorize(['ADM']), function (req, res) {
-    console.log("aqui")
-    User.countInfected(req, res)
 })
 
 module.exports = router;
