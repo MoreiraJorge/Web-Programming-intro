@@ -44,6 +44,7 @@ router.delete('/tests/:id', authorize(['TECH']), function (req, res) {
 })
 
 router.get('/infected', authorize(['ADM']), function (req, res) {
+    console.log("aqui")
     User.countInfected(req, res)
 })
 

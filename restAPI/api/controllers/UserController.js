@@ -92,8 +92,10 @@ UserController.remCovTests = async (req, res) => {
 
 UserController.countInfected = async (req, res) => {
     try {
-        const result = await User.countDocuments({ infected: true })
-        res.json(result)
+
+        const list = await User.countDocuments({ role: 'EXT', infected: true })
+        res.json(list);
+
     } catch (err) {
         console.log(err)
     }

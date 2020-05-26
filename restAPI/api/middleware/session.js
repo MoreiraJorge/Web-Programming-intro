@@ -11,7 +11,7 @@ const parseToken = (req) => {
 			return authorization.substring(7)
 		}
 	}
-	return null
+	//return null
 }
 
 const sessionMiddleware = (req, res, next) => {

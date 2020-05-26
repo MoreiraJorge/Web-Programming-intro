@@ -88,6 +88,23 @@ app
 	.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 	.use('/api', cors(), apiRouter)
 
+	/*
+	.use(function (err, req, res, next) {
+		if (err.name === 'ValidationError') {
+			console.error('Mongoose Validation Error: You should send error list to the client')
+			res.status(400)
+		} else {
+			// use the error's status or default to 500
+			res.status(err.status || 500);
+		}
+
+		// send back json data
+		res.send({
+			message: err.message
+		})
+	})
+	*/
+
 	.listen(PORT, () => {
 		console.log(`API started on http://localhost:${PORT}/api`)
 		console.log(`API started on http://localhost:${PORT}/api-docs`)
