@@ -6,7 +6,7 @@ const authorize = (roles) => {
             next('Not Authenticated')
         } else {
             const hasAuthorization = roles.includes(req.sessionUser.role)
-    
+
             if (hasAuthorization) {
                 next()
             } else {
