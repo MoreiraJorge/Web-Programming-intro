@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from 'src/app/services/session.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -15,8 +16,10 @@ export class LoginComponent implements OnInit {
 
   errors: String
 
-  constructor(public sessionService: SessionService, public router: Router, private route: ActivatedRoute) { 
-    
+  user: User
+
+  constructor(public sessionService: SessionService, public router: Router, private route: ActivatedRoute) {
+
   }
 
   ngOnInit(): void {
@@ -27,23 +30,24 @@ export class LoginComponent implements OnInit {
         }
       })
   }
-  
+
   handleSubmit(event): void {
     event.preventDefault()
     this.errors = ''
     this.sessionService.login(this.email, this.password)
-    .subscribe(
-      () => {
-        this.router.navigate(['/'])
-      },
-      (error) => {
-        if (error.status === 401) {
-          this.errors = 'Invalid credentials.'
-        } else {
-          this.errors = error.message
-        }
-      }
-    )
+      .subscribe(
+        () => {
+          this.router.navigate(['/labApp'])
+        },
+        (error) => {
+          if (error.status === 401) {
+            this.errors = 'Invalid credentials.'
+          } else {
+            this.errors = error.message
+          }
+        })
+
   }
+
 
 }

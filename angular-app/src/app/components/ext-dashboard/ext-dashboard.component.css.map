@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,IAAI,EAAE,IAAI,CAAC;EACP,MAAM,EAAE,GAAG;EACX,OAAO,EAAE,GAAG;CAAG",
+    "sources": [
+        "ext-dashboard.component.sass"
+    ],
+    "names": [],
+    "file": "ext-dashboard.component.css"
+}

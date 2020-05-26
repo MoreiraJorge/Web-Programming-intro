@@ -1,0 +1,9 @@
+<div *ngIf="user.role==='ADM'">
+    <app-admin-dashboard></app-admin-dashboard>
+</div>
+<div *ngIf="user.role==='TECH'">
+    <app-tech-dashboard></app-tech-dashboard>
+</div>
+<div *ngIf="user.role==='EXT'">
+    <app-ext-dashboard></app-ext-dashboard>
+</div>
