@@ -135,7 +135,7 @@ CovtestController.schedule = async (req, res) => {
 //number tests in a day
 CovtestController.nTestsDay = async (req, res) => {
     try {
-        const result = await Covtest.countDocuments({ schedule: req.body.schedule })
+        const result = await Covtest.countDocuments({ schedule: req.params.date })
         res.json(result)
     } catch (err) {
         console.log(err)

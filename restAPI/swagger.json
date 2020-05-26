@@ -1035,7 +1035,7 @@
                 }
             }
         },
-        "/covtests/schedule/count": {
+        "/covtests/schedCount/{date}": {
             "get": {
                 "tags": [
                     "Covtest"
@@ -1046,17 +1046,11 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "schedule",
-                        "description": "Data a procurar",
+                        "in": "path",
+                        "name": "date",
+                        "description": "Data para saber o numero de testes",
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "schedule": {
-                                    "type": "string",
-                                    "format": "date"
-                                }
-                            }
+                            "$ref": "#/definitions/Covtest"
                         }
                     }
                 ],
@@ -1064,12 +1058,7 @@
                     "200": {
                         "description": "success",
                         "schema": {
-                            "type": "number",
-                            "properties": {
-                                "number": {
-                                    "type": "number"
-                                }
-                            }
+                            "type": "integer"
                         }
                     },
                     "400": {
