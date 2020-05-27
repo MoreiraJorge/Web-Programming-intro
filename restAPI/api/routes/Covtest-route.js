@@ -8,7 +8,7 @@ const authorize = require('../middleware/authorize')
 router.use(fileUpload())
 
 //List tests
-router.get('/testList', authorize(['ADM', 'TECH']), function (req, res) {
+router.get('/testList', authorize(['TECH']), function (req, res) {
     Covtest.listTests(req, res)
 })
 

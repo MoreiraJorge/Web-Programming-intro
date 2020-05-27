@@ -54,7 +54,7 @@ export class SessionService {
   }
 
   me(): Observable<any> {
-    return this.session;
+    return this.session
   }
 
   logout() {

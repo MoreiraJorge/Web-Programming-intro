@@ -11,6 +11,7 @@ import { PrivateAppComponent } from './components/private-app/private-app.compon
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { TechDashboardComponent } from './components/tech-dashboard/tech-dashboard.component';
 import { ExtDashboardComponent } from './components/ext-dashboard/ext-dashboard.component';
+import { ProfileDetailsComponent } from './components/profile-details/profile-details.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ExtDashboardComponent } from './components/ext-dashboard/ext-dashboard.
     PrivateAppComponent,
     AdminDashboardComponent,
     TechDashboardComponent,
-    ExtDashboardComponent
+    ExtDashboardComponent,
+    ProfileDetailsComponent
   ],
   imports: [
     BrowserModule,

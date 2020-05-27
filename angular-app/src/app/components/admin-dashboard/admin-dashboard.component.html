@@ -1,2 +1,6 @@
-<p>admin-dashboard works!</p>
-<h1>Hello</h1>
+<div *ngIf="user">
+    <h1>Hello {{user.name}}</h1>
+</div>
+<div>
+    <button (click)="seeProfile()" >Profile</button>
+</div>
