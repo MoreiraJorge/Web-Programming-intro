@@ -12,16 +12,16 @@ export class ProfileDetailsComponent implements OnInit {
 
   user:User
 
-  constructor(public sessionService: SessionService, private route: ActivatedRoute, private router: Router) { }
+  constructor(public sessionService: SessionService) { }
 
   ngOnInit(): void {
     this.getMe()
   }
 
   getMe() {
-    this.sessionService.me().subscribe((data) => {
-      console.log(data);
+    this.sessionService.me().subscribe((data: User) => {
       this.user = data
+      console.log(this.user);
     });
   }
 

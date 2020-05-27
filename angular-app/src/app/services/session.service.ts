@@ -5,6 +5,7 @@ import { Observable, BehaviorSubject } from "rxjs";
 import { share } from "rxjs/operators";
 
 import { environment } from "./../../environments/environment";
+import { User } from '../models/user';
 
 const API_URL = environment.apiUrl;
 
