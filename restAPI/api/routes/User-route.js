@@ -15,7 +15,6 @@ router.get('/userList', authorize(['ADM']), function (req, res) {
 
 //count infected
 router.get('/infected', authorize(['ADM']), function (req, res) {
-    console.log("aqui")
     User.countInfected(req, res)
 })
 

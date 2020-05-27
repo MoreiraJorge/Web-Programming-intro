@@ -1066,6 +1066,60 @@
                     }
                 }
             }
+        },
+        "/covtests/nTestsPerson/{id}": {
+            "get": {
+                "tags": [
+                    "Covtest"
+                ],
+                "summary": "Obter número de testes de um utilizador especifico| Acesso -> Admin",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ObjectId do utilizador",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            }
+        },
+        "/users/infected": {
+            "get": {
+                "tags": [
+                    "Externos"
+                ],
+                "summary": "Numero  utilizadores que estejam infetados | Acesso -> Admin",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            }
         }
     },
     "definitions": {
