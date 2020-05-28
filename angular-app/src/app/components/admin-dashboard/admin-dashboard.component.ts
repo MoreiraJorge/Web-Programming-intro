@@ -28,18 +28,7 @@ export class AdminDashboardComponent implements OnInit {
     event.preventDefault()
     this.errors = ''
     this.sessionService.logout()
-      .subscribe(
-        () => {
-          this.router.navigate(['/labApp'])
-        },
-        (error) => {
-          if (error.status === 401) {
-            this.errors = 'Invalid credentials.'
-          } else {
-            this.errors = error.message
-          }
-        })
-
+    this.router.navigate(['/login'])
   }
-
+  
 }
