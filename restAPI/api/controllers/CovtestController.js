@@ -6,7 +6,7 @@ var uniqid = require('uniqid');
 
 var CovtestController = {};
 
-//list tests (admin)
+//list tests
 CovtestController.listTests = async (req, res) => {
     const testList = await Covtest.find().
         populate('user', ['name', 'idCard'])
@@ -154,31 +154,35 @@ CovtestController.nTestsPerson = async (req, res) => {
 
 //number tests per day
 CovtestController.nTestPerDay = async (req, res) => {
-    return await Covtest.aggregate([
-        {
-            $group: {
-                _id: {
-                    // https://docs.mongodb.com/manual/reference/operator/aggregation/dateToString/
-                    $dateToString: { format: "%Y-%m-%d", date: "$schedule" },
+    try {
+        const result = await Covtest.aggregate([
+            {
+                $group: {
+                    _id: {
+                        // https://docs.mongodb.com/manual/reference/operator/aggregation/dateToString/
+                        $dateToString: { format: "%Y-%m-%d", date: "$schedule" },
+                    },
+                    total: { $sum: 1 },
                 },
-                total: { $sum: 1 },
             },
-        },
-        {
-            $project: {
-                date: "$_id",
-                totalEvents: "$total",
-                _id: false,
+            {
+                $project: {
+                    date: "$_id",
+                    totalEvents: "$total",
+                    _id: false,
+                },
             },
-        },
-        {
-            $sort: { date: 1 },
-        },
-    ]).catch((e) => {
-        console.log(e)
-        return []
-    })
-
+            {
+                $sort: { date: 1 },
+            },
+        ]).catch((e) => {
+            console.log(e)
+            return []
+        })
+        res.json(result)
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 module.exports = CovtestController
