@@ -2,13 +2,11 @@
 <p *ngIf="user.role==='ADM'">Role: Admin</p>
 <p>email: {{user.email}}</p>
 
-<p>Change Password</p>
-<div>
-<label>New password:
-    <input [(ngModel)]="password" placeholder="new passwrod"/>
-</label><br>
-<button (click)="changePass()">submit</button>
+<div *ngIf="user.role==='ADM'">
+    <p>Change Password</p>
+    <label>New password:
+        <input [(ngModel)]="password" placeholder="new passwrod" />
+    </label><br>
+    <button (click)="changePass()">submit</button>
 </div>
-
-
 
