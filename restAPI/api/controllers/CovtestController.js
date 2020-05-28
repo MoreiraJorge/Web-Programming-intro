@@ -152,4 +152,33 @@ CovtestController.nTestsPerson = async (req, res) => {
     }
 }
 
+//number tests per day
+CovtestController.nTestPerDay = async (req, res) => {
+    return await Covtest.aggregate([
+        {
+            $group: {
+                _id: {
+                    // https://docs.mongodb.com/manual/reference/operator/aggregation/dateToString/
+                    $dateToString: { format: "%Y-%m-%d", date: "$schedule" },
+                },
+                total: { $sum: 1 },
+            },
+        },
+        {
+            $project: {
+                date: "$_id",
+                totalEvents: "$total",
+                _id: false,
+            },
+        },
+        {
+            $sort: { date: 1 },
+        },
+    ]).catch((e) => {
+        console.log(e)
+        return []
+    })
+
+}
+
 module.exports = CovtestController

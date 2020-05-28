@@ -12,6 +12,14 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { TechDashboardComponent } from './components/tech-dashboard/tech-dashboard.component';
 import { ExtDashboardComponent } from './components/ext-dashboard/ext-dashboard.component';
 import { ProfileDetailsComponent } from './components/profile-details/profile-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import { PopupPassComponent } from './components/popup-pass/popup-pass.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +29,20 @@ import { ProfileDetailsComponent } from './components/profile-details/profile-de
     AdminDashboardComponent,
     TechDashboardComponent,
     ExtDashboardComponent,
-    ProfileDetailsComponent
+    ProfileDetailsComponent,
+    PopupPassComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

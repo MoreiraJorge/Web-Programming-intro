@@ -13,11 +13,12 @@ const routes: Routes = [{
 }, {
   path: 'labApp',
   component: PrivateAppComponent,
-  canActivate: [AuthGuardService],
-  children: [{
-    path: 'profile',
-    component: ProfileDetailsComponent
-  }]
+  canActivate: [AuthGuardService]
+},
+{
+  path: 'profile',
+  component: ProfileDetailsComponent,
+  canActivate: [AuthGuardService]
 },
 {
   path: '',

@@ -72,9 +72,14 @@ router.put('/schedule/:id', authorize(['TECH']), function (req, res) {
     Covtest.schedule(req, res)
 })
 
-//numberTestsOnDay
+//numberTestsinDay
 router.get('/schedCount/:date', authorize(['ADM']), function (req, res) {
     Covtest.nTestsDay(req, res)
+})
+
+//numberTests per person
+router.get('/schedCount', authorize(['ADM']), function (req, res) {
+    Covtest.nTestPerDay(req,res)
 })
 
 //numberTests per person

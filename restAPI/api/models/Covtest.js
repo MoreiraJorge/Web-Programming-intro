@@ -12,7 +12,7 @@ const CovtestSchema = new mongoose.Schema({
     testResult: String,
     resultFile: String,
     isTestDone: Boolean,
-    schedule: Date,
+    schedule: { type: Date, default: Date.now },
     saude24: Boolean,
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     updated_at: { type: Date, default: Date.now }
