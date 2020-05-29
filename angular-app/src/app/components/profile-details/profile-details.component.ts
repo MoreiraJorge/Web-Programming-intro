@@ -33,7 +33,14 @@ export class ProfileDetailsComponent implements OnInit {
   changePass() {
     this.adminService.changeAdminPass(this.user.idCard, JSON.parse(`{ "password":"${ this.password }"}`)).subscribe((result) => {
       this.router.navigate(['/profile']);
-      this.openDialog()
+
+      if(this.password){
+        this.openDialog()
+      }
+      
+    
+      
+
     }, (err) => {
       console.log(err);
     })

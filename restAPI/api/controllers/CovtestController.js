@@ -167,13 +167,9 @@ CovtestController.nTestPerDay = async (req, res) => {
             },
             {
                 $project: {
-                    values: {
-                        $map: {
-                            date: "$_id",
-                            totalEvents: "$total",
-                            _id: false
-                        }
-                    }
+                    date: "$_id",
+                    totalEvents: "$total",
+                    _id: false
                 },
             },
             {
@@ -183,7 +179,7 @@ CovtestController.nTestPerDay = async (req, res) => {
             console.log(e)
             return []
         })
-        res.json(result)
+        res.json({"values":result})
     } catch (err) {
         console.log(err)
     }

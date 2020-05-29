@@ -2,8 +2,8 @@
     <app-admin-dashboard [user]="user"></app-admin-dashboard>
 </div>
 <div *ngIf="user.role==='TECH'">
-    <app-tech-dashboard></app-tech-dashboard>
+    <app-tech-dashboard [user]="user"></app-tech-dashboard>
 </div>
 <div *ngIf="user.role==='EXT'">
-    <app-ext-dashboard></app-ext-dashboard>
+    <app-ext-dashboard [user]="user"></app-ext-dashboard>
 </div>

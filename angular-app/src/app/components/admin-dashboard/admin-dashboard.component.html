@@ -1,9 +1,12 @@
 <mat-card class="top">
-	<button mat-raised-button color="primary" (click)="logout($event)">Logout</button>
+    <button mat-raised-button color="primary" (click)="logout($event)">Logout</button>
 </mat-card>
 <div *ngIf="user">
     <h1>Hello {{user.name}}</h1>
 </div>
 <div>
-    <button (click)="seeProfile()" >Profile</button>
+    <button (click)="seeProfile()">Profile</button>
+</div>
+<div id="graphic">
+    <canvas id="canvas"></canvas>
 </div>

@@ -6,22 +6,36 @@ var AdmController = {};
 
 //Update Admin password (admin)
 AdmController.updatePassword = async (req, res) => {
-    const encryptedPass = bcrypt.hashSync(req.body.password, 10);
+    try {
+        if (req.body.password == "undefined") {
+            res.json('empty password')
+        } else {
+            console.log(req.body.password)
+            const encryptedPass = bcrypt.hashSync(req.body.password, 10);
 
-    const newData =
-    {
-        password: encryptedPass
+            const newData =
+            {
+                password: encryptedPass
+            }
+
+            await User.findOneAndUpdate({ idCard: req.params.id, role: "ADM" }, newData);
+            const result = await User.find({ idCard: req.params.id, role: "ADM" })
+            res.json(result)
+
+        }
+    } catch (err) {
+        console.log(err)
     }
-
-    await User.findOneAndUpdate({ idCard: req.params.id, role: "ADM" }, newData);
-    const result = await User.find({ idCard: req.params.id, role: "ADM" })
-    res.json(result)
 }
 
 //find the admin (admin)
 AdmController.getAdmin = async (req, res) => {
-    const result = await User.findOne({role: "ADM"})
-    res.json(result)
+    try {
+        const result = await User.findOne({ role: "ADM" })
+        res.json(result)
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 module.exports = AdmController
