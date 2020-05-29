@@ -167,9 +167,13 @@ CovtestController.nTestPerDay = async (req, res) => {
             },
             {
                 $project: {
-                    date: "$_id",
-                    totalEvents: "$total",
-                    _id: false,
+                    values: {
+                        $map: {
+                            date: "$_id",
+                            totalEvents: "$total",
+                            _id: false
+                        }
+                    }
                 },
             },
             {
