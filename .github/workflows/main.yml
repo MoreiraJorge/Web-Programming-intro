@@ -21,7 +21,7 @@ jobs:
 
     - name: script
       run: |
-        npm install -g paw2020/angular-app/ @angular/cli
+        npm install -g @angular/cli
         npm install
         ng build --base-href=/paw2020/angular-app/
         mkdir public
