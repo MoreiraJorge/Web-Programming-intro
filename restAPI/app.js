@@ -72,6 +72,7 @@ mongoose
 	})
 	.catch(console.error)
 
+/*
 // Set API Router at /api endpoint and enable cors
 // If you do not use angular proxy
 const whitelist = ['http://localhost:4200', 'http://localhost:3000', 'http://localhost', 'https://moreirajorge.github.io', '0.0.0.0/0']
@@ -86,7 +87,7 @@ const corsOptions = {
 		}
 	}
 }
-
+*/
 
 //api setup
 app
@@ -105,24 +106,7 @@ app
 	//swagger doc setup
 	.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
-	.use('/api', cors(corsOptions), apiRouter)
-
-	/*
-	.use(function (err, req, res, next) {
-		if (err.name === 'ValidationError') {
-			console.error('Mongoose Validation Error: You should send error list to the client')
-			res.status(400)
-		} else {
-			// use the error's status or default to 500
-			res.status(err.status || 500);
-		}
-
-		// send back json data
-		res.send({
-			message: err.message
-		})
-	})
-	*/
+	.use('/api', cors(), apiRouter)
 
 	.listen(PORT, () => {
 		console.log(`API started on http://localhost:${PORT}/api`)
