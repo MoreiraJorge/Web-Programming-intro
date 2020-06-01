@@ -36,7 +36,7 @@ mongoose.Promise = global.Promise
 //connect to atlas, but if atlas is offline, create local DB
 mongoose
 	.connect(
-		`mongodb+srv://DBuser1:${ ATLAS_PASS }@cluster0-91k9g.mongodb.net/test?retryWrites=true&w=majority` || 
+		//`mongodb+srv://DBuser1:${ ATLAS_PASS }@cluster0-91k9g.mongodb.net/test?retryWrites=true&w=majority` || 
 		`mongodb://${ MONGO_DB_HOST }:${ MONGO_DB_PORT }/${ MONGO_DB_DATABASE_NAME }`,
 		{
 			useNewUrlParser: true,

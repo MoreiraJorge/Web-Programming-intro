@@ -7,7 +7,7 @@ import { share } from "rxjs/operators";
 import { environment } from "./../../environments/environment";
 import { User } from '../models/user';
 
-const API_URL = environment.apiUrl;
+const API_URL = environment.apiUrl || "http://localhost:3000/api";
 
 const httpOptions = {
   headers: new HttpHeaders({
