@@ -23,9 +23,7 @@ jobs:
       run: |
         npm install -g @angular/cli
         npm install
-        ng build --prod --base-href="/angular-app/"
-        mkdir public
-        mv dist/angular-app/* public
+        ng build --prod --base-href="/paw2020/"
     - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:
