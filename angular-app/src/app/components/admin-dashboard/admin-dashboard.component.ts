@@ -28,7 +28,12 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private sessionService: SessionService, private AdminService: AdminService, private CovtestService: CovtestsService) { }
 
   ngOnInit(): void {
-
+    this.createChart()
+    this.countTests()
+    this.countInfected()
+  }
+  
+  createChart(){
     //create bar chart for tests per day 
     this.AdminService.dayTests().subscribe(res => {
       var ctx = document.getElementById('canvas');
@@ -73,8 +78,6 @@ export class AdminDashboardComponent implements OnInit {
       mychart.canvas.parentNode.style.height = '200px';
       mychart.canvas.parentNode.style.width = '400px';
     })//end of barchart config
-    this.countTests()
-    this.countInfected()
   }
 
   countTests(){
