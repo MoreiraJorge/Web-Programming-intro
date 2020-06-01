@@ -10,8 +10,11 @@ jobs:
     steps:
     - name: actions checkout
       uses: actions/checkout@v2
+      
+    - name: Install SSH Client 🔑
+      uses: webfactory/ssh-agent@v0.2.0
       with:
-        persist-credentials: false
+        ssh-private-key: ${{ secrets.ACCESS_TOKEN }}
 
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.2
@@ -24,11 +27,12 @@ jobs:
         npm install -g @angular/cli
         npm install
         ng build --prod --base-href="/paw2020/"
-    - name: GitHub Pages action
-      uses: peaceiris/actions-gh-pages@v3.6.1
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
-        github_token: ${{ secrets.ACCESS_TOKEN}}
-        publish_branch: gh-pages
-        publish_dir: angular-app/dist/angular-app
+        SSH: true
+        BASE_BRANCH: master
+        BRANCH: gh-pages
+        FOLDER: angular-app/dist/angular-app
         
 
