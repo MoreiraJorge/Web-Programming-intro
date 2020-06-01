@@ -1,11 +1,9 @@
-# This is a basic workflow to help you get started with Actions
 name: CI
 
 on:
   push:
     branches: [master]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,7 +29,7 @@ jobs:
     - name: GitHub Pages
       uses: JamesIves/github-pages-deploy-action@releases/v2
       env:
-        ACCESS_TOKEN: §{{ secrets.TOKEN }}
+        ACCESS_TOKEN: ${{ secrets.TOKEN }}
         BASE_BRANCH: master
         BRANCH: gh-pages
         FOLDER: angular-app/dist/angular-app
