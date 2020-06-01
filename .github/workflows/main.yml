@@ -16,7 +16,7 @@ jobs:
         node-version: 12.17.0
     - run: npm install -g @angular/cli
     - run: npm install
-    - run: ng build --base-href=/paw2020
+    - run: ng build --base-href=MoreiraJorge/paw2020/angular-app
     - run: mkdir public
     - run: mv dist/angular-app/* public/
     - uses: actions/upload-artifact@v1
