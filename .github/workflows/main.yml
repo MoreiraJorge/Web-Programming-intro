@@ -1,0 +1,26 @@
+name: Project Pipeline
+
+on: [push]
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: deploy
+      uses: actions/setup-node@v1.4.2
+      with:
+        node-version: 12.17.0
+    - run: npm install -g @angular/cli
+    - run: npm install
+    - run: ng build --base-href=/paw2020/
+    - run: mkdir public
+    - run: mv dist/angular-app/* public/
+    - uses: actions/upload-artifact@v1
+      with:
+          name: public
+          path: public
+    
