@@ -26,10 +26,10 @@ jobs:
         ng build --prod --base-href="/angular-app/"
         mkdir public
         mv dist/angular-app/* public
-    - name: GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@releases/v2
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BASE_BRANCH: master
-        BRANCH: gh-pages
-        FOLDER: angular-app/dist/angular-app
+    - name: Gitee Pages
+    - uses: upcwangying/gitee-pages@v0.0.1
+      with:
+        repo: paw2020
+        target_branch: gh-pages
+        build_dir: angular-app/dist/angular-app/*
+        
