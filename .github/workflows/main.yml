@@ -18,11 +18,11 @@ jobs:
       uses: actions/setup-node@v1.4.2
       with:
         node-version: 12.17.0
-        
+
     - name: script
       run: |
         npm install -g @angular/cli
         npm install
-        ng build --base-href=/paw2020/
+        ng build --base-href=/paw2020/angular-app
         mkdir public
         mv dist/angular-app/* public
