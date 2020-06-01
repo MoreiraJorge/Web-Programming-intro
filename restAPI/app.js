@@ -28,13 +28,16 @@ const PORT = process.env.APP_PORT
 const MONGO_DB_HOST = process.env.MONGO_DB_HOST
 const MONGO_DB_PORT = process.env.MONGO_DB_PORT
 const MONGO_DB_DATABASE_NAME = process.env.MONGO_DB_DATABASE_NAME
+const ATLAS_PASS = process.env.ATLAS_PASS
 
 mongoose.Promise = global.Promise
 
 //mongo connection
+//connect to atlas, but if atlas is offline, create local DB
 mongoose
 	.connect(
-		`mongodb://${MONGO_DB_HOST}:${MONGO_DB_PORT}/${MONGO_DB_DATABASE_NAME}`,
+		`mongodb+srv://DBuser1:${ ATLAS_PASS }@cluster0-91k9g.mongodb.net/test?retryWrites=true&w=majority` || 
+		`mongodb://${ MONGO_DB_HOST }:${ MONGO_DB_PORT }/${ MONGO_DB_DATABASE_NAME }`,
 		{
 			useNewUrlParser: true,
 			useUnifiedTopology: true,

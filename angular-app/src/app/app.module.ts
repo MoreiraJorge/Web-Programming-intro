@@ -19,7 +19,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 import { PopupPassComponent } from './components/popup-pass/popup-pass.component';
+import { ListCovtestComponent } from './components/covtest/list-covtest/list-covtest.component';
+import { AddCovtestComponent } from './components/covtest/add-covtest/add-covtest.component';
+import { EditCovtestComponent } from './components/covtest/edit-covtest/edit-covtest.component';
+import { DetailCovtestComponent } from './components/covtest/detail-covtest/detail-covtest.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,10 @@ import { PopupPassComponent } from './components/popup-pass/popup-pass.component
     ExtDashboardComponent,
     ProfileDetailsComponent,
     PopupPassComponent,
+    ListCovtestComponent,
+    AddCovtestComponent,
+    EditCovtestComponent,
+    DetailCovtestComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +52,8 @@ import { PopupPassComponent } from './components/popup-pass/popup-pass.component
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

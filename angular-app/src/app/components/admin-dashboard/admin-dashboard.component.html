@@ -4,9 +4,17 @@
 <div *ngIf="user">
     <h1>Hello {{user.name}}</h1>
 </div>
-<div>
-    <button (click)="seeProfile()">Profile</button>
-</div>
+<button (click)="seeProfile()">Profile</button>
 <div id="graphic">
     <canvas id="canvas"></canvas>
 </div>
+<p>Numero Total de testes: {{ nTests }}</p>
+<p>Numero Total de infetados: {{ nInfected }}</p>
+
+<form name="dateForm" ng-controller="DateController as dateCtrl">
+    <label for="dateInput">Pesquisar nº testes na Data: </label>
+    <input type="date" [(ngModel)]="myDate" id="dateInput" name="date" placeholder="yyyy-MM-dd" required />
+    <button type="submit" form="dateForm" value="Submit" (click)="countTestsOnDate()">Find</button>
+</form>
+<p>Nº de testes na data {{ myDate | date :  "dd/MM/y"}} : {{ dateTests }}</p>
+<button>Gestão de Técnicos</button>

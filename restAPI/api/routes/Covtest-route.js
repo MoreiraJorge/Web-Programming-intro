@@ -77,15 +77,14 @@ router.get('/schedCount/:date', authorize(['ADM']), function (req, res) {
     Covtest.nTestsDay(req, res)
 })
 
-//numberTests per person
+//numberTests per day
 router.get('/schedCount', authorize(['ADM']), function (req, res) {
     Covtest.nTestPerDay(req,res)
 })
 
-//numberTests per person
+//numberTests of person
 router.get('/nTestsPerson/:id', authorize(['ADM']), function (req, res) {
     Covtest.nTestsPerson(req, res)
 })
-
 
 module.exports = router;
