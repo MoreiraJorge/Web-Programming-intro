@@ -36,7 +36,7 @@ mongoose.Promise = global.Promise
 //connect to atlas, but if atlas is offline, create local DB
 mongoose
 	.connect(
-		//`mongodb+srv://DBuser1:${ ATLAS_PASS }@cluster0-91k9g.mongodb.net/test?retryWrites=true&w=majority` || 
+		`mongodb+srv://DBuser1:${ ATLAS_PASS }@cluster0-91k9g.mongodb.net/test?retryWrites=true&w=majority` || 
 		`mongodb://${MONGO_DB_HOST}:${MONGO_DB_PORT}/${MONGO_DB_DATABASE_NAME}`,
 		{
 			useNewUrlParser: true,
@@ -74,7 +74,7 @@ mongoose
 
 // Set API Router at /api endpoint and enable cors
 // If you do not use angular proxy
-const whitelist = ['http://localhost:4200', 'http://localhost:3000', 'http://localhost', 'https://moreirajorge.github.io']
+const whitelist = ['http://localhost:4200', 'http://localhost:3000', 'http://localhost', 'https://moreirajorge.github.io', '0.0.0.0/0']
 const corsOptions = {
 	credentials: true,
 	origin: function (origin, callback) {
