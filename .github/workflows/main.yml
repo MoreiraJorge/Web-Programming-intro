@@ -24,13 +24,7 @@ jobs:
         npm install -g @angular/cli
         npm install
         ng build --prod --base-href="/paw2020/"
-<<<<<<< HEAD
-        mkdir public
-        mv dist/angular-app/* public
-    - name: GitHub Pages
-=======
     - name: Deploy
->>>>>>> 81966d7bfeb459099e9d4c95c18aff8104dcef99
       uses: JamesIves/github-pages-deploy-action@releases/v2
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
