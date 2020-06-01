@@ -27,7 +27,7 @@ jobs:
         mkdir public
         mv dist/angular-app/* public
     - name: Gitee Pages
-    - uses: upcwangying/gitee-pages@v0.0.1
+      uses: upcwangying/gitee-pages@v0.0.1
       with:
         repo: paw2020
         target_branch: gh-pages
