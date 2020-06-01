@@ -31,7 +31,7 @@ jobs:
     - name: GitHub Pages
       uses: JamesIves/github-pages-deploy-action@releases/v2
       env:
-        ACCESS_TOKEN: §{{ secrets.TOKEN }}
+        ACCESS_TOKEN: ${{ secrets.TOKEN }}
         BASE_BRANCH: master
         BRANCH: gh-pages
         FOLDER: angular-app/dist/angular-app
