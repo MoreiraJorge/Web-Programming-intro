@@ -21,7 +21,7 @@ jobs:
 
     - name: script
       run: |
-        npm install -g /angular-app/ @angular/cli
+        npm install -g angular-app/ @angular/cli
         npm install /angular-app/
         ng build --base-href=/angular-app/
         mkdir public
