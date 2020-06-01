@@ -10,6 +10,8 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
+    env:
+      working-directory: ./angular-app
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -21,10 +23,8 @@ jobs:
 
     - name: script
       run: |
-        npm install -g angular-app/ @angular/cli
-        npm install /angular-app/
-        ng build --base-href=/angular-app/
+        npm install -g @angular/cli
+        npm install
+        ng build --base-href=/paw2020/
         mkdir public
         mv dist/angular-app/* public
-      env:
-        CI: true
