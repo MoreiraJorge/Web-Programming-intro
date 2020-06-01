@@ -1,11 +1,9 @@
 # This is a basic workflow to help you get started with Actions
 name: CI
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
-    branches: [ master, pages ]
+    branches: [master]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,13 +15,19 @@ jobs:
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.2
       with:
-        node-version: 12.17.0
+        node-version: '14.x'
 
     - name: script
       working-directory: ./angular-app
       run: |
         npm install -g @angular/cli
         npm install
-        ng build --base-href=/paw2020/angular-app/
+        ng build --prod --base-href="/angular-app/"
         mkdir public
         mv dist/angular-app/* public
+    - name: GitHub Pages
+      uses: crazy-max/ghaction-github-pages@v2.0.1
+      with:
+        repo: paw2020
+        target_branch: gh-pages
+        build_dir: angular-app/dist/angular-app
