@@ -32,6 +32,7 @@ import { EditTechuserComponent } from './components/TechCrud/edit-techuser/edit-
 import { ListExtuserComponent } from './components/ExtuserCrud/list-extuser/list-extuser.component';
 import { EditExtuserComponent } from './components/ExtuserCrud/edit-extuser/edit-extuser.component';
 import { AddExtuserComponent } from './components/ExtuserCrud/add-extuser/add-extuser.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { AddExtuserComponent } from './components/ExtuserCrud/add-extuser/add-ex
     EditTechuserComponent,
     ListExtuserComponent,
     EditExtuserComponent,
-    AddExtuserComponent
+    AddExtuserComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

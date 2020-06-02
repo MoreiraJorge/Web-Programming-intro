@@ -6,8 +6,9 @@
             <mat-grid-tile>{{user.name}}</mat-grid-tile>
             <mat-grid-tile>{{user.idCard}}</mat-grid-tile>
             <mat-grid-tile>{{user.role}}</mat-grid-tile>
-            <mat-grid-tile><button>user Details</button></mat-grid-tile>
-            <mat-grid-tile><button>Remove user</button></mat-grid-tile>
+            <mat-grid-tile><button (click)="TechDetails( user.idCard )">user Details</button></mat-grid-tile>
+            <mat-grid-tile><button (click)="Delete( user.idCard )">Remove user</button></mat-grid-tile>
         </ng-container>
     </mat-grid-list>
 </div>
+<button (click)="Dashboard()">Back to Dashboard</button>
