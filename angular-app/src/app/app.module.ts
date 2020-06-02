@@ -26,6 +26,12 @@ import { ListCovtestComponent } from './components/covtest/list-covtest/list-cov
 import { AddCovtestComponent } from './components/covtest/add-covtest/add-covtest.component';
 import { EditCovtestComponent } from './components/covtest/edit-covtest/edit-covtest.component';
 import { DetailCovtestComponent } from './components/covtest/detail-covtest/detail-covtest.component';
+import { AddTechuserComponent } from './components/TechCrud/add-techuser/add-techuser.component';
+import { ListTechuserComponent } from './components/TechCrud/list-techuser/list-techuser.component';
+import { EditTechuserComponent } from './components/TechCrud/edit-techuser/edit-techuser.component';
+import { ListExtuserComponent } from './components/ExtuserCrud/list-extuser/list-extuser.component';
+import { EditExtuserComponent } from './components/ExtuserCrud/edit-extuser/edit-extuser.component';
+import { AddExtuserComponent } from './components/ExtuserCrud/add-extuser/add-extuser.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +46,13 @@ import { DetailCovtestComponent } from './components/covtest/detail-covtest/deta
     ListCovtestComponent,
     AddCovtestComponent,
     EditCovtestComponent,
-    DetailCovtestComponent
+    DetailCovtestComponent,
+    AddTechuserComponent,
+    ListTechuserComponent,
+    EditTechuserComponent,
+    ListExtuserComponent,
+    EditExtuserComponent,
+    AddExtuserComponent
   ],
   imports: [
     BrowserModule,

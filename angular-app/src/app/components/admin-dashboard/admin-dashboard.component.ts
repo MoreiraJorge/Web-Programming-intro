@@ -102,6 +102,10 @@ export class AdminDashboardComponent implements OnInit {
     this.router.navigate(['/profile']);
   }
 
+  TechManagement() {
+    this.router.navigate(['/techMng']);
+  }
+
   logout(event): void {
     event.preventDefault()
     this.errors = ''

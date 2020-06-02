@@ -38,9 +38,6 @@ export class ProfileDetailsComponent implements OnInit {
         this.openDialog()
       }
       
-    
-      
-
     }, (err) => {
       console.log(err);
     })

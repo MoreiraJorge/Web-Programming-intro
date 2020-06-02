@@ -17,4 +17,4 @@
     <button type="submit" form="dateForm" value="Submit" (click)="countTestsOnDate()">Find</button>
 </form>
 <p>Nº de testes na data {{ myDate | date :  "dd/MM/y"}} : {{ dateTests }}</p>
-<button>Gestão de Técnicos</button>
+<button (click)="TechManagement()">Gestão de Técnicos</button>

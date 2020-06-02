@@ -6,6 +6,8 @@ import { PrivateAppComponent } from './components/private-app/private-app.compon
 import { AuthGuardService } from './services/auth-guard.service';
 import { ProfileDetailsComponent } from './components/profile-details/profile-details.component';
 import { ListCovtestComponent } from './components/covtest/list-covtest/list-covtest.component';
+import { ListTechuserComponent } from './components/TechCrud/list-techuser/list-techuser.component';
+import { AddTechuserComponent } from './components/TechCrud/add-techuser/add-techuser.component';
 
 
 const routes: Routes = [{
@@ -25,6 +27,15 @@ const routes: Routes = [{
   path: 'covtestList',
   component: ListCovtestComponent,
   canActivate: [AuthGuardService]
+},
+{
+  path: 'techMng',
+  component: ListTechuserComponent,
+  canActivate: [AuthGuardService],
+  children:[{
+    path: 'addTech',
+    component: AddTechuserComponent
+  }]
 },
 {
   path: '',
