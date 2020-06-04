@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, from } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { environment } from './../../environments/environment';
 import { User } from '../models/user';
@@ -33,8 +32,8 @@ export class AdminService {
     return this.http.put<User>(`${API_URL}/admin/changePass/${id}`, JSON.stringify(password), httpOptions)
   }
 
-  dayTests(){
-    return this.http.get(`${API_URL}/covtests/schedCount`, httpOptions).pipe(map(result => result));
+  dayTests(): Observable<any>{
+    return this.http.get(`${API_URL}/covtests/schedCount`, httpOptions);
   }
   
 }
