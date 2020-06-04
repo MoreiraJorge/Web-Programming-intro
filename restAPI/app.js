@@ -72,10 +72,10 @@ mongoose
 	})
 	.catch(console.error)
 
-/*
+
 // Set API Router at /api endpoint and enable cors
 // If you do not use angular proxy
-const whitelist = ['http://localhost:4200', 'http://localhost:3000', 'http://localhost', 'https://moreirajorge.github.io', '0.0.0.0/0']
+const whitelist = ['http://localhost:4200', 'http://localhost:3000', 'http://localhost', 'https://moreirajorge.github.io']
 const corsOptions = {
 	credentials: true,
 	origin: function (origin, callback) {
@@ -87,7 +87,7 @@ const corsOptions = {
 		}
 	}
 }
-*/
+
 
 //api setup
 app
@@ -106,7 +106,7 @@ app
 	//swagger doc setup
 	.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
-	.use('/api', cors(), apiRouter)
+	.use('/api', cors(corsOptions), apiRouter)
 
 	.listen(PORT, () => {
 		console.log(`API started on http://localhost:${PORT}/api`)
