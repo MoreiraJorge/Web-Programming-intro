@@ -7,11 +7,11 @@ import {MatDialog} from '@angular/material/dialog';
 import { PopupPassComponent } from '../popup-pass/popup-pass.component';
 
 @Component({
-  selector: 'app-profile-details',
-  templateUrl: './profile-details.component.html',
-  styleUrls: ['./profile-details.component.sass']
+  selector: 'app-my-profile',
+  templateUrl: './my-profile.component.html',
+  styleUrls: ['./my-profile.component.sass']
 })
-export class ProfileDetailsComponent implements OnInit {
+export class MyProfileComponent implements OnInit {
 
   user: User
   password: string

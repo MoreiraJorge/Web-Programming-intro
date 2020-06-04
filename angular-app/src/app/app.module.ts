@@ -8,10 +8,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { PrivateAppComponent } from './components/private-app/private-app.component';
-import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
-import { TechDashboardComponent } from './components/tech-dashboard/tech-dashboard.component';
-import { ExtDashboardComponent } from './components/ext-dashboard/ext-dashboard.component';
-import { ProfileDetailsComponent } from './components/profile-details/profile-details.component';
+import { AdminDashboardComponent } from './components/Dashboards/admin-dashboard/admin-dashboard.component';
+import { TechDashboardComponent } from './components/Dashboards/tech-dashboard/tech-dashboard.component';
+import { ExtDashboardComponent } from './components/Dashboards/ext-dashboard/ext-dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatCardModule} from '@angular/material/card';
@@ -22,17 +21,15 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatGridListModule} from '@angular/material/grid-list';
 
 import { PopupPassComponent } from './components/popup-pass/popup-pass.component';
-import { ListCovtestComponent } from './components/covtest/list-covtest/list-covtest.component';
-import { AddCovtestComponent } from './components/covtest/add-covtest/add-covtest.component';
-import { EditCovtestComponent } from './components/covtest/edit-covtest/edit-covtest.component';
-import { DetailCovtestComponent } from './components/covtest/detail-covtest/detail-covtest.component';
-import { AddTechuserComponent } from './components/TechCrud/add-techuser/add-techuser.component';
-import { ListTechuserComponent } from './components/TechCrud/list-techuser/list-techuser.component';
-import { EditTechuserComponent } from './components/TechCrud/edit-techuser/edit-techuser.component';
-import { ListExtuserComponent } from './components/ExtuserCrud/list-extuser/list-extuser.component';
-import { EditExtuserComponent } from './components/ExtuserCrud/edit-extuser/edit-extuser.component';
-import { AddExtuserComponent } from './components/ExtuserCrud/add-extuser/add-extuser.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { ListCovtestComponent } from './components/CovtestCrud/list-covtest/list-covtest.component';
+import { AddCovtestComponent } from './components/CovtestCrud/add-covtest/add-covtest.component';
+import { EditCovtestComponent } from './components/CovtestCrud/edit-covtest/edit-covtest.component';
+import { DetailCovtestComponent } from './components/CovtestCrud/detail-covtest/detail-covtest.component';
+import { AddUserComponent } from './components/UserCrud/add-user/add-user.component';
+import { ListUserComponent } from './components/UserCrud/list-user/list-user.component';
+import { EditUserComponent } from './components/UserCrud/edit-user/edit-user.component';
+import { UserProfileComponent } from './components/UserCrud/user-profile/user-profile.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -42,19 +39,16 @@ import { ProfileComponent } from './components/profile/profile.component';
     AdminDashboardComponent,
     TechDashboardComponent,
     ExtDashboardComponent,
-    ProfileDetailsComponent,
     PopupPassComponent,
     ListCovtestComponent,
     AddCovtestComponent,
     EditCovtestComponent,
     DetailCovtestComponent,
-    AddTechuserComponent,
-    ListTechuserComponent,
-    EditTechuserComponent,
-    ListExtuserComponent,
-    EditExtuserComponent,
-    AddExtuserComponent,
-    ProfileComponent
+    AddUserComponent,
+    ListUserComponent,
+    EditUserComponent,
+    UserProfileComponent,
+    MyProfileComponent,
   ],
   imports: [
     BrowserModule,

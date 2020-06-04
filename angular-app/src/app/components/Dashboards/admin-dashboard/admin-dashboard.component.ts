@@ -98,12 +98,14 @@ export class AdminDashboardComponent implements OnInit {
     }, (err) => { console.log(err) })
   }
 
+  
   seeProfile() {
-    this.router.navigate(['/profile']);
+    console.log(this.user)
+    this.router.navigate(['/myProfile']);
   }
 
   TechManagement() {
-    this.router.navigate(['/techMng']);
+    //this.router.navigate(['/techMng']);
   }
 
   logout(event): void {

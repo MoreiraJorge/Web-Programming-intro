@@ -1,0 +1,17 @@
+<h1>Profile details</h1>
+<div *ngIf="user">
+    
+    <p>name: {{user.name}}</p>
+    <p>age: {{user.age}}</p>
+    <p>phoneNumber: {{user.phoneNumber}}</p>
+    <p>email: {{user.email}}</p>
+    <p>address: {{user.address}}</p>
+    <p>Role: {{user.role}}</p>
+    <p>idCard: {{user.idCard}}</p>
+
+    <div *ngIf="user.role==='EXT'">
+        <p *ngIf="user.infected == true; else elseBlock">Status: Infected</p>
+        <ng-template #elseBlock>Status: Suspect</ng-template>
+    </div>
+
+</div>
