@@ -34,7 +34,7 @@ export class AdminService {
   }
 
   dayTests(){
-    return this.http.get(`${API_URL}/covtests/schedCount`).pipe(map(result => result));
+    return this.http.get(`${API_URL}/covtests/schedCount`, httpOptions).pipe(map(result => result));
   }
   
 }
