@@ -27,7 +27,11 @@ export class UserProfileComponent implements OnInit {
 
   getMe() {
     this.sessionService.me().subscribe((data: User) => {
-      this.role = data.role
+      if(data === null){
+        this.role = ''
+      } else {
+        this.role = data.role
+      }
     });
   }
 

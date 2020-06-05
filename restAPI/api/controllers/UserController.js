@@ -22,7 +22,7 @@ UserController.listExtUsers = async (req, res) => {
 UserController.findOneUser = async (req, res) => {
     const result = await User.findOne({ idCard: req.params.id, role: "EXT" }).
         populate('covtest', 'code')
-    res.json(result);
+    res.json({...result.toJSON(), password: undefined});
 }
 
 //create user (tech)

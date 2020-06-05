@@ -34,7 +34,11 @@ export class AddUserComponent implements OnInit {
 
   getMe() {
     this.sessionService.me().subscribe((data: User) => {
-      this.role = data.role
+      if(data === null){
+        this.role = ''
+      } else {
+        this.role = data.role
+      }
     });
   }
 
@@ -46,7 +50,7 @@ export class AddUserComponent implements OnInit {
       }, (err) => {
         console.log(err);
       });
-      
+
     } else if (this.role == 'TECH') {
       this.ExtUserService.addExt(this.userData).subscribe((result: User) => {
         console.log(result);

@@ -28,7 +28,11 @@ export class EditUserComponent implements OnInit {
 
   getMe() {
     this.sessionService.me().subscribe((data: User) => {
-      this.role = data.role
+      if (data === null) {
+        this.role = ''
+      } else {
+        this.role = data.role
+      }
     });
   }
 
@@ -37,7 +41,7 @@ export class EditUserComponent implements OnInit {
       this.TechUserService.getTechByID(this.route.snapshot.params['id']).subscribe((data: {}) => {
         this.userData = data;
       });
-    } else if (this.role == 'ADM') {
+    } else if (this.role == 'TECH') {
       this.ExtUserService.getExtByID(this.route.snapshot.params['id']).subscribe((data: {}) => {
         this.userData = data;
       });
@@ -55,7 +59,12 @@ export class EditUserComponent implements OnInit {
         console.log(err);
       });
 
-    } else if (this.role == 'ADM') {
+    } else if (this.role == 'TECH') {
+      this.ExtUserService.updateExt(idTemp, this.userData).subscribe((result) => {
+        this.router.navigate(['/profile/' + this.userData.idCard]);
+      }, (err) => {
+        console.log(err);
+      });
       
     }
   }
