@@ -20,7 +20,11 @@ export class TechDashboardComponent implements OnInit {
   }
 
   seeProfile() {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/myProfile']);
+  }
+
+  ExtManagement(){
+    this.router.navigate(['/usrMng']);
   }
 
 }

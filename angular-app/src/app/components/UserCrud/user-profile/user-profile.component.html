@@ -12,6 +12,12 @@
     <div *ngIf="user.role==='EXT'">
         <p *ngIf="user.infected == true; else elseBlock">Status: Infected</p>
         <ng-template #elseBlock>Status: Suspect</ng-template>
+
+        <button (click)="usrMng()">External Management</button>
     </div>
+
+    <button (click)="edit(user.idCard)">Edit this user</button>
+
+    <button *ngIf="user.role==='TECH'" (click)="usrMng()">Tech Management</button>
 
 </div>

@@ -73,7 +73,7 @@ TechController.listUserTech = async (req, res) => {
 TechController.findOneUserTech = async (req, res) => {
     const user = await User.findOne({ idCard: req.params.id, role: "TECH" })
     if (user != null) {
-        res.json(user)
+        res.json({...user.toJSON(), password: undefined})
     } else {
         res.send("there is no tech with this ID")
     }

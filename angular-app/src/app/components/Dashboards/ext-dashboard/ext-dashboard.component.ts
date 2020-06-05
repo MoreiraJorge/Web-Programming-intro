@@ -20,7 +20,7 @@ export class ExtDashboardComponent implements OnInit {
   }
 
   seeProfile() {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/myProfile']);
   }
 
 }

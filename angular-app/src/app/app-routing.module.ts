@@ -8,6 +8,10 @@ import { ListCovtestComponent } from './components/CovtestCrud/list-covtest/list
 import { AdminDashboardComponent } from './components/Dashboards/admin-dashboard/admin-dashboard.component';
 import { UserProfileComponent } from './components/UserCrud/user-profile/user-profile.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { ListUserComponent } from './components/UserCrud/list-user/list-user.component';
+import { EditUserComponent } from './components/UserCrud/edit-user/edit-user.component';
+import { AddUserComponent } from './components/UserCrud/add-user/add-user.component';
+import { TechDashboardComponent } from './components/Dashboards/tech-dashboard/tech-dashboard.component';
 
 
 const routes: Routes = [{
@@ -24,6 +28,11 @@ const routes: Routes = [{
   canActivate: [AuthGuardService]
 },
 {
+  path: 'techDashboard',
+  component: TechDashboardComponent,
+  canActivate: [AuthGuardService]
+},
+{
   path: 'covtestList',
   component: ListCovtestComponent,
   canActivate: [AuthGuardService]
@@ -31,6 +40,25 @@ const routes: Routes = [{
 {
   path: 'myProfile',
   component: MyProfileComponent,
+  canActivate: [AuthGuardService]
+},
+{
+  path: 'usrMng',
+  component: ListUserComponent,
+  canActivate: [AuthGuardService],
+  children: [{
+    path: 'addUsr',
+    component: AddUserComponent
+  }]
+},
+{
+  path: 'profile/:id',
+  component: UserProfileComponent,
+  canActivate: [AuthGuardService]
+}, 
+{
+  path: 'edit/:id',
+  component: EditUserComponent,
   canActivate: [AuthGuardService]
 },
 {
