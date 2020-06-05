@@ -27,8 +27,20 @@ export class ExtUserService {
     return this.http.get<User[]>(`${API_URL}/users/userListExt`, httpOptions)
   }
 
+  addExt(user: User): Observable<User>{
+    return this.http.post<User>(`${API_URL}/users/create`, JSON.stringify(user), httpOptions)
+  }
+
   getExtByID(id: string): Observable<User> {
     return this.http.get<User>(`${API_URL}/users/${ id }`, httpOptions)
+  }
+
+  deleteExt(id: string): Observable<User>{
+    return this.http.delete<User>(`${API_URL}/users/${ id }`, httpOptions)
+  }
+
+  updateExt(id: string, user:User): Observable<User>{
+    return this.http.put<User>(`${API_URL}/users/${ id }`, JSON.stringify(user), httpOptions)
   }
 
 }

@@ -52,19 +52,29 @@ export class ListUserComponent implements OnInit {
   }
 
   Delete(id: string) {
-    this.TechUserService.deleteTech(id)
-      .subscribe(res => {
-        this.getUsers();
-      }, (err) => {
-        console.log(err);
-      }
-      );
+    if (this.role == 'ADM') {
+      this.TechUserService.deleteTech(id)
+        .subscribe(res => {
+          this.getUsers();
+        }, (err) => {
+          console.log(err);
+        }
+        );
+    } else if (this.role == 'TECH') {
+      this.ExtUserService.deleteExt(id)
+        .subscribe(res => {
+          this.getUsers();
+        }, (err) => {
+          console.log(err);
+        }
+        );
+    }
   }
 
   Dashboard() {
     if (this.role == 'ADM') {
       this.router.navigate(['/admDashboard'])
-    }  else if (this.role == 'TECH') {
+    } else if (this.role == 'TECH') {
       this.router.navigate(['/techDashboard'])
     }
   }
