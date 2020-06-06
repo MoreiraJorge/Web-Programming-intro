@@ -85,4 +85,8 @@ export class CovtestsService {
   nTestPerExtID(id: string): Observable<any> {
     return this.http.get<any>(`${API_URL}/covtests/nTestsPerson/${id}`, httpOptions)
   }
+
+  getTestByID(id: string): Observable<Covtest> {
+    return this.http.get<Covtest>(`${API_URL}/covtests/${id}`, httpOptions)
+  }
 }

@@ -1,1 +1,22 @@
-<p>detail-covtest works!</p>
+<h1>Test details</h1>
+<div *ngIf="covtest">
+
+    <p>code: {{ covtest.code }}</p>
+    <p>description: {{ covtest.description }}</p>
+    <p>userHistory: {{ covtest.userHistory }}</p>
+    <p>riskGroup: {{ covtest.riskGroup }}</p>
+    <p>riskJob: {{ covtest.riskJob }}</p>
+    <p>testStatus: {{ covtest.testStatus }}</p>
+    <p>testResult: {{ covtest.testResult }}</p>
+    <p>isTestDone: {{ covtest.isTestDone }}</p>
+    <p type="date">schedule: {{ covtest.schedule | date :  "dd/MM/y"}}</p>
+    <p>saude24: {{ covtest.saude24 }}</p>
+    <p>user: {{ covtest.user.name }}</p>
+
+    <button>Edit</button>
+
+    <button>Test Management</button>
+
+    <button> Download File </button>
+
+</div>

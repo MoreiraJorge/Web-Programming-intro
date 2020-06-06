@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Covtest } from 'src/app/models/covtest';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CovtestsService } from 'src/app/services/covtests.service';
 
 @Component({
   selector: 'app-detail-covtest',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailCovtestComponent implements OnInit {
 
-  constructor() { }
+  covtest: Covtest
+
+  constructor(private route: ActivatedRoute, private router: Router, private CovtestService: CovtestsService) { }
 
   ngOnInit(): void {
+    this.getCovTest()
   }
+
+  getCovTest() {
+    this.CovtestService.getTestByID(this.route.snapshot.params['id']).subscribe((covtest: Covtest) => {
+      this.covtest = covtest;
+    });
+  }
+
 
 }
