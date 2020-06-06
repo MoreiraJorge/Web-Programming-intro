@@ -1085,6 +1085,38 @@
                     }
                 }
             }
+        },
+        "/covtests/{id}": {
+            "get": {
+                "tags": [
+                    "Técnicos"
+                ],
+                "summary": "Obter teste de Covid por Código | Acesso -> Técnicos",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Codigo do teste",
+                        "schema": {
+                            "$ref": "#/definitions/Covtest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "$ref": "#/definitions/Covtest"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            }
         }
     },
     "definitions": {

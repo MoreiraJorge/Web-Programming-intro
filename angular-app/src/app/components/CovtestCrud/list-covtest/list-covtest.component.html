@@ -13,7 +13,7 @@
     <mat-grid-list cols="4" rowHeight="50px">
         <ng-container *ngFor="let covtest of covtests; index as i">
             <mat-grid-tile>{{covtest.code}}</mat-grid-tile>
-            <mat-grid-tile><button>Test Details</button></mat-grid-tile>
+            <mat-grid-tile><button (click)="TestDetails( covtest.code )">Test Details</button></mat-grid-tile>
             <mat-grid-tile><button>Remove Test</button></mat-grid-tile>
             <mat-grid-tile type="date">{{ covtest.schedule | date :  "dd/MM/y"}}</mat-grid-tile>
         </ng-container>

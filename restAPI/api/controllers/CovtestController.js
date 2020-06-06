@@ -221,4 +221,13 @@ CovtestController.nTestPerDay = async (req, res) => {
     }
 }
 
+CovtestController.getTestByID = async (req, res) => {
+    try {
+        const result = await Covtest.find({ code: req.params.id })
+        res.json(result)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 module.exports = CovtestController

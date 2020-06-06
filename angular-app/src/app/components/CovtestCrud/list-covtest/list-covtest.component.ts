@@ -35,4 +35,8 @@ export class ListCovtestComponent implements OnInit {
 
   }
 
+  TestDetails( Testcode: string ){
+    this.router.navigate([`/covtestDetail/${ Testcode }`])
+  }
+
 }

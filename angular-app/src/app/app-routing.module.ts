@@ -12,6 +12,7 @@ import { ListUserComponent } from './components/UserCrud/list-user/list-user.com
 import { EditUserComponent } from './components/UserCrud/edit-user/edit-user.component';
 import { AddUserComponent } from './components/UserCrud/add-user/add-user.component';
 import { TechDashboardComponent } from './components/Dashboards/tech-dashboard/tech-dashboard.component';
+import { DetailCovtestComponent } from './components/CovtestCrud/detail-covtest/detail-covtest.component';
 
 
 const routes: Routes = [{
@@ -59,6 +60,11 @@ const routes: Routes = [{
 {
   path: 'edit/:id',
   component: EditUserComponent,
+  canActivate: [AuthGuardService]
+},
+{
+  path: 'covtestDetail/:id',
+  component: DetailCovtestComponent,
   canActivate: [AuthGuardService]
 },
 {
