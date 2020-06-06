@@ -79,7 +79,7 @@ const whitelist = ['http://localhost:4200', 'http://localhost:3000', 'http://loc
 const corsOptions = {
 	credentials: true,
 	origin: function (origin, callback) {
-		console.log(origin)
+		console.log("Origin -> " + origin)
 		if (!origin || whitelist.includes(origin)) {
 			callback(null, true)
 		} else {
