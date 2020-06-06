@@ -296,28 +296,6 @@
                 }
             }
         },
-        "/users/userList": {
-            "get": {
-                "tags": [
-                    "Externos"
-                ],
-                "summary": "Listar todos os utilizadores existentes | Acesso -> Admin",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "success",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    },
-                    "400": {
-                        "description": "Failed"
-                    }
-                }
-            }
-        },
         "/users/{id}": {
             "get": {
                 "tags": [
@@ -451,49 +429,6 @@
             }
         },
         "/users/tests/{id}": {
-            "put": {
-                "tags": [
-                    "Externos"
-                ],
-                "summary": "Associar teste a um utilizador | Acesso -> Técnicos",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "idCard do utilizador externo a ser atualizado",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "covtest",
-                        "description": "ObjectID (_id) do teste de covid a associar",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "covtest": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "success",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    },
-                    "400": {
-                        "description": "Failed"
-                    }
-                }
-            },
             "delete": {
                 "tags": [
                     "Externos"
@@ -1113,6 +1048,36 @@
                         "description": "success",
                         "schema": {
                             "type": "number"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            }
+        },
+        "/covtests/schedCount": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Numero de Testes por dia | Acesso -> Admin",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "values": [
+                                    {
+                                        "date": "string",
+                                        "totalEvents": "number"
+                                    }
+                                ]
+                            }
                         }
                     },
                     "400": {

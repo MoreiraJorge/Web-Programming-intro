@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 var UserController = {};
 
 //list all users (admin)
+/*
 UserController.listAllUsers = async (req, res) => {
     try {
         const list = await User.find().
@@ -14,6 +15,7 @@ UserController.listAllUsers = async (req, res) => {
         console.log(err)
     }
 }
+*/
 
 //list all External users (tech)
 UserController.listExtUsers = async (req, res) => {
@@ -90,6 +92,7 @@ UserController.updateUser = async (req, res) => {
 }
 
 //add covid tests to user test list (tech)
+/*
 UserController.addCovTests = async (req, res) => {
     try {
         await User.findOneAndUpdate({ idCard: req.params.id, role: "EXT" }, { $push: { covtest: req.body.covtest } })
@@ -100,6 +103,7 @@ UserController.addCovTests = async (req, res) => {
         console.log(err)
     }
 }
+*/
 
 //remove covid test from user test list (tech)
 UserController.remCovTests = async (req, res) => {
