@@ -16,6 +16,7 @@ export class AdminDashboardComponent implements OnInit {
 
   @Input()
   user: User
+  users: User[]
   
   nTests: number
   nInfected: number

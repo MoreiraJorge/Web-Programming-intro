@@ -1,6 +1,9 @@
 var mongoose = require("mongoose");
 const User = require('../models/User')
 const bcrypt = require('bcrypt');
+const { parse } = require('url')
+const { parse: parseQuery } = require('querystring')
+
 
 var UserController = {};
 
@@ -108,7 +111,10 @@ UserController.addCovTests = async (req, res) => {
 //remove covid test from user test list (tech)
 UserController.remCovTests = async (req, res) => {
     try {
-        await User.findOneAndUpdate({ idCard: req.params.id, role: "EXT" }, { $pull: { covtest: req.body.covtest } })
+        const q = parse(req.url)
+        const query = parseQuery(q.query)
+
+        await User.findOneAndUpdate({ idCard: req.params.id, role: "EXT" }, { $pull: { covtest: query.covtest } })
         const result = await User.findOne({ idCard: req.params.id }).
             populate('covtest')
         res.json(result)
