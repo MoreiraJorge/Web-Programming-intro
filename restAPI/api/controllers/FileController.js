@@ -12,10 +12,10 @@ FileController.upload = async (req, res) => {
     let sampleFile = req.files.file
     let path = "./public/uploads/"
 
-    if (!fs.existsSync(path)){
+    if (!fs.existsSync(path)) {
         fs.mkdirSync(path);
     }
-    
+
     let uploadPath = path + sampleFile.name;
 
     try {

@@ -6,23 +6,35 @@ var UserController = {};
 
 //list all users (admin)
 UserController.listAllUsers = async (req, res) => {
-    const list = await User.find().
-        populate('covtest', 'code')
-    res.json(list);
+    try {
+        const list = await User.find().
+            populate('covtest', 'code')
+        res.json(list);
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 //list all External users (tech)
 UserController.listExtUsers = async (req, res) => {
-    const list = await User.find({ role: "EXT" }).
-        populate('covtest', 'code')
-    res.json(list);
+    try {
+        const list = await User.find({ role: "EXT" }).
+            populate('covtest', 'code')
+        res.json(list);
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 //find one user (tech)
 UserController.findOneUser = async (req, res) => {
-    const result = await User.findOne({ idCard: req.params.id, role: "EXT" }).
-        populate('covtest', 'code')
-    res.json({...result.toJSON(), password: undefined});
+    try {
+        const result = await User.findOne({ idCard: req.params.id, role: "EXT" }).
+            populate('covtest', 'code')
+        res.json({ ...result.toJSON(), password: undefined });
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 //create user (tech)
@@ -51,43 +63,54 @@ UserController.createUser = async (req, res) => {
 
 //delete user (tech)
 UserController.deleteUser = async (req, res) => {
-    const result = await User.findOneAndDelete({ idCard: req.params.id, role: "EXT" });
-    res.json(result)
+    try {
+        const result = await User.findOneAndDelete({ idCard: req.params.id, role: "EXT" });
+        res.json(result)
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 //update user (tech)
 UserController.updateUser = async (req, res) => {
+    try {
+        const userData = req.body
+        if (userData.role !== 'EXT') {
+            userData.role = 'EXT'
+        }
 
-    const userData = req.body
-    if (userData.role !== 'EXT') {
-        userData.role = 'EXT'
+        await User.findOneAndUpdate({ idCard: req.params.id, role: "EXT" }, userData)
+        const result = await User.findOne({ idCard: req.params.id }).
+            populate('covtest')
+        res.json(result)
+    } catch (err) {
+        console.log(err)
     }
-
-    await User.findOneAndUpdate({ idCard: req.params.id, role: "EXT" }, userData)
-    const result = await User.findOne({ idCard: req.params.id }).
-        populate('covtest')
-    res.json(result)
 
 }
 
 //add covid tests to user test list (tech)
 UserController.addCovTests = async (req, res) => {
-
-    await User.findOneAndUpdate({ idCard: req.params.id, role: "EXT" }, { $push: { covtest: req.body.covtest } })
-    const result = await User.findOne({ idCard: req.params.id }).
-        populate('covtest')
-    res.json(result)
-
+    try {
+        await User.findOneAndUpdate({ idCard: req.params.id, role: "EXT" }, { $push: { covtest: req.body.covtest } })
+        const result = await User.findOne({ idCard: req.params.id }).
+            populate('covtest')
+        res.json(result)
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 //remove covid test from user test list (tech)
 UserController.remCovTests = async (req, res) => {
-
-    await User.findOneAndUpdate({ idCard: req.params.id, role: "EXT" }, { $pull: { covtest: req.body.covtest } })
-    const result = await User.findOne({ idCard: req.params.id }).
-        populate('covtest')
-    res.json(result)
-
+    try {
+        await User.findOneAndUpdate({ idCard: req.params.id, role: "EXT" }, { $pull: { covtest: req.body.covtest } })
+        const result = await User.findOne({ idCard: req.params.id }).
+            populate('covtest')
+        res.json(result)
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 UserController.countInfected = async (req, res) => {
