@@ -5,7 +5,12 @@
         <input matInput [(ngModel)]="userid" name="userid" placeholder="userid" required>
     </mat-form-field>
 
-    <button type="submit" form="query" value="Submit" (click)="getUserTests()">Submit</button>
+    <button type="submit" form="query" value="Submit" (click)="getUserTests()">Submit</button><br>
+
+    <button (click)="getPositiveTests()">Obter testes positivos</button><br>
+    <button (click)="getNegativeTests()">Obter testes negativos</button><br>
+    <button (click)="getPendingTests()">Obter testes em espera</button><br>
+
 
 </form>
 

@@ -1,6 +1,7 @@
 <div>
     <h2>Edit Menu</h2>
-    <div>
+
+    <div *ngIf="userData.role == 'TECH'">
         <label>user Name:
             <input [(ngModel)]="userData.name" placeholder="user Name" />
         </label><br>
@@ -14,7 +15,7 @@
             <input [(ngModel)]="userData.email" placeholder="email" />
         </label><br>
         <label>password:
-            <input [(ngModel)]="userData.password" value=""/>
+            <input [(ngModel)]="userData.password" value="" />
         </label><br>
         <label>phone number:
             <input [(ngModel)]="userData.phoneNumber" placeholder="phoneNumber" />
@@ -22,7 +23,43 @@
         <label>idCard:
             <input [(ngModel)]="userData.idCard" placeholder="idCard" />
         </label><br>
+
     </div>
+
+    <div *ngIf="ExtUserData.role == 'EXT'">
+        <label>user Name:
+            <input [(ngModel)]="ExtUserData.name" placeholder="user Name" />
+        </label><br>
+        <label>user address:
+            <input [(ngModel)]="ExtUserData.address" placeholder="address" />
+        </label><br>
+        <label>user age:
+            <input [(ngModel)]="ExtUserData.age" placeholder="age" />
+        </label><br>
+        <label>email:
+            <input [(ngModel)]="ExtUserData.email" placeholder="email" />
+        </label><br>
+        <label>password:
+            <input [(ngModel)]="ExtUserData.password" value="" />
+        </label><br>
+        <label>phone number:
+            <input [(ngModel)]="ExtUserData.phoneNumber" placeholder="phoneNumber" />
+        </label><br>
+        <label>idCard:
+            <input [(ngModel)]="ExtUserData.idCard" placeholder="idCard" />
+        </label><br>
+
+        <div>
+            <label>User status:</label><br>
+            <input type="radio" id="infected" name="infected" [(ngModel)]="ExtUserData.infected" value="true">
+            <label for="infected">Infected</label><br>
+            <input type="radio" id="nonInfected" name="nonInfected" [(ngModel)]="ExtUserData.infected" value="false">
+            <label for="nonInfected">Healthy</label><br>
+        </div>
+
+    </div>
+
     <button (click)="update()">Update changes</button>
     <button (click)="Back()">Back to profile</button>
+
 </div>

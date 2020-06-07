@@ -10,8 +10,8 @@
     <p>idCard: {{user.idCard}}</p>
 
     <div *ngIf="user.role==='EXT'">
-        <p *ngIf="user.infected == true; else elseBlock">Status: Infected</p>
-        <ng-template #elseBlock>Status: Suspect</ng-template>
+        <p *ngIf="user.infected; else elseContent; ">Status: Infected</p>
+        <ng-template #elseContent>Status: Healthy</ng-template>
 
         <button (click)="usrMng()">External Management</button>
     </div>

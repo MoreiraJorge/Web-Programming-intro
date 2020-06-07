@@ -62,10 +62,11 @@ export class CovtestsService {
     return this.http.put<Covtest>(`${API_URL}/covtests/update/testResult/${id}`, testResult, httpOptions);
   }
 
+  //
   uploadFile(formData: FormData, id: string): Observable<Covtest> {
     return this.http.put<Covtest>(`${API_URL}/covtests/upload/${id}`, formData, httpFileOptions)
   }
-
+  //
   downloadFile(id: string): Observable<File> {
     return this.http.get<File>(`${API_URL}/covtests/download/${id}`, httpOptions)
   }
@@ -81,7 +82,7 @@ export class CovtestsService {
   listPositive(): Observable<Covtest[]> {
     return this.http.get<Covtest[]>(`${API_URL}/covtests/positive`, httpOptions)
   }
-
+  
   scheduleTest(schedule: string, id: string): Observable<Covtest> {
     return this.http.put<Covtest>(`${API_URL}/covtests/schedule/${id}`, schedule, httpOptions)
   }

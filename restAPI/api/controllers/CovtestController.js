@@ -125,7 +125,7 @@ CovtestController.listPend = async (req, res) => {
 //get test list with positive result (techs)
 CovtestController.listPos = async (req, res) => {
     try {
-        const result = await Covtest.find({ testResult: "Positive" })
+        const result = await Covtest.find({ testResult: "positive" })
         res.json(result)
     } catch (err) {
         console.log(err)
@@ -135,7 +135,7 @@ CovtestController.listPos = async (req, res) => {
 //get test list with negative result (techs)
 CovtestController.listNeg = async (req, res) => {
     try {
-        const result = await Covtest.find({ testResult: "Negative" })
+        const result = await Covtest.find({ testResult: "negative" })
         res.json(result)
     } catch (err) {
         console.log(err)

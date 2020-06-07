@@ -15,6 +15,7 @@ export class EditUserComponent implements OnInit {
   role: string
 
   @Input() userData: any = { name: '', address: '', age: 0, email: '', password: '', phoneNumber: 0, idCard: '' };
+  @Input() ExtUserData: any = { name: '', address: '', age: 0, email: '', password: '', phoneNumber: 0, idCard: '', infected: '' };
 
   constructor(private route: ActivatedRoute, private router: Router,
     private TechUserService: TechUserService,
@@ -43,7 +44,7 @@ export class EditUserComponent implements OnInit {
       });
     } else if (this.role == 'TECH') {
       this.ExtUserService.getExtByID(this.route.snapshot.params['id']).subscribe((data: {}) => {
-        this.userData = data;
+        this.ExtUserData = data;
       });
     }
   }
@@ -60,17 +61,21 @@ export class EditUserComponent implements OnInit {
       });
 
     } else if (this.role == 'TECH') {
-      this.ExtUserService.updateExt(idTemp, this.userData).subscribe((result) => {
-        this.router.navigate(['/profile/' + this.userData.idCard]);
+      this.ExtUserService.updateExt(idTemp, this.ExtUserData).subscribe((result) => {
+        this.router.navigate(['/profile/' + this.ExtUserData.idCard]);
       }, (err) => {
         console.log(err);
       });
-      
+
     }
   }
 
   Back() {
-    this.router.navigate(['/profile/' + this.userData.idCard]);
+    if (this.role == 'ADM') {
+      this.router.navigate(['/profile/' + this.userData.idCard]);
+    } else if (this.role == 'TECH') {
+      this.router.navigate(['/profile/' + this.ExtUserData.idCard]);
+    }
   }
 
 }

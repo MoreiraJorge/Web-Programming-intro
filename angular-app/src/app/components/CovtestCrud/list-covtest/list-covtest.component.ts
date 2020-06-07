@@ -11,7 +11,7 @@ import { CovtestsService } from 'src/app/services/covtests.service';
 export class ListCovtestComponent implements OnInit {
 
   covtests: Covtest[];
-  //selectedTest: Covtest;
+
   userid: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private CovtestService: CovtestsService) { }
@@ -23,8 +23,8 @@ export class ListCovtestComponent implements OnInit {
     }, (err) => { console.log(err) })
   }
 
-  getUserTests():void{
-    if(this.userid){
+  getUserTests(): void {
+    if (this.userid) {
       this.CovtestService.getUserTests(this.userid).subscribe((covtests) => {
         this.covtests = covtests;
         console.log(JSON.stringify(covtests))
@@ -35,8 +35,29 @@ export class ListCovtestComponent implements OnInit {
 
   }
 
-  TestDetails( id: string ){
-    this.router.navigate([`/covtestDetail/${ id }`])
+  getPositiveTests(): void {
+    this.CovtestService.listPositive().subscribe((covtests) => {
+      this.covtests = covtests;
+      console.log(JSON.stringify(covtests))
+    }, (err) => { console.log(err) })
+  }
+
+  getNegativeTests(): void {
+    this.CovtestService.listNegative().subscribe((covtests) => {
+      this.covtests = covtests;
+      console.log(JSON.stringify(covtests))
+    }, (err) => { console.log(err) })
+  }
+
+  getPendingTests(): void{
+    this.CovtestService.listPending().subscribe((covtests) => {
+      this.covtests = covtests;
+      console.log(JSON.stringify(covtests))
+    }, (err) => { console.log(err) })
+  }
+
+  TestDetails(id: string) {
+    this.router.navigate([`/covtestDetail/${id}`])
   }
 
 }
