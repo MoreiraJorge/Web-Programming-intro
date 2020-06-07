@@ -44,10 +44,6 @@ export class CovtestsService {
     return this.http.get(`${API_URL}/users/infected`, httpOptions)
   }
 
-  updateTestStatus(testStatus: string, id: string): Observable<Covtest> {
-    return this.http.put<Covtest>(`${API_URL}/covtests/update/testStatus/${id}`, testStatus, httpOptions);
-  }
-
   updateUserTestStatus(UserTestStatus: string, id: string): Observable<Covtest> {
     return this.http.put<Covtest>(`${API_URL}/covtests/update/testUserStatus/${id}`, UserTestStatus, httpOptions);
   }
@@ -56,9 +52,7 @@ export class CovtestsService {
     return this.http.put<Covtest>(`${API_URL}/covtests/update/testResult/${id}`, testResult, httpOptions);
   }
 
-  uploadFile(fileToUpload: File, id: string): Observable<Covtest> {
-    const formData: FormData = new FormData();
-    formData.append('file', fileToUpload, fileToUpload.name);
+  uploadFile(formData: FormData, id: string): Observable<Covtest> {
     return this.http.put<Covtest>(`${API_URL}/covtests/upload/${id}`, formData, httpOptions)
   }
 

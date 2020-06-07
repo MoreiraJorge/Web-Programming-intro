@@ -91,8 +91,8 @@ const corsOptions = {
 
 //api setup
 app
-	.use(express.json())
-	.use(express.urlencoded({ extended: false }))
+	.use(express.json({ limit: '50mb' }))
+	.use(express.urlencoded({ extended: false, limit: '50mb' }))
 
 	// Setup cookie parser
 	.use(cookieParser())

@@ -18,9 +18,11 @@ router.post('/create/:id', authorize(['EXT']), function (req, res) {
 })
 
 //update test status
+/*
 router.put('/update/testStatus/:id', authorize(['TECH']), function (req, res) {
     Covtest.updateTestStatus(req, res)
 })
+*/
 
 //update user test status
 router.put('/update/testUserStatus/:id', authorize(['TECH']), function (req, res) {

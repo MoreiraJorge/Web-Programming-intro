@@ -29,8 +29,8 @@ CovtestController.createTest = async (req, res) => {
             code: randomCode,
             //associate the user that created the test
             user: targetUser,
-            testStatus: "pending"
-
+            testStatus: "pending",
+            testResult:"awaiting result"
         }
 
         //create test
@@ -64,6 +64,7 @@ CovtestController.updateTestUserStatus = async (req, res) => {
 }
 
 //update test status (techs)
+/*
 CovtestController.updateTestStatus = async (req, res) => {
     try {
         const newData =
@@ -78,13 +79,15 @@ CovtestController.updateTestStatus = async (req, res) => {
         console.log(err)
     }
 }
+*/
 
 //update test result (techs)
 CovtestController.updateTestResult = async (req, res) => {
     try {
         const newData =
         {
-            testResult: req.body.testResult
+            testResult: req.body.testResult,
+            testStatus: "done"
         }
 
         await Covtest.findOneAndUpdate({ code: req.params.id }, newData);
@@ -223,7 +226,7 @@ CovtestController.nTestPerDay = async (req, res) => {
 
 CovtestController.getTestByID = async (req, res) => {
     try {
-        const result = await Covtest.find({ code: req.params.id })
+        const result = await Covtest.findOne({ code: req.params.id }).populate('user')
         res.json(result)
     } catch (err) {
         console.log(err)

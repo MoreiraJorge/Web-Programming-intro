@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema({
         default: 'EXT',
         index: true
     },
+    saude24: Boolean,
     covtest: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Covtest' }],
     updated_at: { type: Date, default: Date.now }
 

@@ -14,6 +14,8 @@ export class TechDashboardComponent implements OnInit {
   @Input()
   user: User
 
+  errors: String
+
   constructor(private route: ActivatedRoute, private router: Router, private sessionService: SessionService) { }
 
   ngOnInit(): void {
@@ -25,6 +27,13 @@ export class TechDashboardComponent implements OnInit {
 
   ExtManagement(){
     this.router.navigate(['/usrMng']);
+  }
+
+  logout(){
+    event.preventDefault()
+    this.errors = ''
+    this.sessionService.logout()
+    this.router.navigate(['/login'])
   }
 
 }

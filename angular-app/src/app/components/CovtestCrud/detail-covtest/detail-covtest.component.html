@@ -5,17 +5,20 @@
     <p>description: {{ covtest.description }}</p>
     <p>userHistory: {{ covtest.userHistory }}</p>
     <p>riskGroup: {{ covtest.riskGroup }}</p>
+    <p>userStatus: {{ covtest.userStatus }}</p>
     <p>riskJob: {{ covtest.riskJob }}</p>
     <p>testStatus: {{ covtest.testStatus }}</p>
     <p>testResult: {{ covtest.testResult }}</p>
-    <p>isTestDone: {{ covtest.isTestDone }}</p>
     <p type="date">schedule: {{ covtest.schedule | date :  "dd/MM/y"}}</p>
     <p>saude24: {{ covtest.saude24 }}</p>
-    <p>user: {{ covtest.user.name }}</p>
+    <div *ngIf="covtest.user">
+        <p>user: {{ covtest.user.name }}</p>
+    </div>
 
-    <button>Edit</button>
 
-    <button>Test Management</button>
+    <button (click)="edit(covtest.code)">Edit</button>
+
+    <button (click)="Back()">Back to Dashboard</button>
 
     <button> Download File </button>
 

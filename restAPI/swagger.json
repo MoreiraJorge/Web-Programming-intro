@@ -535,51 +535,6 @@
                 }
             }
         },
-        "/covtests/update/testStatus/{id}": {
-            "put": {
-                "tags": [
-                    "Covtest"
-                ],
-                "summary": "Atualizar o status de um teste de covid | Acesso -> Técnico",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "Código (code) do teste a ser atualizado",
-                        "schema": {
-                            "$ref": "#/definitions/Covtest"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "Detalhes",
-                        "description": "Detalhes a atualizar no teste",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "testStatus": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "success",
-                        "schema": {
-                            "$ref": "#/definitions/Covtest"
-                        }
-                    },
-                    "400": {
-                        "description": "Failed"
-                    }
-                }
-            }
-        },
         "/covtests/pending": {
             "get": {
                 "tags": [
