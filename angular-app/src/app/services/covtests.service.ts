@@ -17,6 +17,14 @@ const httpOptions = {
   withCredentials: true,
 };
 
+const httpFileOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'multipart/form-data',
+    'Accept': 'application/pdf'
+  }),
+  withCredentials: true,
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -53,7 +61,7 @@ export class CovtestsService {
   }
 
   uploadFile(formData: FormData, id: string): Observable<Covtest> {
-    return this.http.put<Covtest>(`${API_URL}/covtests/upload/${id}`, formData, httpOptions)
+    return this.http.put<Covtest>(`${API_URL}/covtests/upload/${id}`, formData, httpFileOptions)
   }
 
   downloadFile(id: string): Observable<File> {
