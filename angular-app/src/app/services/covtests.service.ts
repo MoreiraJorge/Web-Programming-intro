@@ -19,8 +19,10 @@ const httpOptions = {
 
 const httpFileOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'multipart/form-data',
-    'Accept': 'application/pdf'
+    'Content-Type': 'application/pdf',
+    'Accept': 'application/pdf',
+    'enctype': 'multipart/form-data',
+    
   }),
   withCredentials: true,
 };
