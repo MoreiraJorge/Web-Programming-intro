@@ -57,11 +57,8 @@ export class EditCovtestComponent implements OnInit {
     this.fileToUpload = event.target.files[0]
     const formData = new FormData()
     formData.append('file', this.fileToUpload, this.fileToUpload.name)
-
-    console.log(JSON.stringify(formData))
-    //this.CovtestService.uploadFile(formData, id).subscribe((result) => {
-
-    //})
+    this.CovtestService.uploadFile(formData, id).subscribe((result) => {
+    })
   }
 
 }
