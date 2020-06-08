@@ -19,10 +19,6 @@ const httpOptions = {
 
 const httpFileOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/pdf',
-    'Accept': 'application/pdf',
-    'enctype': 'multipart/form-data',
-    
   }),
   withCredentials: true,
 };
@@ -63,9 +59,12 @@ export class CovtestsService {
   }
 
   //
-  uploadFile(formData: FormData, id: string): Observable<Covtest> {
-    return this.http.put<Covtest>(`${API_URL}/covtests/upload/${id}`, formData, httpFileOptions)
+  uploadFile(fileToUpload: File, id: string): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    return this.http.post(`http://localhost:3000/api/covtests/upload/${id}`, formData, httpFileOptions)
   }
+
   //
   downloadFile(id: string): Observable<File> {
     return this.http.get<File>(`${API_URL}/covtests/download/${id}`, httpOptions)

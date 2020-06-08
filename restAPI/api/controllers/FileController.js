@@ -1,34 +1,28 @@
-var mongoose = require("mongoose");
 const Covtest = require('../models/Covtest')
-var fs = require('fs');
+const fs = require('fs');
+const path = require('path');
 
 var FileController = {};
 
 //Upload File (tech)
 FileController.upload = async (req, res) => {
-    if (!req.files || Object.keys(req.files).length === 0) {
-        return res.status(404).send(`<h1>NO FILES UPLOADED</h1>`);
-    }
-    let sampleFile = req.files.file
-    let path = "./public/uploads/"
+
+    console.log(req.file)
+
+    let path = "/uploads/"
 
     if (!fs.existsSync(path)) {
         fs.mkdirSync(path);
     }
 
-    let uploadPath = path + sampleFile.name;
+    let uploadPath = path + req.file.filename;
 
     try {
-        await Covtest.findOneAndUpdate({ code: req.params.id }, { resultFile: uploadPath })
-        const result = await Covtest.find({ code: req.params.id })
-
-        sampleFile.mv(uploadPath, function (err) {
-            if (err)
-                return res.status(500).send(err);
-
-            res.json(result);
-        });
+        const result = await Covtest.findOneAndUpdate({ code: req.params.id }, { resultFile: uploadPath }, { new: true })
+        res.json(result)
     } catch (err) {
+        res.status(400)
+        res.json(err)
         console.log(err)
     }
 }
@@ -37,19 +31,19 @@ FileController.upload = async (req, res) => {
 FileController.download = async (req, res) => {
 
     try {
-
         const result = await Covtest.findOne({ code: req.params.id })
-        console.log(result.resultFile)
         if (result.resultFile === null || result.resultFile === []) {
             return res.status(404).send(`<h1>NO FILES UPLOADED</h1>`);
         } else {
-
-            res.download(result.resultFile);
+            const file = path.join(__dirname, '../../public', result.resultFile)
+            console.log("ficheiro ->" + file)
+            res.download(file);
             console.log("File downloaded")
         }
     } catch (err) {
         console.log(err)
     }
+
 }
 
 module.exports = FileController

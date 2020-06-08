@@ -33,11 +33,14 @@
         <button type="button" form="dateForm" value="Submit" (click)="scheduleTest(covtest.code)">Agendar</button>
     </form>
 
-    <form enctype="multipart/form-data">
-        <label for="file">Insert File</label>
-        <input type="file" name="file" (change)="upload($event.target.files, covtest.code)">
+    <form enctype="multipart/form-data" (submit)="onSubmit($event, covtest.code)">
+        <div>
+            <input type='file' name="file_input" id="file_input" (change)="handleFileInput($event.target.files)">
+        </div>
+        <div>
+            <button type="submit">upload</button>
+        </div>
     </form>
-
 
     <p>saude24: {{ covtest.saude24 }}</p>
     <div *ngIf="covtest.user">

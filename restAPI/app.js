@@ -13,10 +13,10 @@ const User = require('./api/models/User')
 const bcrypt = require('bcrypt');
 var fs = require('fs');
 
-let path = 'public'
+let publicPath = 'public'
 
-if (!fs.existsSync(path)) {
-	fs.mkdirSync(path);
+if (!fs.existsSync(publicPath)) {
+	fs.mkdirSync(publicPath);
 }
 
 const apiRouter = require('./api')
@@ -87,7 +87,6 @@ const corsOptions = {
 		}
 	}
 }
-
 
 //api setup
 app

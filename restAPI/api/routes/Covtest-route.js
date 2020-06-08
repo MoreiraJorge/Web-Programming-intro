@@ -2,10 +2,27 @@ var express = require('express');
 var router = express.Router();
 var Covtest = require("../controllers/CovtestController")
 var fileController = require("../controllers/FileController")
-const fileUpload = require('express-fileupload');
 const authorize = require('../middleware/authorize')
 
-router.use(fileUpload())
+const multer = require('multer')
+//const path = require('path')
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+
+var upload = multer({ storage: storage })
+
+/*
+const upload = multer({
+	dest: path.resolve('public', 'uploads')
+})
+*/
 
 //List tests
 router.get('/testList', authorize(['TECH']), function (req, res) {
@@ -35,7 +52,8 @@ router.put('/update/testResult/:id', authorize(['TECH']), function (req, res) {
 })
 
 //Upload PDF file of Covid Test
-router.put('/upload/:id', authorize(['TECH']), function (req, res) {
+router.post('/upload/:id', upload.single('file'), authorize(['TECH']), function (req, res) {
+    console.log(req.body)
     fileController.upload(req, res)
 })
 
@@ -81,7 +99,7 @@ router.get('/schedCount/:date', authorize(['ADM']), function (req, res) {
 
 //numberTests per day
 router.get('/schedCount', authorize(['ADM']), function (req, res) {
-    Covtest.nTestPerDay(req,res)
+    Covtest.nTestPerDay(req, res)
 })
 
 //numberTests of person
@@ -89,8 +107,8 @@ router.get('/nTestsPerson/:id', authorize(['ADM']), function (req, res) {
     Covtest.nTestsPerson(req, res)
 })
 
-router.get('/:id', authorize(['TECH']), function(req, res){
-    Covtest.getTestByID(req,res)
+router.get('/:id', authorize(['TECH']), function (req, res) {
+    Covtest.getTestByID(req, res)
 })
 
 module.exports = router;

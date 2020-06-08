@@ -3,7 +3,6 @@ import { Covtest } from 'src/app/models/covtest';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CovtestsService } from 'src/app/services/covtests.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-edit-covtest',
@@ -17,9 +16,9 @@ export class EditCovtestComponent implements OnInit {
   @Input() userStatus: string
   @Input() testResult: string
   @Input() schedule: Date
-  fileToUpload: File = null
+  fileToUpload: File;
 
-  constructor(private route: ActivatedRoute, private router: Router, private CovtestService: CovtestsService, private formBuilder: FormBuilder, ) { }
+  constructor(private route: ActivatedRoute, private router: Router, private CovtestService: CovtestsService) { }
 
   ngOnInit(): void {
     this.getData()
@@ -55,13 +54,21 @@ export class EditCovtestComponent implements OnInit {
     this.router.navigate([`/covtestDetail/${id}`])
   }
 
-  upload(files:FileList, id:string){
-    this.fileToUpload = files.item(0);
-
-    const formData: FormData = new FormData();
-    formData.append('file', this.fileToUpload, this.fileToUpload.name);
-    
+  handleFileInput(files: FileList){
+    this.fileToUpload = files.item(0)
+    console.log('file selected');
+  }
+  /*
+  upload(id: string){
     this.CovtestService.uploadFile(formData, id).subscribe((result) =>{
+      console.log(result)
+    })
+  }
+*/
+
+  onSubmit(e: Event, id:string){
+    e.preventDefault();
+    this.CovtestService.uploadFile(this.fileToUpload, id).subscribe((result) => {
       console.log(result)
     })
   }
