@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Covtest } from 'src/app/models/covtest';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CovtestsService } from 'src/app/services/covtests.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupUploadComponent } from '../../popups/popup-upload/popup-upload.component';
 
 @Component({
   selector: 'app-edit-covtest',
@@ -18,7 +19,7 @@ export class EditCovtestComponent implements OnInit {
   @Input() schedule: Date
   fileToUpload: File;
 
-  constructor(private route: ActivatedRoute, private router: Router, private CovtestService: CovtestsService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private CovtestService: CovtestsService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getData()
@@ -71,6 +72,19 @@ export class EditCovtestComponent implements OnInit {
     this.CovtestService.uploadFile(this.fileToUpload, id).subscribe((result) => {
       console.log(result)
     })
+    this.openDialog()
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(PopupUploadComponent);
+    console.log(dialogRef)
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  Back(id: string){
+    this.router.navigate([`/covtestDetail/${id}`])
   }
 
 }

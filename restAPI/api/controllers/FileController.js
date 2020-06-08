@@ -35,9 +35,10 @@ FileController.download = async (req, res) => {
         if (result.resultFile === null || result.resultFile === []) {
             return res.status(404).send(`<h1>NO FILES UPLOADED</h1>`);
         } else {
-            const file = path.join(__dirname, '../../public', result.resultFile)
-            console.log("ficheiro ->" + file)
-            res.download(file);
+            //const file = path.join(__dirname, '../../public', result.resultFile)
+            //console.log(file)
+            res.send(`{"url": "http://localhost:3000${result.resultFile}"}`);
+            //res.download(file)
             console.log("File downloaded")
         }
     } catch (err) {

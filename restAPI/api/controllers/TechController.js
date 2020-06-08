@@ -1,8 +1,20 @@
 var mongoose = require("mongoose");
 const User = require('../models/User')
 const bcrypt = require('bcrypt');
+const nodemailer = require("nodemailer");
 
 var TechController = {};
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    secure: false,
+    auth: {
+        user: 'trabalhopaw@gmail.com',
+        pass: 'trabalho123456'
+    }, tls: {
+        rejectUnauthorized: false
+    }
+});
 
 //create tech user (admin)
 TechController.createUserTech = async (req, res) => {
@@ -22,11 +34,30 @@ TechController.createUserTech = async (req, res) => {
                 role: "TECH"
             }
             const result = await User.create(newData);
+
+            var mailOptions = {
+                to: req.body.email,
+                subject: 'Conta de Técnico',
+                text: `Credenciais de sessão:
+                        email: ${req.body.email}
+                        password: ${ req.body.password}`
+            };
+
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                }
+            });
+
             res.json(result);
         } else {
             console.log("User is technical by default");
             res.send()
         }
+
+
     } catch (err) {
         console.log(err)
     }

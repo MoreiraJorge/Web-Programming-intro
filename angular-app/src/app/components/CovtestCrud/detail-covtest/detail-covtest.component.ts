@@ -24,12 +24,18 @@ export class DetailCovtestComponent implements OnInit {
     });
   }
 
-  Back(){
+  Back() {
     this.router.navigate(['/techDashboard'])
   }
 
-  edit( id: string){
-    this.router.navigate([`/covtestEdit/${ id }`])
+  edit(id: string) {
+    this.router.navigate([`/covtestEdit/${id}`])
+  }
+
+  download(id: string) {
+    this.CovtestService.downloadFile(id).subscribe((data) => {
+      window.open(data.url, '_blank');
+    })
   }
 
 }

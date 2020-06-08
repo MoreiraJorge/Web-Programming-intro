@@ -14,6 +14,8 @@ import { AddUserComponent } from './components/UserCrud/add-user/add-user.compon
 import { TechDashboardComponent } from './components/Dashboards/tech-dashboard/tech-dashboard.component';
 import { DetailCovtestComponent } from './components/CovtestCrud/detail-covtest/detail-covtest.component';
 import { EditCovtestComponent } from './components/CovtestCrud/edit-covtest/edit-covtest.component';
+import { ExtDashboardComponent } from './components/Dashboards/ext-dashboard/ext-dashboard.component';
+import { AddCovtestComponent } from './components/CovtestCrud/add-covtest/add-covtest.component';
 
 
 const routes: Routes = [{
@@ -33,6 +35,16 @@ const routes: Routes = [{
   path: 'techDashboard',
   component: TechDashboardComponent,
   canActivate: [AuthGuardService]
+},
+{
+  path: 'extDashboard',
+  component: ExtDashboardComponent,
+  canActivate: [AuthGuardService],
+  children: [{
+    path: 'addTest',
+    component: AddCovtestComponent,
+    canActivate: [AuthGuardService],
+  }]
 },
 {
   path: 'covtestList',
@@ -57,7 +69,7 @@ const routes: Routes = [{
   path: 'profile/:id',
   component: UserProfileComponent,
   canActivate: [AuthGuardService]
-}, 
+},
 {
   path: 'edit/:id',
   component: EditUserComponent,

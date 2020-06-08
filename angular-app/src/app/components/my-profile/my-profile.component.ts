@@ -3,8 +3,8 @@ import { User } from 'src/app/models/user';
 import { SessionService } from 'src/app/services/session.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service'
-import {MatDialog} from '@angular/material/dialog';
-import { PopupPassComponent } from '../popup-pass/popup-pass.component';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupPassComponent } from '../popups/popup-pass/popup-pass.component';
 
 @Component({
   selector: 'app-my-profile',
@@ -16,7 +16,7 @@ export class MyProfileComponent implements OnInit {
   user: User
   password: string
 
-  constructor(public sessionService: SessionService, public adminService: AdminService, private route: ActivatedRoute, 
+  constructor(public sessionService: SessionService, public adminService: AdminService, private route: ActivatedRoute,
     private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -31,13 +31,13 @@ export class MyProfileComponent implements OnInit {
   }
 
   changePass() {
-    this.adminService.changeAdminPass(this.user.idCard, JSON.parse(`{ "password":"${ this.password }"}`)).subscribe((result) => {
+    this.adminService.changeAdminPass(this.user.idCard, JSON.parse(`{ "password":"${this.password}"}`)).subscribe((result) => {
       this.router.navigate(['/profile']);
 
-      if(this.password){
+      if (this.password) {
         this.openDialog()
       }
-      
+
     }, (err) => {
       console.log(err);
     })

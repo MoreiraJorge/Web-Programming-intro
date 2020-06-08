@@ -13,6 +13,7 @@ const User = require('./api/models/User')
 const bcrypt = require('bcrypt');
 var fs = require('fs');
 
+
 let publicPath = 'public'
 
 if (!fs.existsSync(publicPath)) {

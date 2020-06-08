@@ -1,1 +1,31 @@
-<p>add-covtest works!</p>
+<div>
+    <h2>Create Test</h2>
+    <div>
+
+        <p>Escreva um descrição relativamente a este pedido de teste, por exemplo sintomas:</p>
+        <textarea [(ngModel)]="testData.description"></textarea>
+
+        <p>Caso tenha, indique o seu historico de doenças:</p>
+        <textarea [(ngModel)]="testData.userHistory"></textarea>
+
+        <label for="riskJob">Faz parte de um Grupo de risco?:</label>
+        <select id="riskJob" [(ngModel)]="testData.riskGroup">
+            <option value="yes">Sim</option>
+            <option value="no">Não</option>
+        </select>
+
+        <label for="riskJob">Faz parte de um Trabalho de risco?:</label>
+        <select id="riskJob" [(ngModel)]="testData.riskJob">
+            <option value="yes">Sim</option>
+            <option value="no">Não</option>
+        </select>
+
+        <label for="saude24">Foi encaminhado pela saude 24?</label>
+        <select id="saude24" [(ngModel)]="testData.saude24">
+            <option value="true">Sim</option>
+            <option value="false">Não</option>
+        </select>
+
+    </div>
+    <button (click)="createTest()">Save</button>
+</div>

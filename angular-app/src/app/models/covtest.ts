@@ -16,8 +16,8 @@ export class Covtest {
     user: User;
     updated_at: string;
 
-    constructor(description: string, userHistory: string, userStatus: string, riskGroup: string, riskJob: string, testStatus: string, testResult: string,
-        resultFile: string, schedule: string, saude24: boolean) {
+    constructor(description: string, userHistory: string, riskGroup: string, riskJob: string, saude24: boolean, userStatus?: string, testStatus?: string, testResult?: string,
+        resultFile?: string, schedule?: string) {
 
         this.description = description;
         this.userHistory = userHistory;
@@ -28,7 +28,8 @@ export class Covtest {
         this.testResult = testResult;
         this.resultFile = resultFile;
         this.schedule = schedule;
-        this.saude24 = saude24
+        this.saude24 = saude24;
+        this.userStatus = userStatus;
 
     }
 }

@@ -3,6 +3,18 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt');
 const { parse } = require('url')
 const { parse: parseQuery } = require('querystring')
+const nodemailer = require("nodemailer");
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    secure: false,
+    auth: {
+        user: 'trabalhopaw@gmail.com',
+        pass: 'trabalho123456'
+    }, tls: {
+        rejectUnauthorized: false
+    }
+});
 
 
 var UserController = {};
@@ -35,7 +47,7 @@ UserController.listExtUsers = async (req, res) => {
 UserController.findOneUser = async (req, res) => {
     try {
         const result = await User.findOne({ idCard: req.params.id, role: "EXT" }).
-            populate('covtest', 'code')
+            populate('covtest')
         res.json({ ...result.toJSON(), password: undefined });
     } catch (err) {
         console.log(err)
@@ -55,6 +67,23 @@ UserController.createUser = async (req, res) => {
                 password: encryptedPass
             }
             const result = await User.create(newData);
+
+            var mailOptions = {
+                to: req.body.email,
+                subject: 'Conta de utilizador',
+                text: `Credenciais de sessão:
+                        email: ${req.body.email}
+                        password: ${ req.body.password}`
+            };
+
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                }
+            });
+
             res.json(result);
         } else {
             console.log("User is external by default");

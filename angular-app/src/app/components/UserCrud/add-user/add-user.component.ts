@@ -11,6 +11,7 @@ import { ExtUserService } from 'src/app/services/ext-user.service';
   styleUrls: ['./add-user.component.sass']
 })
 export class AddUserComponent implements OnInit {
+  
   name: string;
   address: string;
   age: number;

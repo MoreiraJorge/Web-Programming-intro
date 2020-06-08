@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
 const Covtest = require('../models/Covtest')
 const User = require('../models/User')
+const nodemailer = require("nodemailer");
 
 var uniqid = require('uniqid');
 
@@ -29,6 +29,7 @@ CovtestController.createTest = async (req, res) => {
             code: randomCode,
             //associate the user that created the test
             user: targetUser,
+            userStatus: "suspeito",
             testStatus: "pending",
             testResult:"awaiting result"
         }

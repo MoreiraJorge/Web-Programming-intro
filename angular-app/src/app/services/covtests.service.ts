@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-
 import { environment } from './../../environments/environment';
 import { Covtest } from '../models/covtest';
 
@@ -58,16 +57,14 @@ export class CovtestsService {
     return this.http.put<Covtest>(`${API_URL}/covtests/update/testResult/${id}`, testResult, httpOptions);
   }
 
-  //
   uploadFile(fileToUpload: File, id: string): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    return this.http.post(`http://localhost:3000/api/covtests/upload/${id}`, formData, httpFileOptions)
+    return this.http.post(`${API_URL}/covtests/upload/${id}`, formData, httpFileOptions)
   }
 
-  //
-  downloadFile(id: string): Observable<File> {
-    return this.http.get<File>(`${API_URL}/covtests/download/${id}`, httpOptions)
+  downloadFile(id: string): Observable<any> {
+    return this.http.get(`${API_URL}/covtests/download/${id}`, httpOptions)
   }
 
   listPending(): Observable<Covtest[]> {
@@ -93,4 +90,9 @@ export class CovtestsService {
   getTestByID(id: string): Observable<Covtest> {
     return this.http.get<Covtest>(`${API_URL}/covtests/${id}`, httpOptions)
   }
+
+  createTest(covtest: Covtest, id: string): Observable<Covtest>{
+    return this.http.post<Covtest>(`${API_URL}/covtests/create/${id}`, JSON.stringify(covtest), httpOptions)
+  }
+  
 }
