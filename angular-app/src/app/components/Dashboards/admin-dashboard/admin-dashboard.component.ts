@@ -136,7 +136,6 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   chartDateFilter() {
-    //ir buscar ao array o indice da firstDate
     var val = this.firstDate
     if (val == undefined) {
       val = this.array[0].date
@@ -146,7 +145,6 @@ export class AdminDashboardComponent implements OnInit {
       return item.date === val
     });
 
-    //ir buscar ao array o indice da secondDate
     var val2 = this.secondDate
     if (val2 == undefined) {
       val2 = this.array[this.array.length - 1].date
@@ -204,4 +202,5 @@ export class AdminDashboardComponent implements OnInit {
   reset() {
     this.createChart()
   }
+
 }
