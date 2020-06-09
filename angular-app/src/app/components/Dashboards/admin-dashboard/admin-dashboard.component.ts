@@ -122,7 +122,7 @@ export class AdminDashboardComponent implements OnInit {
     this.router.navigate(['/usrMng']);
   }
 
-  logout(event): void {
+  logout(): void {
     event.preventDefault()
     this.errors = ''
     this.sessionService.logout()

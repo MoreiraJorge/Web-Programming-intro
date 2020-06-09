@@ -1,16 +1,23 @@
 <mat-card class="top">
-    <button mat-raised-button color="primary" (click)="logout($event)">Logout</button>
+    <label id="title">Painel de Administrador</label>
+    <div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="TechManagement()">Gestão de Técnicos
+            </button>
+            <button mat-menu-item (click)="seeProfile()">Perfil do Admin
+            </button>
+            <button mat-menu-item (click)="logout()">Logout
+            </button>
+        </mat-menu>
+    </div>
 </mat-card>
-
-<div *ngIf="user">
-    <h1>Hello {{user.name}}</h1>
-</div>
-
-<button (click)="seeProfile()">Profile</button>
 
 <div name="rangeForm">
     <label>First Date:
-        <input type="date" [(ngModel)]="firstDate" placeholder="yyyy-MM-dd"/>
+        <input type="date" [(ngModel)]="firstDate" placeholder="yyyy-MM-dd" />
     </label><br>
     <label>second Date:
         <input type="date" [(ngModel)]="secondDate" placeholder="yyyy-MM-dd" />
@@ -36,9 +43,7 @@
 
 <form name="nTestsPerson">
     <label for="ntests">Pesquisar nº testes por ID de cliente: </label>
-    <input [(ngModel)]="userCode" id="ntests" name="ntests"/>
+    <input [(ngModel)]="userCode" id="ntests" name="ntests" />
     <button type="submit" form="dateForm" value="Submit" (click)="nTestsOfPerson(userCode)">Find</button>
 </form>
 <p>Nº de testes de {{ userCode }} : {{ nTestsUser }}</p>
-
-<button (click)="TechManagement()">Gestão de Técnicos</button>

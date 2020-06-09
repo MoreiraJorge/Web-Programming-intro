@@ -18,6 +18,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 import { PopupPassComponent } from './components/popups/popup-pass/popup-pass.component';
 import { ListCovtestComponent } from './components/CovtestCrud/list-covtest/list-covtest.component';
@@ -63,7 +65,9 @@ import { PopupUploadComponent } from './components/popups/popup-upload/popup-upl
     MatButtonModule,
     MatDialogModule,
     MatGridListModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
