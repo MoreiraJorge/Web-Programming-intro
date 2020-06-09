@@ -78,4 +78,14 @@ export class EditUserComponent implements OnInit {
     }
   }
 
+  TestDetails(id: string) {
+    this.router.navigate([`/covtestDetail/${id}`])
+  }
+
+  RemoveTest(covtest:string, id:string){
+    this.ExtUserService.removeTestFromList(covtest, id).subscribe((result)=>{
+      this.ExtUserData.covtest = result.covtest
+    })
+  }
+
 }

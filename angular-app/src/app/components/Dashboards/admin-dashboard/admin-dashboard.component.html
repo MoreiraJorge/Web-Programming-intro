@@ -1,13 +1,29 @@
 <mat-card class="top">
     <button mat-raised-button color="primary" (click)="logout($event)">Logout</button>
 </mat-card>
+
 <div *ngIf="user">
     <h1>Hello {{user.name}}</h1>
 </div>
+
 <button (click)="seeProfile()">Profile</button>
+
+<div name="rangeForm">
+    <label>First Date:
+        <input type="date" [(ngModel)]="firstDate" placeholder="yyyy-MM-dd"/>
+    </label><br>
+    <label>second Date:
+        <input type="date" [(ngModel)]="secondDate" placeholder="yyyy-MM-dd" />
+    </label><br>
+</div>
+
+<button (click)="chartDateFilter()">Find</button>
+<button (click)="reset()">Reset Graphic</button>
+
 <div id="graphic">
     <canvas id="canvas"></canvas>
 </div>
+
 <p>Numero Total de testes: {{ nTests }}</p>
 <p>Numero Total de infetados: {{ nInfected }}</p>
 
@@ -17,4 +33,12 @@
     <button type="submit" form="dateForm" value="Submit" (click)="countTestsOnDate()">Find</button>
 </form>
 <p>Nº de testes na data {{ myDate | date :  "dd/MM/y"}} : {{ dateTests }}</p>
+
+<form name="nTestsPerson">
+    <label for="ntests">Pesquisar nº testes por ID de cliente: </label>
+    <input [(ngModel)]="userCode" id="ntests" name="ntests"/>
+    <button type="submit" form="dateForm" value="Submit" (click)="nTestsOfPerson(userCode)">Find</button>
+</form>
+<p>Nº de testes de {{ userCode }} : {{ nTestsUser }}</p>
+
 <button (click)="TechManagement()">Gestão de Técnicos</button>

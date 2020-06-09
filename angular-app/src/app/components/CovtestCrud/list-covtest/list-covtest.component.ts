@@ -17,6 +17,10 @@ export class ListCovtestComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private CovtestService: CovtestsService) { }
 
   ngOnInit(): void {
+    this.getTotalTests()
+  }
+
+  getTotalTests(){
     this.CovtestService.getTests().subscribe((covtests) => {
       this.covtests = covtests;
       console.log(JSON.stringify(covtests))

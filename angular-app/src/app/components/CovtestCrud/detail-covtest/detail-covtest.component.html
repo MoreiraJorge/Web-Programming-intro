@@ -15,8 +15,10 @@
         <p>user: {{ covtest.user.name }}</p>
     </div>
 
-
-    <button (click)="edit(covtest.code)">Edit</button>
+    <div *ngIf="role=='TECH'">
+        <button (click)="edit(covtest.code)">Edit</button>
+    </div>
+    
 
     <button (click)="Back()">Back to Dashboard</button>
 

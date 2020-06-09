@@ -17,14 +17,22 @@ export class AdminDashboardComponent implements OnInit {
   @Input()
   user: User
   users: User[]
-  
+
   nTests: number
   nInfected: number
+
+  userCode: string
+  nTestsUser: number
 
   myDate: Date
   dateTests: number
 
+  firstDate: string
+  secondDate: string
+
   errors: String
+  mychart;
+  array;
 
   constructor(private route: ActivatedRoute, private router: Router, private sessionService: SessionService, private AdminService: AdminService, private CovtestService: CovtestsService) { }
 
@@ -33,10 +41,11 @@ export class AdminDashboardComponent implements OnInit {
     this.countTests()
     this.countInfected()
   }
-  
-  createChart(){
+
+  createChart() {
     //create bar chart for tests per day 
     this.AdminService.dayTests().subscribe(res => {
+      this.array = res.values
       var ctx = document.getElementById('canvas');
 
       let dates = res['values'].map(res => res.date)
@@ -53,7 +62,7 @@ export class AdminDashboardComponent implements OnInit {
         }]
       }
 
-      var mychart = new Chart(ctx, {
+      this.mychart = new Chart(ctx, {
         type: 'bar',
         data: barChartData,
         options: {
@@ -67,39 +76,43 @@ export class AdminDashboardComponent implements OnInit {
           },
           scales: {
             yAxes: [{
-                ticks: {
-                  beginAtZero: true,
-                    stepSize: 1
-                }
+              ticks: {
+                beginAtZero: true,
+                stepSize: 1
+              }
             }]
-        }
+          }
         }
       });
 
-      mychart.canvas.parentNode.style.height = '200px';
-      mychart.canvas.parentNode.style.width = '400px';
+      this.mychart.canvas.parentNode.style.height = '200px';
+      this.mychart.canvas.parentNode.style.width = '400px';
     })//end of barchart config
   }
 
-  countTests(){
+  result() {
+    this.createChart()
+  }
+
+  countTests() {
     this.CovtestService.countTotalTests().subscribe((nTests) => {
       this.nTests = nTests;
     }, (err) => { console.log(err) })
   }
 
-  countTestsOnDate(){
-    this.CovtestService.countDayTests(this.myDate).subscribe((dateTests)=>{
+  countTestsOnDate() {
+    this.CovtestService.countDayTests(this.myDate).subscribe((dateTests) => {
       this.dateTests = dateTests;
     }, (err) => { console.log(err) })
   }
 
-  countInfected(){
-    this.CovtestService.countTotalInfected().subscribe((nInfected)=>{
+  countInfected() {
+    this.CovtestService.countTotalInfected().subscribe((nInfected) => {
       this.nInfected = nInfected;
     }, (err) => { console.log(err) })
   }
 
-  
+
   seeProfile() {
     console.log(this.user)
     this.router.navigate(['/myProfile']);
@@ -116,4 +129,79 @@ export class AdminDashboardComponent implements OnInit {
     this.router.navigate(['/login'])
   }
 
+  nTestsOfPerson(id: string) {
+    this.CovtestService.nTestPerExtID(id).subscribe((result) => {
+      this.nTestsUser = result
+    })
+  }
+
+  chartDateFilter() {
+    //ir buscar ao array o indice da firstDate
+    var val = this.firstDate
+    if (val == undefined) {
+      val = this.array[0].date
+    }
+
+    var index1 = this.array.findIndex(function (item, i) {
+      return item.date === val
+    });
+
+    //ir buscar ao array o indice da secondDate
+    var val2 = this.secondDate
+    if (val2 == undefined) {
+      val2 = this.array[this.array.length - 1].date
+    }
+
+    var index2 = this.array.findIndex(function (item, i) {
+      return item.date === val2
+    });
+
+    if (index1 == -1 || index2 == -1) {
+      console.log('data inválida')
+      return;
+    }
+
+
+    if (index1 > index2) {
+      let result = this.array.slice(parseInt(index2), parseInt(index1) + 1);
+      let dates = result.map(res => res.date)
+      let values = result.map(res => res.totalEvents)
+
+      var newData = {
+        labels: dates,
+        datasets: [{
+          label: 'Nº de testes',
+          barPercentage: 0.5,
+          data: values,
+          backgroundColor:
+            'rgba(255, 99, 132, 0.2)'
+        }]
+      }
+
+      this.mychart.data = newData
+
+    } else {
+      let result = this.array.slice(parseInt(index1), parseInt(index2) + 1);
+      let dates = result.map(res => res.date)
+      let values = result.map(res => res.totalEvents)
+
+      var newData = {
+        labels: dates,
+        datasets: [{
+          label: 'Nº de testes',
+          barPercentage: 0.5,
+          data: values,
+          backgroundColor:
+            'rgba(255, 99, 132, 0.2)'
+        }]
+      }
+
+      this.mychart.data = newData
+    }
+    this.mychart.update();
+  }
+
+  reset() {
+    this.createChart()
+  }
 }

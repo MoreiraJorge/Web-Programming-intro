@@ -107,7 +107,7 @@ router.get('/nTestsPerson/:id', authorize(['ADM']), function (req, res) {
     Covtest.nTestsPerson(req, res)
 })
 
-router.get('/:id', authorize(['TECH']), function (req, res) {
+router.get('/:id', authorize(['TECH', 'EXT']), function (req, res) {
     Covtest.getTestByID(req, res)
 })
 

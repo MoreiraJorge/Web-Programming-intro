@@ -62,7 +62,8 @@ const routes: Routes = [{
   canActivate: [AuthGuardService],
   children: [{
     path: 'addUsr',
-    component: AddUserComponent
+    component: AddUserComponent,
+    canActivate: [AuthGuardService]
   }]
 },
 {

@@ -4,6 +4,17 @@ const nodemailer = require("nodemailer");
 
 var uniqid = require('uniqid');
 
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    secure: false,
+    auth: {
+        user: 'trabalhopaw@gmail.com',
+        pass: 'trabalho123456'
+    }, tls: {
+        rejectUnauthorized: false
+    }
+});
+
 var CovtestController = {};
 
 //list tests
@@ -162,8 +173,22 @@ CovtestController.schedule = async (req, res) => {
         }
 
         await Covtest.findOneAndUpdate({ code: req.params.id }, newData)
+        const result = await Covtest.findOne({ code: req.params.id }).populate('user')
 
-        const result = await Covtest.find({ code: req.params.id })
+        var mailOptions = {
+            to: result.user.email,
+            subject: 'Agendamento de teste COVID-19',
+            text: `O seu teste foi agendado para: ${ req.body.schedule }`
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+
         res.json(result)
     } catch (err) {
         console.log(err)

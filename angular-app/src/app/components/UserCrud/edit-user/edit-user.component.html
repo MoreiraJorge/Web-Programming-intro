@@ -57,6 +57,18 @@
             <label for="nonInfected">Healthy</label><br>
         </div>
 
+        <div class="list">
+            <mat-grid-list cols="4" rowHeight="50px">
+                <ng-container *ngFor="let covtest of ExtUserData.covtest; index as i">
+                    <mat-grid-tile>{{covtest.code}}</mat-grid-tile>
+                    <mat-grid-tile><button (click)="TestDetails(covtest.code)">Test Details</button></mat-grid-tile>
+                    <mat-grid-tile><button (click)="RemoveTest(covtest._id, ExtUserData.idCard)">Remove Test from
+                            user</button></mat-grid-tile>
+                    <mat-grid-tile type="date">{{ covtest.schedule | date :  "dd/MM/y"}}</mat-grid-tile>
+                </ng-container>
+            </mat-grid-list>
+        </div>
+
     </div>
 
     <button (click)="update()">Update changes</button>
