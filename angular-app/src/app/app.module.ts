@@ -51,7 +51,7 @@ import { PopupUploadComponent } from './components/popups/popup-upload/popup-upl
     EditUserComponent,
     UserProfileComponent,
     MyProfileComponent,
-    PopupUploadComponent,
+    PopupUploadComponent
   ],
   imports: [
     BrowserModule,
