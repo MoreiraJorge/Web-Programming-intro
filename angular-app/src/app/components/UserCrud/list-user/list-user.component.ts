@@ -49,7 +49,7 @@ export class ListUserComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['/usrMng/addUsr']);
+    this.router.navigate(['/addUsr']);
   }
 
   userDetails(id: string) {

@@ -59,12 +59,12 @@ const routes: Routes = [{
 {
   path: 'usrMng',
   component: ListUserComponent,
-  canActivate: [AuthGuardService],
-  children: [{
-    path: 'addUsr',
-    component: AddUserComponent,
-    canActivate: [AuthGuardService]
-  }]
+  canActivate: [AuthGuardService]
+},
+{
+  path: 'addUsr',
+  component: AddUserComponent,
+  canActivate: [AuthGuardService]
 },
 {
   path: 'profile/:id',

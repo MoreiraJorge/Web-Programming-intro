@@ -106,7 +106,7 @@ app
 	//swagger doc setup
 	.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
-	.use('/api', cors(corsOptions), apiRouter)
+	.use('/api', cors(), apiRouter)
 
 	.listen(PORT, () => {
 		console.log(`API started on http://localhost:${PORT}/api`)
