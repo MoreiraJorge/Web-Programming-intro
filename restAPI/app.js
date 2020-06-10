@@ -76,7 +76,7 @@ mongoose
 
 // Set API Router at /api endpoint and enable cors
 // If you do not use angular proxy
-const whitelist = ['http://localhost:4200', 'http://localhost:3000', 'http://localhost', 'https://moreirajorge.github.io']
+const whitelist = ['http://localhost:4200', 'http://localhost:3000', 'http://localhost', 'https://moreirajorge.github.io', 'https://covid-rest-paw2020.herokuapp.com']
 const corsOptions = {
 	credentials: true,
 	origin: function (origin, callback) {
