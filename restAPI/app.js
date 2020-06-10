@@ -37,7 +37,7 @@ mongoose.Promise = global.Promise
 //connect to atlas, but if atlas is offline, create local DB
 mongoose
 	.connect(
-		`mongodb+srv://DBuser1:${ ATLAS_PASS }@cluster0-91k9g.mongodb.net/test?retryWrites=true&w=majority` || 
+		//`mongodb+srv://DBuser1:${ ATLAS_PASS }@cluster0-91k9g.mongodb.net/test?retryWrites=true&w=majority` || 
 		`mongodb://${MONGO_DB_HOST}:${MONGO_DB_PORT}/${MONGO_DB_DATABASE_NAME}`,
 		{
 			useNewUrlParser: true,
@@ -76,7 +76,7 @@ mongoose
 
 // Set API Router at /api endpoint and enable cors
 // If you do not use angular proxy
-const whitelist = ['http://localhost:4200', 'http://localhost:3000', 'http://localhost', 'https://moreirajorge.github.io', 'https://covid-rest-paw2020.herokuapp.com']
+const whitelist = ['http://localhost:4200', 'http://localhost:3000', 'http://localhost', 'https://moreirajorge.github.io']
 const corsOptions = {
 	credentials: true,
 	origin: function (origin, callback) {
@@ -106,7 +106,7 @@ app
 	//swagger doc setup
 	.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
-	.use('/api', cors(), apiRouter)
+	.use('/api', cors(corsOptions), apiRouter)
 
 	.listen(PORT, () => {
 		console.log(`API started on http://localhost:${PORT}/api`)
