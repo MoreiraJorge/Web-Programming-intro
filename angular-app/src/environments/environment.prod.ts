@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://covid-rest-paw2020.herokuapp.com/api'
+  apiUrl: 'https://paw2020-cov.herokuapp.com/api'
 };

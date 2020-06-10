@@ -25,7 +25,6 @@ const apiRouter = require('./api')
 const app = express()
 
 // Read values from environment variables
-const PORT = process.env.APP_PORT
 const MONGO_DB_HOST = process.env.MONGO_DB_HOST
 const MONGO_DB_PORT = process.env.MONGO_DB_PORT
 const MONGO_DB_DATABASE_NAME = process.env.MONGO_DB_DATABASE_NAME
@@ -37,7 +36,7 @@ mongoose.Promise = global.Promise
 //connect to atlas, but if atlas is offline, create local DB
 mongoose
 	.connect(
-		`mongodb+srv://DBuser1:${ ATLAS_PASS }@cluster0-91k9g.mongodb.net/test?retryWrites=true&w=majority` || 
+		`mongodb+srv://DBuser1:${ATLAS_PASS}@cluster0-91k9g.mongodb.net/test?retryWrites=true&w=majority` ||
 		`mongodb://${MONGO_DB_HOST}:${MONGO_DB_PORT}/${MONGO_DB_DATABASE_NAME}`,
 		{
 			useNewUrlParser: true,
@@ -108,7 +107,7 @@ app
 
 	.use('/api', cors(corsOptions), apiRouter)
 
-	.listen(PORT, () => {
-		console.log(`API started on http://localhost:${PORT}/api`)
-		console.log(`API started on http://localhost:${PORT}/api-docs`)
+	.listen(process.env.PORT || 5000, () => {
+		console.log(`API started on http://localhost:${process.env.PORT}/api`)
+		console.log(`API started on http://localhost:${process.env.PORT}/api-docs`)
 	})
