@@ -24,12 +24,25 @@ jobs:
         npm install -g @angular/cli
         npm install
         ng build --prod --base-href="/paw2020/"
-    - name: Deploy
+    - name: Deploy Pages
       uses: JamesIves/github-pages-deploy-action@releases/v2
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BASE_BRANCH: master
         BRANCH: gh-pages
         FOLDER: angular-app/dist/angular-app
+  deploy:
+      runs-on: ubuntu-latest
+      name: Deploy Heroku
+      steps: 
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            persist-credentials: false
+        - name: Add remote origin
+          run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+        - name: Deploy backend to heroku
+          run: git push --force heroku git subtree split --prefix restAPI HEAD:master   
+          #run: git subtree push --prefix RestAPI heroku master
         
 
