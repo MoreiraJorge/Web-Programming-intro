@@ -1,6 +1,6 @@
 module.exports = {
     apps : [{
-      name: "matched-betting-tracker",
+      name: "restAPI",
       script: "./app.js",
       instances: "max",
       env: {
