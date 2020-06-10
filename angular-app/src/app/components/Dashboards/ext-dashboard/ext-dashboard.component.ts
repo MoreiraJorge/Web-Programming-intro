@@ -50,7 +50,7 @@ export class ExtDashboardComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate([`/extDashboard/addTest`]);
+    this.router.navigate([`/addTest`]);
   }
 
   TestDetails(id: string) {

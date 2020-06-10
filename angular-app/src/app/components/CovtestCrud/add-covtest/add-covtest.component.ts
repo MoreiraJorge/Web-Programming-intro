@@ -22,7 +22,7 @@ export class AddCovtestComponent implements OnInit {
 
   @Input() testData: Covtest = new Covtest(this.description, this.userHistory, this.riskGroup, this.riskJob, this.saude24);
 
-  constructor(private route: ActivatedRoute, private CovtestService: CovtestsService, private sessionService: SessionService) { }
+  constructor(private router: Router, private CovtestService: CovtestsService, private sessionService: SessionService) { }
 
   ngOnInit(): void {
     this.getMe()
@@ -36,7 +36,7 @@ export class AddCovtestComponent implements OnInit {
 
   createTest() {
     this.CovtestService.createTest(this.testData, this.user._id).subscribe((result) => {
-      window.location.reload()
+      this.router.navigate(['/extDashboard'])
     })
   }
 

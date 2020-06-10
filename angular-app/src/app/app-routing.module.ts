@@ -40,11 +40,11 @@ const routes: Routes = [{
   path: 'extDashboard',
   component: ExtDashboardComponent,
   canActivate: [AuthGuardService],
-  children: [{
-    path: 'addTest',
-    component: AddCovtestComponent,
-    canActivate: [AuthGuardService],
-  }]
+},
+{
+  path: 'addTest',
+  component: AddCovtestComponent,
+  canActivate: [AuthGuardService],
 },
 {
   path: 'covtestList',

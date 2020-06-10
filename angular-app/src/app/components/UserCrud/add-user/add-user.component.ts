@@ -11,7 +11,7 @@ import { ExtUserService } from 'src/app/services/ext-user.service';
   styleUrls: ['./add-user.component.sass']
 })
 export class AddUserComponent implements OnInit {
-  
+
   name: string;
   address: string;
   age: number;
@@ -35,7 +35,7 @@ export class AddUserComponent implements OnInit {
 
   getMe() {
     this.sessionService.me().subscribe((data: User) => {
-      if(data === null){
+      if (data === null) {
         this.role = ''
       } else {
         this.role = data.role
@@ -46,16 +46,14 @@ export class AddUserComponent implements OnInit {
   addUser() {
     if (this.role == 'ADM') {
       this.TechUserService.addTech(this.userData).subscribe((result: User) => {
-        console.log(result);
-        window.location.reload();
+        this.router.navigate(['/usrMng'])
       }, (err) => {
         console.log(err);
       });
 
     } else if (this.role == 'TECH') {
       this.ExtUserService.addExt(this.userData).subscribe((result: User) => {
-        console.log(result);
-        window.location.reload();
+        this.router.navigate(['/usrMng'])
       }, (err) => {
         console.log(err);
       });
