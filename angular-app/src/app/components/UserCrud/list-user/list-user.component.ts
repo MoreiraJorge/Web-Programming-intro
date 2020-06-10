@@ -18,7 +18,6 @@ export class ListUserComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router,
     public sessionService: SessionService,
     private TechUserService: TechUserService, private ExtUserService: ExtUserService) {
-      this.getUsers()
   }
 
   ngOnInit(): void {
