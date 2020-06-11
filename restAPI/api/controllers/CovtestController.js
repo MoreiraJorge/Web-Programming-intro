@@ -42,7 +42,8 @@ CovtestController.createTest = async (req, res) => {
             user: targetUser,
             userStatus: "suspeito",
             testStatus: "pending",
-            testResult:"awaiting result"
+            testResult:"awaiting result",
+            schedule: undefined
         }
 
         //create test
@@ -189,16 +190,6 @@ CovtestController.schedule = async (req, res) => {
             }
         });
 
-        res.json(result)
-    } catch (err) {
-        console.log(err)
-    }
-}
-
-//number tests in a day
-CovtestController.nTestsDay = async (req, res) => {
-    try {
-        const result = await Covtest.countDocuments({ schedule: req.params.date })
         res.json(result)
     } catch (err) {
         console.log(err)

@@ -17,11 +17,13 @@ export class ExtDashboardComponent implements OnInit {
 
   @Input()
   user: User
+  name:string
 
   id: string
   errors: string
 
   covtests: Covtest[]
+  displayedColumns: string[] = ['ID', 'Detalhes', 'Data', 'Resultado'];
 
   constructor(private route: ActivatedRoute, private router: Router, private sessionService: SessionService, private CovtestService: CovtestsService) { }
 
@@ -33,6 +35,7 @@ export class ExtDashboardComponent implements OnInit {
   getMe() {
     this.sessionService.me().subscribe((data: User) => {
       if (data) {
+        this.name = data.name
         this.id = data.idCard;
         //console.log(this.id)
       }

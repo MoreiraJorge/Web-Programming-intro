@@ -1,26 +1,73 @@
-<form id="query">
+<div id="card">
 
-    <mat-form-field appearance="fill">
-        <mat-label>Obter testes por ID de utilizador</mat-label>
-        <input matInput [(ngModel)]="userid" name="userid" placeholder="userid" required>
-    </mat-form-field>
+    <mat-card id="ListForm">
+        <form id="query">
+            <button mat-raised-button (click)="getPositiveTests()">Obter testes positivos</button><br>
+            <button mat-raised-button (click)="getNegativeTests()">Obter testes negativos</button><br>
+            <button mat-raised-button (click)="getPendingTests()">Testes com resultado em espera</button><br>
+            <button mat-raised-button (click)="getTotalTests()">Obter testes</button><br>
+        </form>
+    </mat-card>
 
-    <button type="submit" form="query" value="Submit" (click)="getUserTests()">Submit</button><br>
+    <mat-card class="listCard">
+        <mat-card-title>
+            Lista de Testes
+        </mat-card-title>
 
-    <button (click)="getPositiveTests()">Obter testes positivos</button><br>
-    <button (click)="getNegativeTests()">Obter testes negativos</button><br>
-    <button (click)="getPendingTests()">Obter testes em espera</button><br>
-    <button (click)="getTotalTests()">Obter testes</button><br>
+        <div id="tableDiv">
+            <table mat-table [dataSource]="covtests" class="mat-elevation-z8">
 
+                <ng-container id="column" matColumnDef="ID">
+                    <th mat-header-cell *matHeaderCellDef> ID do Teste </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.code }} </td>
+                </ng-container>
 
-</form>
+                <ng-container matColumnDef="Detalhes">
+                    <th mat-header-cell *matHeaderCellDef> Detalhes </th>
+                    <td mat-cell *matCellDef="let element"><button mat-raised-button
+                            (click)="TestDetails( element.code )">Detalhes do Teste</button>
+                    </td>
+                </ng-container>
 
-<div class="list">
-    <mat-grid-list cols="3" rowHeight="50px">
-        <ng-container *ngFor="let covtest of covtests; index as i">
-            <mat-grid-tile>{{covtest.code}}</mat-grid-tile>
-            <mat-grid-tile><button (click)="TestDetails( covtest.code )">Test Details</button></mat-grid-tile>
-            <mat-grid-tile type="date">{{ covtest.schedule | date :  "dd/MM/y"}}</mat-grid-tile>
-        </ng-container>
-    </mat-grid-list>
+                <ng-container matColumnDef="Data">
+                    <th mat-header-cell *matHeaderCellDef> Data </th>
+                    <td mat-cell *matCellDef="let element">
+                        <p type="date" *ngIf="element.schedule != 'undefined'">
+                            {{ element.schedule | date :  "dd/MM/y"}}</p>
+                        <p *ngIf="element.schedule == undefined"> Aguarda Agendamento </p>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Resultado">
+                    <th mat-header-cell *matHeaderCellDef> Resultado </th>
+                    <td mat-cell *matCellDef="let element">
+                        <p *ngIf="element.testResult == 'positive'"> Positivo </p>
+                        <p *ngIf="element.testResult == 'awaiting result'"> Aguarda Resultado </p>
+                        <p *ngIf="element.testResult == 'negative'"> Negativo </p>
+                        <p *ngIf="element.testResult == 'undefined'"> Aguarda Resultado </p>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+
+        <mat-form-field id="field" appearance="fill">
+            <mat-label id="fieldLabel">Testes por ID do User</mat-label>
+            <input matInput [(ngModel)]="userid" name="userid" placeholder="userid" required>
+        </mat-form-field>
+
+        <button id="submitB" mat-raised-button type="submit" form="query" value="Submit"
+            (click)="getUserTests()">Procurar</button>
+
+        <mat-form-field id="field2" appearance="fill">
+            <mat-label id="fieldLabel2">Obter Teste por ID</mat-label>
+            <input matInput [(ngModel)]="testId" name="testId" placeholder="testId" required>
+        </mat-form-field>
+        <button id="submitB" mat-raised-button type="submit" form="query" value="Submit"
+            (click)="getByID()">Procurar</button>
+
+    </mat-card>
+
 </div>

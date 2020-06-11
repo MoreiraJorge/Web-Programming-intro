@@ -1,6 +1,18 @@
-<div>
-    <button (click)="logout()">Logout</button>
-    <button (click)="seeProfile()">Profile</button>
-    <button (click)="ExtManagement()">Gestão de Externos</button>
-</div>
+<mat-card class="top">
+    <label id="title">Painel de Técnico</label>
+    <div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="ExtManagement()" >Gestão de Externos
+            </button>
+            <button mat-menu-item (click)="seeProfile()" >Meu Perfil
+            </button>
+            <button mat-menu-item (click)="logout()">Logout
+            </button>
+        </mat-menu>
+    </div>
+</mat-card>
+
 <app-list-covtest></app-list-covtest>

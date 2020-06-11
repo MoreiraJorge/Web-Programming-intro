@@ -20,6 +20,11 @@ router.get('/infected', authorize(['ADM']), function (req, res) {
     User.countInfected(req, res)
 })
 
+//count infected
+router.get('/healthy', authorize(['ADM']), function (req, res) {
+    User.countHealthy(req, res)
+})
+
 //get specific user by ID
 router.get('/:id', authorize(['TECH']), function (req, res) {
     User.findOneUser(req, res)

@@ -15,35 +15,78 @@
     </div>
 </mat-card>
 
-<div name="rangeForm">
-    <label>First Date:
-        <input type="date" [(ngModel)]="firstDate" placeholder="yyyy-MM-dd" />
-    </label><br>
-    <label>second Date:
-        <input type="date" [(ngModel)]="secondDate" placeholder="yyyy-MM-dd" />
-    </label><br>
+<div id="flexContainer">
+
+    <mat-card id="list">
+        <mat-card-title>
+            Lista de Clientes
+        </mat-card-title>
+        <div id="tableContainer">
+
+            <table mat-table [dataSource]="externals">
+
+                <ng-container id="column" matColumnDef="ID">
+                    <th mat-header-cell *matHeaderCellDef> ID de Utilizador </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.idCard }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Nome">
+                    <th mat-header-cell *matHeaderCellDef> Nome </th>
+                    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+
+        </div>
+    </mat-card>
+
+
+
+    <div id="container">
+        <mat-card class="graphicCard">
+            <div id="datePicker">
+
+                <label class="labels">Data de Início:
+                    <input id="firstDate" type="date" [(ngModel)]="firstDate" placeholder="yyyy-MM-dd" />
+                </label>
+
+                <label class="labels">Data de Fim:
+                    <input id="secondDate" type="date" [(ngModel)]="secondDate" placeholder="yyyy-MM-dd" />
+                </label><br>
+
+                <button id="search2" mat-raised-button (click)="chartDateFilter()">Procurar</button>
+
+            </div>
+            <div id="graphic">
+                <canvas id="canvas"></canvas>
+            </div>
+            <button mat-raised-button (click)="reset()">Repor gráfico</button>
+        </mat-card>
+
+        <mat-card id="statistcs">
+            <div>
+                <mat-card id="counter">
+                    <p>Total de testes:</p>
+                    <p>{{ nTests }}</p>
+                </mat-card>
+
+
+                <form name="nTestsPerson">
+                    <label id="dateLabel" for="ntests">Pesquisar nº testes por ID de cliente: </label>
+                    <input [(ngModel)]="userCode" id="ntests" name="ntests" />
+                </form>
+                <button id="search" mat-raised-button type="submit" form="dateForm" value="Submit"
+                    (click)="nTestsOfPerson(userCode)">Procurar</button>
+                <p>Nº de testes de {{ userCode }} : {{ nTestsUser }}</p>
+            </div>
+
+            <div id="graphic2">
+                <canvas id="canvas2"></canvas>
+            </div>
+
+        </mat-card>
+    </div>
 </div>
-
-<button (click)="chartDateFilter()">Find</button>
-<button (click)="reset()">Reset Graphic</button>
-
-<div id="graphic">
-    <canvas id="canvas"></canvas>
-</div>
-
-<p>Numero Total de testes: {{ nTests }}</p>
-<p>Numero Total de infetados: {{ nInfected }}</p>
-
-<form name="dateForm" ng-controller="DateController as dateCtrl">
-    <label for="dateInput">Pesquisar nº testes na Data: </label>
-    <input type="date" [(ngModel)]="myDate" id="dateInput" name="date" placeholder="yyyy-MM-dd" required />
-    <button type="submit" form="dateForm" value="Submit" (click)="countTestsOnDate()">Find</button>
-</form>
-<p>Nº de testes na data {{ myDate | date :  "dd/MM/y"}} : {{ dateTests }}</p>
-
-<form name="nTestsPerson">
-    <label for="ntests">Pesquisar nº testes por ID de cliente: </label>
-    <input [(ngModel)]="userCode" id="ntests" name="ntests" />
-    <button type="submit" form="dateForm" value="Submit" (click)="nTestsOfPerson(userCode)">Find</button>
-</form>
-<p>Nº de testes de {{ userCode }} : {{ nTestsUser }}</p>

@@ -925,38 +925,6 @@
                 }
             }
         },
-        "/covtests/schedCount/{date}": {
-            "get": {
-                "tags": [
-                    "Covtest"
-                ],
-                "summary": "Obter número de testes por dia | Acesso -> Admin",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "date",
-                        "description": "Data para saber o numero de testes",
-                        "schema": {
-                            "$ref": "#/definitions/Covtest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "success",
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    "400": {
-                        "description": "Failed"
-                    }
-                }
-            }
-        },
         "/covtests/nTestsPerson/{id}": {
             "get": {
                 "tags": [

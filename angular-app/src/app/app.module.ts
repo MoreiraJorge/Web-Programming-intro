@@ -20,6 +20,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
+
 
 import { PopupPassComponent } from './components/popups/popup-pass/popup-pass.component';
 import { ListCovtestComponent } from './components/CovtestCrud/list-covtest/list-covtest.component';
@@ -67,9 +71,14 @@ import { PopupUploadComponent } from './components/popups/popup-upload/popup-upl
     MatGridListModule,
     ReactiveFormsModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableModule
   ],
-  providers: [],
+
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

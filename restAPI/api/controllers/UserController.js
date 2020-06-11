@@ -163,4 +163,15 @@ UserController.countInfected = async (req, res) => {
     }
 }
 
+UserController.countHealthy= async (req, res) => {
+    try {
+
+        const list = await User.countDocuments({ role: 'EXT', infected: false })
+        res.json(list);
+
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 module.exports = UserController

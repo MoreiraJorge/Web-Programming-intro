@@ -41,12 +41,12 @@ export class CovtestsService {
     return this.http.get(`${API_URL}/covtests/count`, httpOptions)
   }
 
-  countDayTests(date: Date): Observable<any> {
-    return this.http.get(`${API_URL}/covtests/schedCount/${date}`, httpOptions)
-  }
-
   countTotalInfected(): Observable<any> {
     return this.http.get(`${API_URL}/users/infected`, httpOptions)
+  }
+
+  countNotInfected(): Observable<any> {
+    return this.http.get(`${API_URL}/users/healthy`, httpOptions)
   }
 
   updateUserTestStatus(UserTestStatus: string, id: string): Observable<Covtest> {

@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
-
 import { Chart } from 'chart.js'
 import { AdminService } from 'src/app/services/admin.service';
 import { CovtestsService } from 'src/app/services/covtests.service';
+import { ExtUserService } from 'src/app/services/ext-user.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -17,9 +17,11 @@ export class AdminDashboardComponent implements OnInit {
   @Input()
   user: User
   users: User[]
+  externals: User[]
 
   nTests: number
   nInfected: number
+  notInfected: number
 
   userCode: string
   nTestsUser: number
@@ -32,14 +34,22 @@ export class AdminDashboardComponent implements OnInit {
 
   errors: String
   mychart;
+  MySecondChart;
   array;
 
-  constructor(private route: ActivatedRoute, private router: Router, private sessionService: SessionService, private AdminService: AdminService, private CovtestService: CovtestsService) { }
+  displayedColumns: string[] = ['ID', 'Nome'];
+
+  constructor(private router: Router, 
+    private sessionService: SessionService, 
+    private AdminService: AdminService, 
+    private CovtestService: CovtestsService,
+    private ExternalService: ExtUserService) { }
 
   ngOnInit(): void {
-    this.createChart()
     this.countTests()
-    this.countInfected()
+    this.createChart()
+    this.secondChart()
+    this.getExternalList()
   }
 
   createChart() {
@@ -48,7 +58,13 @@ export class AdminDashboardComponent implements OnInit {
       this.array = res.values
       var ctx = document.getElementById('canvas');
 
-      let dates = res['values'].map(res => res.date)
+      let dates = res['values'].map(res => {
+        if(res.date != undefined){
+          return res.date
+        } else {
+          return "Não agendados"
+        }
+      })
       let values = res['values'].map(res => res.totalEvents)
 
       var barChartData = {
@@ -58,7 +74,7 @@ export class AdminDashboardComponent implements OnInit {
           barPercentage: 0.5,
           data: values,
           backgroundColor:
-            'rgba(255, 99, 132, 0.2)'
+            '#0070FF'
         }]
       }
 
@@ -85,9 +101,73 @@ export class AdminDashboardComponent implements OnInit {
         }
       });
 
-      this.mychart.canvas.parentNode.style.height = '200px';
-      this.mychart.canvas.parentNode.style.width = '400px';
+      this.mychart.canvas.parentNode.style.height = '300px';
+      this.mychart.canvas.parentNode.style.width = '600px';
     })//end of barchart config
+  }
+
+  secondChart() {
+    this.CovtestService.countNotInfected().subscribe(notInfected => {
+      this.CovtestService.countTotalInfected().subscribe(nInfected => {
+        this.nInfected = nInfected;
+        this.notInfected = notInfected;
+
+        var ctx = document.getElementById('canvas2');
+
+        let Mylabels = []
+
+        var horizontalBarChartData = {
+          labels: Mylabels,
+          datasets: [{
+            label: 'Infetados',
+            borderWidth: 1,
+            data: [this.nInfected],
+            backgroundColor:
+              '#FF0000'
+          }, {
+            label: 'Curados',
+            borderWidth: 1,
+            data: [this.notInfected],
+            backgroundColor:
+              '#0FFF00'
+          }]
+        }
+
+        this.MySecondChart = new Chart(ctx, {
+          type: 'horizontalBar',
+          data: horizontalBarChartData,
+          options: {
+            elements: {
+              rectangle: {
+                borderWidth: 2,
+              }
+            },
+            responsive: true,
+            legend: {
+              position: 'right',
+            },
+            title: {
+              display: true,
+              text: 'Comparação Infetados - Curados'
+            },
+            scales: {
+              xAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  stepSize: 1
+                }
+              }]
+            }
+          }
+        });
+
+        this.MySecondChart.canvas.parentNode.style.height = '300px';
+        this.MySecondChart.canvas.parentNode.style.width = '600px';
+
+      }, (err) => { console.log(err) })
+
+    })
+
   }
 
   result() {
@@ -97,18 +177,6 @@ export class AdminDashboardComponent implements OnInit {
   countTests() {
     this.CovtestService.countTotalTests().subscribe((nTests) => {
       this.nTests = nTests;
-    }, (err) => { console.log(err) })
-  }
-
-  countTestsOnDate() {
-    this.CovtestService.countDayTests(this.myDate).subscribe((dateTests) => {
-      this.dateTests = dateTests;
-    }, (err) => { console.log(err) })
-  }
-
-  countInfected() {
-    this.CovtestService.countTotalInfected().subscribe((nInfected) => {
-      this.nInfected = nInfected;
     }, (err) => { console.log(err) })
   }
 
@@ -136,6 +204,10 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   chartDateFilter() {
+
+    console.log(this.firstDate)
+    console.log(this.secondDate)
+
     var val = this.firstDate
     if (val == undefined) {
       val = this.array[0].date
@@ -172,7 +244,7 @@ export class AdminDashboardComponent implements OnInit {
           barPercentage: 0.5,
           data: values,
           backgroundColor:
-            'rgba(255, 99, 132, 0.2)'
+            '#0070FF'
         }]
       }
 
@@ -190,7 +262,7 @@ export class AdminDashboardComponent implements OnInit {
           barPercentage: 0.5,
           data: values,
           backgroundColor:
-            'rgba(255, 99, 132, 0.2)'
+            '#0070FF'
         }]
       }
 
@@ -199,8 +271,17 @@ export class AdminDashboardComponent implements OnInit {
     this.mychart.update();
   }
 
+  getExternalList(){
+    this.ExternalService.getExternals().subscribe((externals) => {
+      this.externals = externals
+    })
+  }
+
   reset() {
+    this.mychart.destroy();
     this.createChart()
+    this.firstDate = ""
+    this.secondDate = ""
   }
 
 }

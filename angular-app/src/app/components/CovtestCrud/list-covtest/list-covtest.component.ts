@@ -13,6 +13,9 @@ export class ListCovtestComponent implements OnInit {
   covtests: Covtest[];
 
   userid: string;
+  testId: string;
+
+  displayedColumns: string[] = ['ID', 'Detalhes', 'Data', 'Resultado'];
 
   constructor(private route: ActivatedRoute, private router: Router, private CovtestService: CovtestsService) { }
 
@@ -20,7 +23,7 @@ export class ListCovtestComponent implements OnInit {
     this.getTotalTests()
   }
 
-  getTotalTests(){
+  getTotalTests() {
     this.CovtestService.getTests().subscribe((covtests) => {
       this.covtests = covtests;
       console.log(JSON.stringify(covtests))
@@ -53,7 +56,7 @@ export class ListCovtestComponent implements OnInit {
     }, (err) => { console.log(err) })
   }
 
-  getPendingTests(): void{
+  getPendingTests(): void {
     this.CovtestService.listPending().subscribe((covtests) => {
       this.covtests = covtests;
       console.log(JSON.stringify(covtests))
@@ -62,6 +65,14 @@ export class ListCovtestComponent implements OnInit {
 
   TestDetails(id: string) {
     this.router.navigate([`/covtestDetail/${id}`])
+  }
+
+  getByID() {
+    this.CovtestService.getTestByID(this.testId).subscribe((covtests) => {
+      let array = [covtests]
+      this.covtests = array;
+      console.log(JSON.stringify(covtests))
+    }, (err) => { console.log(err) })
   }
 
 }
