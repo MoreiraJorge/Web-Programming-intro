@@ -37,6 +37,10 @@ import { EditUserComponent } from './components/UserCrud/edit-user/edit-user.com
 import { UserProfileComponent } from './components/UserCrud/user-profile/user-profile.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { PopupUploadComponent } from './components/popups/popup-upload/popup-upload.component';
+import { PopupDateComponent } from './components/popups/popup-date/popup-date.component';
+import { PopupAddUsrComponent } from './components/popups/popup-add-usr/popup-add-usr.component';
+import { PopupDownloadComponent } from './components/popups/popup-download/popup-download.component';
+import { PopupUploadFailComponent } from './components/popups/popup-upload-fail/popup-upload-fail.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +60,11 @@ import { PopupUploadComponent } from './components/popups/popup-upload/popup-upl
     EditUserComponent,
     UserProfileComponent,
     MyProfileComponent,
-    PopupUploadComponent
+    PopupUploadComponent,
+    PopupDateComponent,
+    PopupAddUsrComponent,
+    PopupDownloadComponent,
+    PopupUploadFailComponent
   ],
   imports: [
     BrowserModule,

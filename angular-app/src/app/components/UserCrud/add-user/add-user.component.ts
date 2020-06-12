@@ -1,11 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/models/user';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { TechUserService } from 'src/app/services/tech-user.service';
 import { SessionService } from 'src/app/services/session.service';
 import { ExtUserService } from 'src/app/services/ext-user.service';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { PopupDateComponent } from '../../popups/popup-date/popup-date.component';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupAddUsrComponent } from '../../popups/popup-add-usr/popup-add-usr.component';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -41,10 +44,11 @@ export class AddUserComponent implements OnInit {
 
   @Input() userData: User = new User(this.name, this.address, this.age, this.email, this.password, this.phoneNumber);
 
-  constructor(private route: ActivatedRoute, private router: Router,
+  constructor(private router: Router,
     private TechUserService: TechUserService,
     public sessionService: SessionService,
-    private ExtUserService: ExtUserService) { }
+    private ExtUserService: ExtUserService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getMe()
@@ -65,16 +69,26 @@ export class AddUserComponent implements OnInit {
       this.TechUserService.addTech(this.userData).subscribe((result: User) => {
         this.router.navigate(['/usrMng'])
       }, (err) => {
+        this.openDialog()
         console.log(err);
       });
 
     } else if (this.role == 'TECH') {
       this.ExtUserService.addExt(this.userData).subscribe((result: User) => {
         this.router.navigate(['/usrMng'])
-      }, (err) => {
+      },(err) => {
+        this.openDialog()
         console.log(err);
       });
     }
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(PopupAddUsrComponent);
+    console.log(dialogRef)
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   Back() {

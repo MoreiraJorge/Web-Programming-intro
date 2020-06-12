@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CovtestsService } from 'src/app/services/covtests.service';
 import { SessionService } from 'src/app/services/session.service';
 import { User } from 'src/app/models/user';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupDownloadComponent } from '../../popups/popup-download/popup-download.component';
 
 @Component({
   selector: 'app-detail-covtest',
@@ -16,7 +18,10 @@ export class DetailCovtestComponent implements OnInit {
   user: User
   role: string
 
-  constructor(private route: ActivatedRoute, private router: Router, private CovtestService: CovtestsService, private sessionService: SessionService) { }
+  constructor(private route: ActivatedRoute, private router: Router,
+    private CovtestService: CovtestsService,
+    private sessionService: SessionService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getCovTest()
@@ -53,8 +58,22 @@ export class DetailCovtestComponent implements OnInit {
 
   download(id: string) {
     this.CovtestService.downloadFile(id).subscribe((data) => {
-      window.open(data.url, '_blank');
+      try {
+        window.open(data.url, '_blank');
+      } catch (e) {
+        this.openDialog()
+      }
+    }, (err) => {
+      console.log(err);
     })
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(PopupDownloadComponent);
+    console.log(dialogRef)
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 }

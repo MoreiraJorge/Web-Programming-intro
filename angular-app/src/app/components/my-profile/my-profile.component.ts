@@ -27,13 +27,12 @@ export class MyProfileComponent implements OnInit {
   getMe() {
     this.sessionService.me().subscribe((data: User) => {
       this.user = data
-      console.log(this.user);
+      //console.log(this.user);
     });
   }
 
   changePass() {
     this.adminService.changeAdminPass(this.user.idCard, JSON.parse(`{ "password":"${this.password}"}`)).subscribe((result) => {
-      this.router.navigate(['/profile']);
       if (this.password) {
         this.openDialog()
       }

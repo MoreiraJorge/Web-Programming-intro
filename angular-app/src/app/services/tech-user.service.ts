@@ -32,16 +32,16 @@ export class TechUserService {
     return this.http.post<User>(`${API_URL}/techs/create`, JSON.stringify(user), httpOptions)
   }
 
-  deleteTech(id:string):Observable<User>{
-    return this.http.delete<User>(`${API_URL}/techs/${ id }`, httpOptions)
+  deleteTech(id: string): Observable<User> {
+    return this.http.delete<User>(`${API_URL}/techs/${id}`, httpOptions)
   }
 
-  updateTech(id: string, user:User): Observable<User> {
-    return this.http.put<User>(`${API_URL}/techs/${ id }`, JSON.stringify(user), httpOptions);
+  updateTech(id: string, user: User): Observable<User> {
+    return this.http.put<User>(`${API_URL}/techs/${id}`, JSON.stringify(user), httpOptions);
   }
 
-  getTechByID(id: string): Observable<User>{
-    return this.http.get<User>(`${API_URL}/techs/${ id }`, httpOptions);
+  getTechByID(id: string): Observable<User> {
+    return this.http.get<User>(`${API_URL}/techs/${id}`, httpOptions);
   }
 
 }

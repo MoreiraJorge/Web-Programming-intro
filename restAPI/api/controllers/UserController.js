@@ -77,6 +77,8 @@ UserController.createUser = async (req, res) => {
         }
 
     } catch (err) {
+        res.status(400)
+        res.json(err)
         console.log(err)
     }
 }

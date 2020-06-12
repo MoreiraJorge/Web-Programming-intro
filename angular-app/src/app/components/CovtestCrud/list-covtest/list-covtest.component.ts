@@ -26,7 +26,7 @@ export class ListCovtestComponent implements OnInit {
   getTotalTests() {
     this.CovtestService.getTests().subscribe((covtests) => {
       this.covtests = covtests;
-      console.log(JSON.stringify(covtests))
+      //console.log(JSON.stringify(covtests))
     }, (err) => { console.log(err) })
   }
 
@@ -34,7 +34,7 @@ export class ListCovtestComponent implements OnInit {
     if (this.userid) {
       this.CovtestService.getUserTests(this.userid).subscribe((covtests) => {
         this.covtests = covtests;
-        console.log(JSON.stringify(covtests))
+        //console.log(JSON.stringify(covtests))
       }, (err) => { console.log(err) })
     } else {
       this.ngOnInit()
@@ -45,21 +45,21 @@ export class ListCovtestComponent implements OnInit {
   getPositiveTests(): void {
     this.CovtestService.listPositive().subscribe((covtests) => {
       this.covtests = covtests;
-      console.log(JSON.stringify(covtests))
+      //console.log(JSON.stringify(covtests))
     }, (err) => { console.log(err) })
   }
 
   getNegativeTests(): void {
     this.CovtestService.listNegative().subscribe((covtests) => {
       this.covtests = covtests;
-      console.log(JSON.stringify(covtests))
+      //console.log(JSON.stringify(covtests))
     }, (err) => { console.log(err) })
   }
 
   getPendingTests(): void {
     this.CovtestService.listPending().subscribe((covtests) => {
       this.covtests = covtests;
-      console.log(JSON.stringify(covtests))
+      //console.log(JSON.stringify(covtests))
     }, (err) => { console.log(err) })
   }
 
@@ -71,7 +71,7 @@ export class ListCovtestComponent implements OnInit {
     this.CovtestService.getTestByID(this.testId).subscribe((covtests) => {
       let array = [covtests]
       this.covtests = array;
-      console.log(JSON.stringify(covtests))
+      //console.log(JSON.stringify(covtests))
     }, (err) => { console.log(err) })
   }
 

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CovtestsService } from 'src/app/services/covtests.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupUploadComponent } from '../../popups/popup-upload/popup-upload.component';
+import { PopupUploadFailComponent } from '../../popups/popup-upload-fail/popup-upload-fail.component';
 
 @Component({
   selector: 'app-edit-covtest',
@@ -55,24 +56,20 @@ export class EditCovtestComponent implements OnInit {
     this.router.navigate([`/covtestDetail/${id}`])
   }
 
-  handleFileInput(files: FileList){
+  handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0)
-    console.log('file selected');
   }
-  /*
-  upload(id: string){
-    this.CovtestService.uploadFile(formData, id).subscribe((result) =>{
-      console.log(result)
-    })
-  }
-*/
 
-  onSubmit(e: Event, id:string){
+  onSubmit(e: Event, id: string) {
     e.preventDefault();
-    this.CovtestService.uploadFile(this.fileToUpload, id).subscribe((result) => {
-      console.log(result)
-    })
-    this.openDialog()
+    try {
+      this.CovtestService.uploadFile(this.fileToUpload, id).subscribe((result) => {
+        console.log(result)
+      })
+      this.openDialog()
+    } catch (e) {
+      this.openSecondDialog()
+    }
   }
 
   openDialog() {
@@ -83,7 +80,15 @@ export class EditCovtestComponent implements OnInit {
     });
   }
 
-  Back(id: string){
+  openSecondDialog() {
+    const dialogRef = this.dialog.open(PopupUploadFailComponent);
+    console.log(dialogRef)
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  Back(id: string) {
     this.router.navigate([`/covtestDetail/${id}`])
   }
 

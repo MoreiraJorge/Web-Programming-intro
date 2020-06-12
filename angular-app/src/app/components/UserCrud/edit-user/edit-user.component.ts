@@ -80,8 +80,6 @@ export class EditUserComponent implements OnInit {
 
     } else if (this.role == 'TECH') {
       this.ExtUserService.updateExt(idTemp, this.ExtUserData).subscribe((result) => {
-        console.log(this.ExtUserData)
-        console.log(result)
         this.router.navigate(['/profile/' + this.ExtUserData.idCard]);
       }, (err) => {
         console.log(err);

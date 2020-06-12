@@ -6,6 +6,8 @@ import { Chart } from 'chart.js'
 import { AdminService } from 'src/app/services/admin.service';
 import { CovtestsService } from 'src/app/services/covtests.service';
 import { ExtUserService } from 'src/app/services/ext-user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupDateComponent } from '../../popups/popup-date/popup-date.component';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -43,7 +45,8 @@ export class AdminDashboardComponent implements OnInit {
     private sessionService: SessionService, 
     private AdminService: AdminService, 
     private CovtestService: CovtestsService,
-    private ExternalService: ExtUserService) { }
+    private ExternalService: ExtUserService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.countTests()
@@ -83,6 +86,7 @@ export class AdminDashboardComponent implements OnInit {
         data: barChartData,
         options: {
           responsive: true,
+          maintainAspectRatio: false,
           legend: {
             position: 'top',
           },
@@ -102,7 +106,7 @@ export class AdminDashboardComponent implements OnInit {
       });
 
       this.mychart.canvas.parentNode.style.height = '300px';
-      this.mychart.canvas.parentNode.style.width = '600px';
+      this.mychart.canvas.parentNode.style.width = '500px';
     })//end of barchart config
   }
 
@@ -205,9 +209,6 @@ export class AdminDashboardComponent implements OnInit {
 
   chartDateFilter() {
 
-    console.log(this.firstDate)
-    console.log(this.secondDate)
-
     var val = this.firstDate
     if (val == undefined) {
       val = this.array[0].date
@@ -227,7 +228,8 @@ export class AdminDashboardComponent implements OnInit {
     });
 
     if (index1 == -1 || index2 == -1) {
-      console.log('data inválida')
+      this.openDialog()
+      //console.log('data inválida')
       return;
     }
 
@@ -282,6 +284,14 @@ export class AdminDashboardComponent implements OnInit {
     this.createChart()
     this.firstDate = ""
     this.secondDate = ""
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(PopupDateComponent);
+    console.log(dialogRef)
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 }
