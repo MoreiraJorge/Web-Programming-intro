@@ -211,7 +211,7 @@ export class AdminDashboardComponent implements OnInit {
 
     var val = this.firstDate
     if (val == undefined) {
-      val = this.array[0].date
+      val = this.array[1].date
     }
 
     var index1 = this.array.findIndex(function (item, i) {
