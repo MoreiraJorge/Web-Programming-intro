@@ -32,7 +32,7 @@
                     <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
                         [(ngModel)]="userData.email">
                     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                        Introduza um e-mail válido Ex. pat@example.com
+                        Introduza um e-mail válido Ex: pat@example.com
                     </mat-error>
                     <mat-error *ngIf="emailFormControl.hasError('required')">
                         E-mail é <strong>Necessário</strong>

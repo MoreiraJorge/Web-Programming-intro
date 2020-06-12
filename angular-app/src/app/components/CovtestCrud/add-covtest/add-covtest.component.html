@@ -12,7 +12,7 @@
             <textarea matInput [(ngModel)]="testData.description"></textarea>
         </mat-form-field>
 
-        <p>Caso tenha, indique o seu historico de doenças:</p>
+        <p>Caso aplicável, indique o seu histórico de doenças:</p>
         <mat-form-field class="example-full-width" style="width: 600px;">
             <mat-label>Histórico</mat-label>
             <textarea matInput [(ngModel)]="testData.userHistory"></textarea>
@@ -36,9 +36,9 @@
             </select>
         </mat-form-field><br>
 
-        <p>Foi encaminhado pela saude 24?</p>
+        <p>Foi encaminhado pela saúde 24?</p>
         <mat-form-field>
-            <mat-label> Saude 24</mat-label>
+            <mat-label> Saúde 24</mat-label>
             <select id="saude24" [(ngModel)]="testData.saude24" matNativeControl required>
                 <option value="true">Sim</option>
                 <option value="false">Não</option>
