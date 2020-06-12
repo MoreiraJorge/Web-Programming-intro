@@ -26,7 +26,7 @@
             <table mat-table [dataSource]="externals">
 
                 <ng-container id="column" matColumnDef="ID">
-                    <th mat-header-cell *matHeaderCellDef> ID de Utilizador </th>
+                    <th mat-header-cell *matHeaderCellDef> ID de utente </th>
                     <td mat-cell *matCellDef="let element"> {{ element.idCard }} </td>
                 </ng-container>
 
@@ -76,7 +76,7 @@
 
 
                 <form name="nTestsPerson">
-                    <label id="dateLabel" for="ntests">Pesquisar nº testes por ID de cliente: </label>
+                    <label id="dateLabel" for="ntests">Pesquisar nº testes por ID de utente: </label>
                     <input [(ngModel)]="userCode" id="ntests" name="ntests" />
                 </form>
                 <button id="search" mat-raised-button type="submit" form="dateForm" value="Submit"

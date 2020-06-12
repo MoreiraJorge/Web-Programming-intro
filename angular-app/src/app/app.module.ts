@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 import { PopupPassComponent } from './components/popups/popup-pass/popup-pass.component';
@@ -74,7 +75,8 @@ import { PopupUploadComponent } from './components/popups/popup-upload/popup-upl
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTableModule
+    MatTableModule,
+    MatRadioModule
   ],
 
   providers: [MatDatepickerModule],

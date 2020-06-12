@@ -4,6 +4,16 @@ import { TechUserService } from 'src/app/services/tech-user.service';
 import { SessionService } from 'src/app/services/session.service';
 import { ExtUserService } from 'src/app/services/ext-user.service';
 import { User } from 'src/app/models/user';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-edit-user',
@@ -12,7 +22,16 @@ import { User } from 'src/app/models/user';
 })
 export class EditUserComponent implements OnInit {
 
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+
+  matcher = new MyErrorStateMatcher();
+
   role: string
+
+  displayedColumns: string[] = ['ID', 'Data', 'Detalhes', 'Remover'];
 
   @Input() userData: any = { name: '', address: '', age: 0, email: '', password: '', phoneNumber: 0, idCard: '' };
   @Input() ExtUserData: any = { name: '', address: '', age: 0, email: '', password: '', phoneNumber: 0, idCard: '', infected: '' };
@@ -53,7 +72,6 @@ export class EditUserComponent implements OnInit {
     var idTemp = this.route.snapshot.params['id'];
 
     if (this.role == 'ADM') {
-
       this.TechUserService.updateTech(idTemp, this.userData).subscribe((result) => {
         this.router.navigate(['/profile/' + this.userData.idCard]);
       }, (err) => {
@@ -62,6 +80,8 @@ export class EditUserComponent implements OnInit {
 
     } else if (this.role == 'TECH') {
       this.ExtUserService.updateExt(idTemp, this.ExtUserData).subscribe((result) => {
+        console.log(this.ExtUserData)
+        console.log(result)
         this.router.navigate(['/profile/' + this.ExtUserData.idCard]);
       }, (err) => {
         console.log(err);
@@ -82,8 +102,8 @@ export class EditUserComponent implements OnInit {
     this.router.navigate([`/covtestDetail/${id}`])
   }
 
-  RemoveTest(covtest:string, id:string){
-    this.ExtUserService.removeTestFromList(covtest, id).subscribe((result)=>{
+  RemoveTest(covtest: string, id: string) {
+    this.ExtUserService.removeTestFromList(covtest, id).subscribe((result) => {
       this.ExtUserData.covtest = result.covtest
     })
   }

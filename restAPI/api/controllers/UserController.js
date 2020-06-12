@@ -99,6 +99,11 @@ UserController.updateUser = async (req, res) => {
             userData.role = 'EXT'
         }
 
+        //if new password is sent, encrypt
+        if (userData.password) {
+            userData.password = bcrypt.hashSync(userData.password, 10);
+        }
+
         await User.findOneAndUpdate({ idCard: req.params.id, role: "EXT" }, userData)
         const result = await User.findOne({ idCard: req.params.id }).
             populate('covtest')

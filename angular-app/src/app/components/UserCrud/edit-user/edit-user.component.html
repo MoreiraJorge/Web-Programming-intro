@@ -1,77 +1,191 @@
 <div>
-    <h2>Edit Menu</h2>
+    <mat-card class="top">
+        <label *ngIf="role=='TECH'">Editar utente</label>
+        <label *ngIf="role=='ADM'">Editar técnico</label>
+    </mat-card>
 
-    <div *ngIf="userData.role == 'TECH'">
-        <label>user Name:
-            <input [(ngModel)]="userData.name" placeholder="user Name" />
-        </label><br>
-        <label>user address:
-            <input [(ngModel)]="userData.address" placeholder="address" />
-        </label><br>
-        <label>user age:
-            <input [(ngModel)]="userData.age" placeholder="age" />
-        </label><br>
-        <label>email:
-            <input [(ngModel)]="userData.email" placeholder="email" />
-        </label><br>
-        <label>password:
-            <input [(ngModel)]="userData.password" value="" />
-        </label><br>
-        <label>phone number:
-            <input [(ngModel)]="userData.phoneNumber" placeholder="phoneNumber" />
-        </label><br>
-        <label>idCard:
-            <input [(ngModel)]="userData.idCard" placeholder="idCard" />
-        </label><br>
+    <div id="techForm" *ngIf="userData.role == 'TECH'">
 
-    </div>
+        <mat-card id="userFormCard">
 
-    <div *ngIf="ExtUserData.role == 'EXT'">
-        <label>user Name:
-            <input [(ngModel)]="ExtUserData.name" placeholder="user Name" />
-        </label><br>
-        <label>user address:
-            <input [(ngModel)]="ExtUserData.address" placeholder="address" />
-        </label><br>
-        <label>user age:
-            <input [(ngModel)]="ExtUserData.age" placeholder="age" />
-        </label><br>
-        <label>email:
-            <input [(ngModel)]="ExtUserData.email" placeholder="email" />
-        </label><br>
-        <label>password:
-            <input [(ngModel)]="ExtUserData.password" value="" />
-        </label><br>
-        <label>phone number:
-            <input [(ngModel)]="ExtUserData.phoneNumber" placeholder="phoneNumber" />
-        </label><br>
-        <label>idCard:
-            <input [(ngModel)]="ExtUserData.idCard" placeholder="idCard" />
-        </label><br>
+            <diV>
+                <mat-form-field>
+                    <mat-label>Nome</mat-label>
+                    <input matInput [(ngModel)]="userData.name" />
+                </mat-form-field>
 
-        <div>
-            <label>User status:</label><br>
-            <input type="radio" id="infected" name="infected" [(ngModel)]="ExtUserData.infected" value="true">
-            <label for="infected">Infected</label><br>
-            <input type="radio" id="nonInfected" name="nonInfected" [(ngModel)]="ExtUserData.infected" value="false">
-            <label for="nonInfected">Healthy</label><br>
-        </div>
+                <mat-form-field id="inputLeft">
+                    <mat-label>Morada</mat-label>
+                    <input matInput [(ngModel)]="userData.address" />
+                </mat-form-field>
+            </diV>
 
-        <div class="list">
-            <mat-grid-list cols="4" rowHeight="50px">
-                <ng-container *ngFor="let covtest of ExtUserData.covtest; index as i">
-                    <mat-grid-tile>{{covtest.code}}</mat-grid-tile>
-                    <mat-grid-tile><button (click)="TestDetails(covtest.code)">Test Details</button></mat-grid-tile>
-                    <mat-grid-tile><button (click)="RemoveTest(covtest._id, ExtUserData.idCard)">Remove Test from
-                            user</button></mat-grid-tile>
-                    <mat-grid-tile type="date">{{ covtest.schedule | date :  "dd/MM/y"}}</mat-grid-tile>
-                </ng-container>
-            </mat-grid-list>
-        </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Idade</mat-label>
+                    <input matInput type="number" maxlength="3" min="0" max="100" [(ngModel)]="userData.age" />
+                </mat-form-field>
+
+
+                <mat-form-field id="inputLeft" class="example-full-width">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                        [(ngModel)]="userData.email">
+                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                        Introduza um e-mail válido Ex. pat@example.com
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                        E-mail é <strong>Necessário</strong>
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+
+            <div>
+
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" [(ngModel)]="userData.password" value=""/>
+                </mat-form-field>
+
+                <mat-form-field id="inputLeft">
+                    <mat-label>Número de telemóvel</mat-label>
+                    <input matInput [(ngModel)]="userData.phoneNumber" />
+                </mat-form-field>
+            </div>
+            <div>
+
+                <mat-form-field>
+                    <mat-label>idCard</mat-label>
+                    <input matInput type="number" min="0" [(ngModel)]="userData.idCard" />
+                </mat-form-field>
+
+                <button id="inputLeft" mat-raised-button (click)="update()">Atualizar</button>
+
+            </div>
+
+            <button mat-raised-button (click)="Back()">Voltar ao perfil</button>
+        </mat-card>
 
     </div>
 
-    <button (click)="update()">Update changes</button>
-    <button (click)="Back()">Back to profile</button>
+    <div id="extForm" *ngIf="ExtUserData.role == 'EXT'">
+
+        <mat-card id="userFormCard">
+
+            <diV>
+                <mat-form-field>
+                    <mat-label>Nome</mat-label>
+                    <input matInput [(ngModel)]="ExtUserData.name" />
+                </mat-form-field>
+
+                <mat-form-field id="inputLeft">
+                    <mat-label>Morada</mat-label>
+                    <input matInput [(ngModel)]="ExtUserData.address" />
+                </mat-form-field>
+            </diV>
+
+            <div>
+                <mat-form-field>
+                    <mat-label>Idade</mat-label>
+                    <input matInput type="number" maxlength="3" min="0" max="100" [(ngModel)]="ExtUserData.age" />
+                </mat-form-field>
+
+
+                <mat-form-field id="inputLeft" class="example-full-width">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                        [(ngModel)]="ExtUserData.email">
+                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                        Introduza um e-mail válido Ex. pat@example.com
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                        E-mail é <strong>Necessário</strong>
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+
+            <div>
+
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" [(ngModel)]="ExtUserData.password" value=""/>
+                </mat-form-field>
+
+                <mat-form-field id="inputLeft">
+                    <mat-label>Número de telemóvel</mat-label>
+                    <input matInput [(ngModel)]="ExtUserData.phoneNumber" />
+                </mat-form-field>
+            </div>
+            <div>
+
+                <mat-form-field>
+                    <mat-label>idCard</mat-label>
+                    <input matInput type="number" min="0" [(ngModel)]="ExtUserData.idCard" />
+                </mat-form-field>
+
+                <button id="inputLeft" mat-raised-button (click)="update()">Atualizar</button>
+
+            </div>
+
+            <div>
+                <div>
+                    <label>Estado do Utilizador:</label><br>
+                    <mat-radio-group [(ngModel)]="ExtUserData.infected" aria-label="Select an option">
+                        <mat-radio-button value="true">Infetado</mat-radio-button><br>
+                        <mat-radio-button value="false">Saudável</mat-radio-button>
+                    </mat-radio-group>
+                    <button id="inputLeft2" mat-raised-button (click)="Back()">Voltar ao perfil</button>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+
+    <div *ngIf="ExtUserData.role==='EXT'" id="container">
+
+        <mat-card id="testsCard">
+
+            <mat-card-title>
+                <p>Testes Associados</p>
+            </mat-card-title>
+
+            <div id="ExtTests">
+
+                <table mat-table [dataSource]="ExtUserData.covtest">
+
+                    <ng-container id="column" matColumnDef="ID">
+                        <th mat-header-cell *matHeaderCellDef> ID do Teste </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.code }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Data">
+                        <th mat-header-cell *matHeaderCellDef> Data </th>
+                        <td mat-cell *matCellDef="let element">
+                            <p type="date" *ngIf="element.schedule != 'undefined'">
+                                {{ element.schedule | date :  "dd/MM/y"}}</p>
+                            <p *ngIf="element.schedule == undefined"> Aguarda Agendamento </p>
+                        </td>
+                    </ng-container>
+
+                    <ng-container id="column" matColumnDef="Detalhes">
+                        <th mat-header-cell *matHeaderCellDef> Detalhes </th>
+                        <td mat-cell *matCellDef="let element"> <button mat-raised-button
+                                (click)="TestDetails(element.code)">Detalhes</button> </td>
+                    </ng-container>
+
+                    <ng-container id="column" matColumnDef="Remover">
+                        <th mat-header-cell *matHeaderCellDef> Remover </th>
+                        <td mat-cell *matCellDef="let element"> <button mat-raised-button
+                                (click)="RemoveTest(element._id, ExtUserData.idCard)">Remover</button></td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </mat-card>
+    </div>
+
 
 </div>
