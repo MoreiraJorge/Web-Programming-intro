@@ -50,4 +50,14 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
+  Back() {
+    if (this.user.role == 'ADM') {
+      this.router.navigate(['admDashboard'])
+    } else if (this.user.role == 'TECH') {
+      this.router.navigate(['techDashboard'])
+    } else if (this.user.role == 'EXT') {
+      this.router.navigate(['extDashboard'])
+    }
+  }
+
 }

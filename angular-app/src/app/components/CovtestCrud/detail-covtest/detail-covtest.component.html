@@ -1,27 +1,40 @@
-<h1>Test details</h1>
-<div *ngIf="covtest">
+<mat-card class="top" *ngIf="covtest">
+    <label id="title"> Teste - {{ covtest.code }} </label>
+</mat-card>
 
-    <p>code: {{ covtest.code }}</p>
-    <p>description: {{ covtest.description }}</p>
-    <p>userHistory: {{ covtest.userHistory }}</p>
-    <p>riskGroup: {{ covtest.riskGroup }}</p>
-    <p>userStatus: {{ covtest.userStatus }}</p>
-    <p>riskJob: {{ covtest.riskJob }}</p>
-    <p>testStatus: {{ covtest.testStatus }}</p>
-    <p>testResult: {{ covtest.testResult }}</p>
-    <p type="date">schedule: {{ covtest.schedule | date :  "dd/MM/y"}}</p>
-    <p>saude24: {{ covtest.saude24 }}</p>
-    <div *ngIf="covtest.user">
-        <p>user: {{ covtest.user.name }}</p>
-    </div>
+<div id="TestDetail" *ngIf="covtest">
+    <mat-card>
+        <p>Código: {{ covtest.code }}</p>
+        <p>Descrição: {{ covtest.description }}</p>
+        <p>Histórico do Utilizador: {{ covtest.userHistory }} </p>
+        <p *ngIf="covtest.riskGroup == 'no'">Grupo de risco: Não</p>
+        <p *ngIf="covtest.riskGroup == 'yes'">Grupo de risco: Sim</p>
+        <p *ngIf="covtest.riskGroup == 'yes'">Trabalho de risco: Sim</p>
+        <p *ngIf="covtest.riskGroup == 'no'">Trabalho de risco: Não</p>
+        <p>Estado do utente: {{ covtest.userStatus }}</p>
+        <p *ngIf="covtest.testStatus == 'pending'">Estado do teste: Aguarda análise</p>
+        <p *ngIf="covtest.testStatus == 'done'">Estado do teste: Concluído</p>
+        <p *ngIf="covtest.testResult == 'positive'">Resultado do teste: Positivo</p>
+        <p *ngIf="covtest.testResult == 'negative'">Resultado do teste: Negativo</p>
 
-    <div *ngIf="role=='TECH'">
-        <button (click)="edit(covtest.code)">Edit</button>
-    </div>
-    
+        <p type="date" *ngIf="covtest.schedule != undefined" >Dia do teste: {{ covtest.schedule | date :  "dd/MM/y"}}</p>
+        <p type="date" *ngIf="covtest.schedule === undefined" >Dia do teste: Aguarda agendamento</p>
 
-    <button (click)="Back()">Back to Dashboard</button>
+        <p *ngIf="covtest.saude24 == true; else elseBlock">Encaminhado pela saúde 24: Sim</p>
+        <ng-template #elseBlock>
+            <p>Encaminhado pela saúde 24: Não</p>
+        </ng-template>
 
-    <button (click)="download(covtest.code)"> Download File </button>
+        <div *ngIf="covtest.user">
+            <p>Utente: {{ covtest.user.name }}</p>
+        </div>
 
+        <div *ngIf="role=='TECH'">
+            <button id="edit" mat-raised-button (click)="edit(covtest.code)">Editar</button>
+        </div>
+
+        <button mat-raised-button (click)="download(covtest.code)"> Tranferir relatório </button>
+
+        <button id="BackButton" mat-raised-button (click)="Back()">Dashboard</button>
+    </mat-card>
 </div>

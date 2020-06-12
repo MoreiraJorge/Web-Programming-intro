@@ -979,6 +979,28 @@
                 }
             }
         },
+        "/users/healthy": {
+            "get": {
+                "tags": [
+                    "Externos"
+                ],
+                "summary": "Numero  utilizadores que estejam curados | Acesso -> Admin",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            }
+        },
         "/covtests/schedCount": {
             "get": {
                 "tags": [

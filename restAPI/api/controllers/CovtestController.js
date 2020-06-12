@@ -52,7 +52,21 @@ CovtestController.createTest = async (req, res) => {
         await User.findOneAndUpdate({ _id: req.params.id, role: "EXT" }, { $push: { covtest: test._id } })
 
         //find the created test and populate to show user
-        const result = await Covtest.find({ _id: test._id }).populate('user', ['name', 'idCard'])
+        const result = await Covtest.findOne({ _id: test._id }).populate('user', ['name', 'idCard', 'email'])
+
+        let mailOptions = {
+            to: result.user.email,
+            subject: 'Teste COVID-19 criado',
+            text: `Foi criado um teste com código - ${ test.code }`
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
 
         res.json(result);
     } catch (err) {
@@ -76,24 +90,6 @@ CovtestController.updateTestUserStatus = async (req, res) => {
     }
 }
 
-//update test status (techs)
-/*
-CovtestController.updateTestStatus = async (req, res) => {
-    try {
-        const newData =
-        {
-            testStatus: req.body.testStatus,
-        }
-
-        await Covtest.findOneAndUpdate({ code: req.params.id }, newData);
-        const result = await Covtest.find({ code: req.params.id })
-        res.json(result)
-    } catch (err) {
-        console.log(err)
-    }
-}
-*/
-
 //update test result (techs)
 CovtestController.updateTestResult = async (req, res) => {
     try {
@@ -104,7 +100,32 @@ CovtestController.updateTestResult = async (req, res) => {
         }
 
         await Covtest.findOneAndUpdate({ code: req.params.id }, newData);
-        const result = await Covtest.find({ code: req.params.id })
+        const result = await Covtest.findOne({ code: req.params.id }).populate('user', ['name', 'idCard', 'email'])
+
+        let analisys;
+
+        if(result.testResult == "positive"){
+            analisys = "Positivo"
+        } else if(result.testResult == "negative"){
+            analisys = "Negativo"
+        }
+
+
+        let mailOptions = {
+            to: result.user.email,
+            subject: `Resultado do teste ${ result.code }`,
+
+            text: `O resultado das análises relativamente ao teste ${ result.code } deu ${ analisys }`
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+
         res.json(result)
     } catch (err) {
         console.log(err)
@@ -176,7 +197,7 @@ CovtestController.schedule = async (req, res) => {
         await Covtest.findOneAndUpdate({ code: req.params.id }, newData)
         const result = await Covtest.findOne({ code: req.params.id }).populate('user')
 
-        var mailOptions = {
+        let mailOptions = {
             to: result.user.email,
             subject: 'Agendamento de teste COVID-19',
             text: `O seu teste foi agendado para: ${ req.body.schedule }`

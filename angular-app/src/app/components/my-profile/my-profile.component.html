@@ -1,28 +1,40 @@
-<h1>{{user.name}}'s Profile</h1>
-<p *ngIf="user.role==='ADM'">Role: Admin</p>
-<p *ngIf="user.role==='TECH'">Role: Technic</p>
-<p *ngIf="user.role==='EXT'">Role: External</p>
+<mat-card class="top">
+    <label id="title">Perfil de {{user.name}}</label>
+</mat-card>
 
-<p>email: {{user.email}}</p>
+<div id="Profile">
+    <mat-card>
+        <p *ngIf="user.role==='ADM'">Cargo: Administrador</p>
+        <p *ngIf="user.role==='TECH'">Cargo: Técnico</p>
+        <p *ngIf="user.role==='EXT'">Cargo: Utente</p>
 
-<div *ngIf="user.role==='EXT' || user.role==='TECH'">
-    <p>address: {{user.address}}</p>
-    <p>age: {{user.age}}</p>
-    <p>phoneNumber: {{user.phoneNumber}}</p>
+        <p>email: {{user.email}}</p>
 
-</div>
-<p>idCard: {{user.idCard}}</p>
-<div *ngIf="user.role==='EXT'">
-    <p *ngIf="user.infected == true; else elseBlock">Status: Infected</p>
-    <ng-template #elseBlock>Status: Suspect</ng-template>
-</div>
-    
+        <div *ngIf="user.role==='EXT' || user.role==='TECH'">
+            <p>Morada: {{user.address}}</p>
+            <p>Idade: {{user.age}}</p>
+            <p>Número de telemóvel: {{user.phoneNumber}}</p>
 
-<div *ngIf="user.role==='ADM'">
-    <p>Change Password</p>
-    <mat-form-field id="pass" appearance="fill">
-        <mat-label color="primary">New password:</mat-label>
-        <input matInput [(ngModel)]="password" name="password" type="password" placeholder="new passwrod" required>
-    </mat-form-field>
-    <button (click)="changePass()">submit</button>
+        </div>
+        <p>idCard: {{user.idCard}}</p>
+        <div *ngIf="user.role==='EXT'">
+            <p *ngIf="user.infected == true; else elseBlock">Estado: infetado</p>
+            <ng-template #elseBlock>
+                <p>Estado: saudável</p>
+            </ng-template>
+        </div>
+
+
+        <div *ngIf="user.role==='ADM'">
+            <p>Mudar a Password:</p>
+            <mat-form-field id="pass" appearance="fill">
+                <mat-label color="primary">Password Nova</mat-label>
+                <input matInput [(ngModel)]="password" name="password" type="password" placeholder="new passwrod"
+                    required>
+            </mat-form-field>
+            <button id="submit" mat-raised-button (click)="changePass()">submeter</button>
+        </div>
+
+        <button id="BackButton" mat-raised-button (click)="Back()">Dashboard</button>
+    </mat-card>
 </div>

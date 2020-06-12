@@ -8,19 +8,12 @@ router.get('/userListExt', authorize(['TECH', 'ADM']), function (req, res) {
     User.listExtUsers(req, res)
 })
 
-//List all users
-/*
-router.get('/userList', authorize(['ADM']), function (req, res) {
-    User.listAllUsers(req, res)
-})
-*/
-
 //count infected
 router.get('/infected', authorize(['ADM']), function (req, res) {
     User.countInfected(req, res)
 })
 
-//count infected
+//count healthy users
 router.get('/healthy', authorize(['ADM']), function (req, res) {
     User.countHealthy(req, res)
 })
@@ -44,13 +37,6 @@ router.delete('/:id', authorize(['TECH']), function (req, res) {
 router.put('/:id', authorize(['TECH']), function (req, res) {
     User.updateUser(req, res)
 })
-
-//add tests to user test list
-/*
-router.put('/tests/:id', authorize(['TECH']), function (req, res) {
-    User.addCovTests(req, res)
-})
-*/
 
 //remove tests to user test list
 router.delete('/tests/:id', authorize(['TECH']), function (req, res) {
