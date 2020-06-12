@@ -1,27 +1,73 @@
+<mat-card class="top">
+    <label *ngIf="role=='TECH'">Criar novo utente</label>
+    <label *ngIf="role=='ADM'">Criar novo técnico</label>
+</mat-card>
+
 <div>
-    <h2>Add Tech user</h2>
-    <div>
-        <label>user Name:
-            <input [(ngModel)]="userData.name" placeholder="user Name" />
-        </label><br>
-        <label>user address:
-            <input [(ngModel)]="userData.address" placeholder="address" />
-        </label><br>
-        <label>user age:
-            <input [(ngModel)]="userData.age" placeholder="age" />
-        </label><br>
-        <label>email:
-            <input [(ngModel)]="userData.email" placeholder="email" />
-        </label><br>
-        <label>password:
-            <input [(ngModel)]="userData.password" placeholder="password" />
-        </label><br>
-        <label>phone number:
-            <input [(ngModel)]="userData.phoneNumber" placeholder="phoneNumber" />
-        </label><br>
-        <label>idCard:
-            <input [(ngModel)]="userData.idCard" placeholder="idCard" />
-        </label><br>
+    <div id="userForm">
+        <mat-card id="userFormCard">
+
+            <diV>
+                <mat-form-field>
+                    <mat-label>Nome</mat-label>
+                    <input matInput [(ngModel)]="userData.name" />
+                </mat-form-field>
+
+                <mat-form-field id="inputLeft">
+                    <mat-label>Morada</mat-label>
+                    <input matInput [(ngModel)]="userData.address" />
+                </mat-form-field>
+            </diV>
+
+            <div>
+                <mat-form-field>
+                    <mat-label>Idade</mat-label>
+                    <input matInput type="number" maxlength="3" min="0" max="100" [(ngModel)]="userData.age" />
+                </mat-form-field>
+
+
+                <mat-form-field id="inputLeft" class="example-full-width">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                        [(ngModel)]="userData.email">
+                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                        Introduza um e-mail válido Ex. pat@example.com
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                        E-mail é <strong>Necessário</strong>
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+
+            <div>
+
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" [(ngModel)]="userData.password" />
+                </mat-form-field>
+
+                <mat-form-field id="inputLeft">
+                    <mat-label>Número de telemóvel</mat-label>
+                    <input matInput [(ngModel)]="userData.phoneNumber" />
+                </mat-form-field>
+            </div>
+            <div>
+
+                <mat-form-field>
+                    <mat-label>idCard</mat-label>
+                    <input matInput type="number" min="0" [(ngModel)]="userData.idCard" />
+                </mat-form-field>
+
+                <button id="inputLeft" mat-raised-button (click)="addUser()">Submeter</button>
+
+            </div>
+
+            <button mat-raised-button *ngIf="role=='TECH'" (click)="Back()">Gestão de utentes</button>
+            <button mat-raised-button *ngIf="role=='ADM'" (click)="Back()">Gestão de técnicos</button>
+
+        </mat-card>
     </div>
-    <button (click)="addUser()">Save</button>
+
+
 </div>

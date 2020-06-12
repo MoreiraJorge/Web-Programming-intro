@@ -45,17 +45,20 @@
                     color: black
                     border-color: black
 
-        ::ng-deep input.mat-input-element 
+        ::ng-deep .mat-form-field-empty.mat-form-field-label 
             color: black
+                
+        ::ng-deep .mat-form-field .mat-input-element 
+            color: black
+                    
+        ::ng-deep .mat-form-field-underline 
+            background-color: black
 
-        ::ng-deep .mat-form-field.mat-focused .mat-form-field-label 
+        ::ng-deep .mat-form-field.mat-focused .mat-form-field-label
             color: black !important
 
         ::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple
             background-color: black !important
-
-        ::ng-deep .mat-form-field-empty.mat-form-field-label 
-            color: black
 
         #submitB
             margin-left: 20px

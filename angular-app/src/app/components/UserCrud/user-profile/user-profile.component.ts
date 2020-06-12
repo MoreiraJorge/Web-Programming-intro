@@ -15,6 +15,8 @@ export class UserProfileComponent implements OnInit {
   user: User;
   role: string;
 
+  displayedColumns: string[] = ['ID', 'Data'];
+
   constructor(private route: ActivatedRoute, private router: Router,
     private ExtUserService: ExtUserService, 
     private TechUserService: TechUserService, 

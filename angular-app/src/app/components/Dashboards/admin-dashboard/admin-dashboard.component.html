@@ -55,11 +55,12 @@
 
                 <label class="labels">Data de Fim:
                     <input id="secondDate" type="date" [(ngModel)]="secondDate" placeholder="yyyy-MM-dd" />
-                </label><br>
-
-                <button id="search2" mat-raised-button (click)="chartDateFilter()">Procurar</button>
+                </label>
 
             </div>
+
+            <button id="dateSearch" mat-raised-button (click)="chartDateFilter()">Procurar</button>
+
             <div id="graphic">
                 <canvas id="canvas"></canvas>
             </div>

@@ -1,52 +1,72 @@
-<div *ngIf="covtest">
+<mat-card class="top" *ngIf="covtest">
+    <label id="title"> Teste - {{ covtest.code }} </label>
+</mat-card>
 
-    <p>code: {{ covtest.code }}</p>
-    <p>description: {{ covtest.description }}</p>
-    <p>userHistory: {{ covtest.userHistory }}</p>
-    <p>riskGroup: {{ covtest.riskGroup }}</p>
-    <p>riskJob: {{ covtest.riskJob }}</p>
-    <p>testStatus: {{ covtest.testStatus }}</p>
+<div id="detailsContainer" *ngIf="covtest">
+    <mat-card id="detailsCard">
 
-    <label for="userStatus">Editar estado de utilizador:</label>
-
-    <select id="userStatus" [(ngModel)]="userStatus">
-        <option value="suspeito">Suspeito</option>
-        <option value="infetado">Infetado</option>
-        <option value="saudavel">Saudavel</option>
-    </select>
-    <button (click)="updateUsrStatus( covtest.code )">Atualizar estado de utilizador</button>
-
-    <br>
-
-    <label for="testResult">Editar estado do teste:</label>
-    <select id="testResult" [(ngModel)]="testResult">
-        <option value="negative">Negativo</option>
-        <option value="positive">Positivo</option>
-    </select>
-    <button (click)="updateResult( covtest.code )">Atualizar Resultado</button>
-
-    <br>
-
-    <form name="dateForm">
-        <label for="dateInput">Agendar Teste: </label>
-        <input type="date" [(ngModel)]="schedule" id="dateInput" name="date" placeholder="yyyy-MM-dd" required />
-        <button type="button" form="dateForm" value="Submit" (click)="scheduleTest(covtest.code)">Agendar</button>
-    </form>
-
-    <form enctype="multipart/form-data" (submit)="onSubmit($event, covtest.code)">
-        <div>
-            <input type='file' name="file_input" id="file_input" (change)="handleFileInput($event.target.files)">
+        <p>Código: {{ covtest.code }}</p>
+        <p>Descrição: {{ covtest.description }}</p>
+        <p>Histórico do Utilizador: {{ covtest.userHistory }} </p>
+        <p *ngIf="covtest.riskGroup == 'no'">Grupo de risco: Não</p>
+        <p *ngIf="covtest.riskGroup == 'yes'">Grupo de risco: Sim</p>
+        <p *ngIf="covtest.riskGroup == 'yes'">Trabalho de risco: Sim</p>
+        <p *ngIf="covtest.riskGroup == 'no'">Trabalho de risco: Não</p>
+        <p>Estado do utente: {{ covtest.userStatus }}</p>
+        <p *ngIf="covtest.saude24 == true; else elseBlock">Encaminhado pela saúde 24: Sim</p>
+        <ng-template #elseBlock>
+            <p>Encaminhado pela saúde 24: Não</p>
+        </ng-template>
+        <div *ngIf="covtest.user">
+            <p>Utente: {{ covtest.user.name }}</p>
         </div>
-        <div>
-            <button type="submit">upload</button>
+
+        <div id="container1">
+            <div id="userStatusDiv">
+                <label for="userStatus">Editar estado de utilizador:</label>
+                <select id="userStatus" [(ngModel)]="userStatus">
+                    <option value="suspeito">Suspeito</option>
+                    <option value="infetado">Infetado</option>
+                    <option value="saudavel">Saudavel</option>
+                </select><br>
+                <button mat-raised-button (click)="updateUsrStatus( covtest.code )">Atualizar estado de
+                    utilizador</button>
+            </div>
+
+
+            <div id="testResultDiv">
+                <label for="testResult">Editar estado do teste:</label>
+                <select id="testResult" [(ngModel)]="testResult">
+                    <option value="negative">Negativo</option>
+                    <option value="positive">Positivo</option>
+                </select><br>
+                <button mat-raised-button (click)="updateResult( covtest.code )">Atualizar Resultado</button>
+            </div>
         </div>
-    </form>
 
-    <p>saude24: {{ covtest.saude24 }}</p>
-    <div *ngIf="covtest.user">
-        <p>user: {{ covtest.user.name }}</p>
-    </div>
+        <div id="container2">
+            <form id="dateForm" name="dateForm">
+                <label for="dateInput">Agendar Teste: </label>
+                <input type="date" [(ngModel)]="schedule" id="dateInput" name="date" placeholder="yyyy-MM-dd"
+                    required /><br>
+                <button mat-raised-button type="button" form="dateForm" value="Submit"
+                    (click)="scheduleTest(covtest.code)">Agendar</button>
+            </form>
 
-    <button (click)="Back(covtest.code)">Back to Details</button>
+            <form id="upload" enctype="multipart/form-data" (submit)="onSubmit($event, covtest.code)">
+                <div>
+                    <input type='file' name="file_input" id="file_input"
+                        (change)="handleFileInput($event.target.files)">
+                </div>
+                <div>
+                    <button mat-raised-button type="submit">Carregar ficheiro</button>
+                </div>
+            </form>
 
+        </div>
+
+
+        <button id="Back" mat-raised-button (click)="Back(covtest.code)">Detalhes</button>
+
+    </mat-card>
 </div>

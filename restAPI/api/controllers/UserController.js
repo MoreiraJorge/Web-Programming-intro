@@ -16,21 +16,7 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-
 var UserController = {};
-
-//list all users (admin)
-/*
-UserController.listAllUsers = async (req, res) => {
-    try {
-        const list = await User.find().
-            populate('covtest', 'code')
-        res.json(list);
-    } catch (err) {
-        console.log(err)
-    }
-}
-*/
 
 //list all External users (tech)
 UserController.listExtUsers = async (req, res) => {
@@ -122,20 +108,6 @@ UserController.updateUser = async (req, res) => {
     }
 
 }
-
-//add covid tests to user test list (tech)
-/*
-UserController.addCovTests = async (req, res) => {
-    try {
-        await User.findOneAndUpdate({ idCard: req.params.id, role: "EXT" }, { $push: { covtest: req.body.covtest } })
-        const result = await User.findOne({ idCard: req.params.id }).
-            populate('covtest')
-        res.json(result)
-    } catch (err) {
-        console.log(err)
-    }
-}
-*/
 
 //remove covid test from user test list (tech)
 UserController.remCovTests = async (req, res) => {

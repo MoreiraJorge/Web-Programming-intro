@@ -1,32 +1,71 @@
-<h1>Profile details</h1>
 <div *ngIf="user">
-    
-    <p>name: {{user.name}}</p>
-    <p>age: {{user.age}}</p>
-    <p>phoneNumber: {{user.phoneNumber}}</p>
-    <p>email: {{user.email}}</p>
-    <p>address: {{user.address}}</p>
-    <p>Role: {{user.role}}</p>
-    <p>idCard: {{user.idCard}}</p>
 
-    <div *ngIf="user.role==='EXT'">
-        <p *ngIf="user.infected; else elseContent; ">Status: Infected</p>
-        <ng-template #elseContent>Status: Healthy</ng-template>
+    <mat-card class="top">
+        <label id="title">Perfil de {{user.name}}</label>
+    </mat-card>
 
-        <div class="list">
-            <mat-grid-list cols="2" rowHeight="50px">
-                <ng-container *ngFor="let covtest of user.covtest; index as i">
-                    <mat-grid-tile>{{covtest.code}}</mat-grid-tile>
-                    <mat-grid-tile type="date">{{ covtest.schedule | date :  "dd/MM/y"}}</mat-grid-tile>
-                </ng-container>
-            </mat-grid-list>
-        </div>
+    <div id="detailsDiv">
+        <mat-card id="detailsCard">
+            <p *ngIf="user.role==='TECH'">Cargo: Técnico</p>
+            <p *ngIf="user.role==='EXT'">Cargo: Utente</p>
 
-        <button (click)="usrMng()">External Management</button>
+            <p>email: {{user.email}}</p>
+
+            <div *ngIf="user.role==='EXT' || user.role==='TECH'">
+                <p>Morada: {{user.address}}</p>
+                <p>Idade: {{user.age}}</p>
+                <p>Número de telemóvel: {{user.phoneNumber}}</p>
+
+            </div>
+            <p>idCard: {{user.idCard}}</p>
+            <div *ngIf="user.role==='EXT'">
+                <p *ngIf="user.infected == true; else elseBlock">Estado: infetado</p>
+                <ng-template #elseBlock>
+                    <p>Estado: saudável</p>
+                </ng-template>
+            </div>
+
+            <button mat-raised-button (click)="edit(user.idCard)">Editar</button>
+
+            <button id="MngButton" mat-raised-button *ngIf="user.role==='TECH'" (click)="usrMng()">Gestão de técnicos</button>
+            <button id="MngButton" mat-raised-button *ngIf="user.role==='EXT'" (click)="usrMng()">Gestão de utentes</button>
+        </mat-card>
     </div>
 
-    <button (click)="edit(user.idCard)">Edit this user</button>
 
-    <button *ngIf="user.role==='TECH'" (click)="usrMng()">Tech Management</button>
+
+    <div *ngIf="user.role==='EXT'" id="container">
+        <mat-card id="testsCard">
+
+            <mat-card-title>
+                <p>Testes Associados</p>
+            </mat-card-title>
+
+            <div id="ExtTests">
+
+                <table mat-table [dataSource]="user.covtest">
+
+                    <ng-container id="column" matColumnDef="ID">
+                        <th mat-header-cell *matHeaderCellDef> ID do Teste </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.code }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Data">
+                        <th mat-header-cell *matHeaderCellDef> Data </th>
+                        <td mat-cell *matCellDef="let element">
+                            <p type="date" *ngIf="element.schedule != 'undefined'">
+                                {{ element.schedule | date :  "dd/MM/y"}}</p>
+                            <p *ngIf="element.schedule == undefined"> Aguarda Agendamento </p>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+            </div>
+        </mat-card>
+    </div>
+
 
 </div>

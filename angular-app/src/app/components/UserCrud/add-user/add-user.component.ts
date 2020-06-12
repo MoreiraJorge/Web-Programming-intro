@@ -4,6 +4,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TechUserService } from 'src/app/services/tech-user.service';
 import { SessionService } from 'src/app/services/session.service';
 import { ExtUserService } from 'src/app/services/ext-user.service';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-add-user',
@@ -11,6 +21,13 @@ import { ExtUserService } from 'src/app/services/ext-user.service';
   styleUrls: ['./add-user.component.sass']
 })
 export class AddUserComponent implements OnInit {
+
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+
+  matcher = new MyErrorStateMatcher();
 
   name: string;
   address: string;
@@ -58,6 +75,10 @@ export class AddUserComponent implements OnInit {
         console.log(err);
       });
     }
+  }
+
+  Back() {
+    this.router.navigate(['/usrMng'])
   }
 
 }
