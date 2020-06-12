@@ -1,31 +1,52 @@
-<div>
-    <h2>Create Test</h2>
-    <div>
+<mat-card class="top">
+    <label id="title"> Formulário de Teste </label>
+</mat-card>
+
+<div id="TestForm">
+
+    <mat-card id="TestFormCard">
 
         <p>Escreva um descrição relativamente a este pedido de teste, por exemplo sintomas:</p>
-        <textarea [(ngModel)]="testData.description"></textarea>
+        <mat-form-field class="example-full-width" style="width: 600px;">
+            <mat-label>Descrição</mat-label>
+            <textarea matInput [(ngModel)]="testData.description"></textarea>
+        </mat-form-field>
 
         <p>Caso tenha, indique o seu historico de doenças:</p>
-        <textarea [(ngModel)]="testData.userHistory"></textarea>
+        <mat-form-field class="example-full-width" style="width: 600px;">
+            <mat-label>Histórico</mat-label>
+            <textarea matInput [(ngModel)]="testData.userHistory"></textarea>
+        </mat-form-field><br>
 
-        <label for="riskJob">Faz parte de um Grupo de risco?:</label>
-        <select id="riskJob" [(ngModel)]="testData.riskGroup">
-            <option value="yes">Sim</option>
-            <option value="no">Não</option>
-        </select>
+        <p>Faz parte de um grupo de risco?</p>
+        <mat-form-field>
+            <mat-label> Grupo de risco</mat-label>
+            <select id="riskGroup" [(ngModel)]="testData.riskGroup" matNativeControl required>
+                <option value="yes">Sim</option>
+                <option value="no">Não</option>
+            </select>
+        </mat-form-field>
 
-        <label for="riskJob">Faz parte de um Trabalho de risco?:</label>
-        <select id="riskJob" [(ngModel)]="testData.riskJob">
-            <option value="yes">Sim</option>
-            <option value="no">Não</option>
-        </select>
+        <p>Faz parte de um Trabalho de risco?</p>
+        <mat-form-field>
+            <mat-label> Grupo de risco</mat-label>
+            <select id="riskJob" [(ngModel)]="testData.riskJob" matNativeControl required>
+                <option value="yes">Sim</option>
+                <option value="no">Não</option>
+            </select>
+        </mat-form-field><br>
 
-        <label for="saude24">Foi encaminhado pela saude 24?</label>
-        <select id="saude24" [(ngModel)]="testData.saude24">
-            <option value="true">Sim</option>
-            <option value="false">Não</option>
-        </select>
+        <p>Foi encaminhado pela saude 24?</p>
+        <mat-form-field>
+            <mat-label> Grupo de risco</mat-label>
+            <select id="saude24" [(ngModel)]="testData.saude24" matNativeControl required>
+                <option value="true">Sim</option>
+                <option value="false">Não</option>
+            </select>
+        </mat-form-field><br>
 
-    </div>
-    <button (click)="createTest()">Save</button>
+        <button id="save" mat-raised-button (click)="createTest()">Submeter</button>
+        <button id="back" mat-raised-button (click)="Back()">Dashboard</button>
+    </mat-card>
+
 </div>

@@ -1,13 +1,63 @@
-<button (click)="add()" >Add user</button>
-<div class="Techlist">
-    <mat-grid-list cols="5" rowHeight="50px">
-        <ng-container *ngFor="let user of users; index as i">
-            <mat-grid-tile>{{user.name}}</mat-grid-tile>
-            <mat-grid-tile>{{user.idCard}}</mat-grid-tile>
-            <mat-grid-tile>{{user.role}}</mat-grid-tile>
-            <mat-grid-tile><button (click)="userDetails( user.idCard )">user Details</button></mat-grid-tile>
-            <mat-grid-tile><button (click)="Delete( user.idCard )">Remove user</button></mat-grid-tile>
-        </ng-container>
-    </mat-grid-list>
+<div id="card">
+    <mat-card class="top">
+        <label *ngIf="role=='ADM'" id="title"> Gestão de Técnicos </label>
+        <label *ngIf="role=='TECH'" id="title"> Gestão de Externos </label>
+    </mat-card>
+
+    <mat-card id="ListForm">
+        <form id="query">
+            <button mat-raised-button (click)="add()">Adicionar utilizador</button>
+            <button mat-raised-button (click)="Dashboard()">Dashboard</button>
+        </form>
+    </mat-card>
+
+
+    <mat-card class="listCard">
+
+        <mat-card-title>
+            <p *ngIf="role=='ADM'"> Lista de Técnicos</p>
+            <p *ngIf="role=='TECH'">Lista de Utentes</p>
+        </mat-card-title>
+
+        <div id="tableDiv">
+            <table mat-table [dataSource]="users" class="mat-elevation-z8">
+
+                <ng-container id="column" matColumnDef="Nome">
+                    <th mat-header-cell *matHeaderCellDef> Nome </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ID">
+                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.idCard }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Cargo">
+                    <th mat-header-cell *matHeaderCellDef> Cargo </th>
+                    <td mat-cell *matCellDef="let element">
+                        <P *ngIf="element.role == 'EXT'">Utente</P>
+                        <P *ngIf="element.role == 'TECH'">Técnico</P>
+                </ng-container>
+
+                <ng-container matColumnDef="Detalhes">
+                    <th mat-header-cell *matHeaderCellDef> Detalhes </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-raised-button (click)="userDetails(element.idCard)">Detalhes</button>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Remover">
+                    <th mat-header-cell *matHeaderCellDef> Remover </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-raised-button (click)="Delete(element.idCard)">Remover</button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+
+    </mat-card>
 </div>
-<button (click)="Dashboard()">Back to Dashboard</button>

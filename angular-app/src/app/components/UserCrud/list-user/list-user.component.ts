@@ -15,6 +15,8 @@ export class ListUserComponent implements OnInit {
   users: User[]
   role: string
 
+  displayedColumns: string[] = ['Nome', 'ID', 'Cargo', 'Detalhes', 'Remover'];
+
   constructor(private route: ActivatedRoute, private router: Router,
     public sessionService: SessionService,
     private TechUserService: TechUserService, private ExtUserService: ExtUserService) {

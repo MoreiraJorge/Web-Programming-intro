@@ -40,4 +40,8 @@ export class AddCovtestComponent implements OnInit {
     })
   }
 
+  Back() {
+    this.router.navigate(['/extDashboard'])
+  }
+
 }
